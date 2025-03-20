@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+header .logo {
+    width: 50px;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #b30059;
+}
+
+.banner {
+    position: relative;
+}
+
+.banner img {
+    width: 100%;
+}
+
+.banner-text {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    background: rgba(255, 143, 177, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    color: #fff;
+    max-width: 350px;
+}
+
+.contact-cards {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 10px;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.contact-cards .card {
+    background-color: #ffe6ec;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    margin: 10px;
+}
+
+.contact-cards .card h3 {
+    color: #b30059;
+    margin-bottom: 10px;
+}
+
+.map img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 30px 0;
+}
+
+.contact-form {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.contact-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.contact-form h2 span {
+    color: #b30059;
+}
+
+.contact-form form {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 48%;
+    padding: 10px;
+    margin: 10px 1%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form textarea {
+    width: 98%;
+    height: 120px;
+}
+
+.contact-form button {
+    background-color: #b30059;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.hotlines {
+    background-color: #ffe6ec;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.hotlines h2 {
+    color: #b30059;
+    margin-bottom: 20px;
+}
+
+.hotline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.hotline-grid strong {
+    color: #b30059;
+}
