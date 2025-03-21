@@ -1,20 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("form");
+    const form = document.getElementById("signupForm");
     const cityDropdown = document.getElementById("city");
     const countryDropdown = document.getElementById("country");
 
     // Sample list of countries
-    const countries = ["Ilo-Ilo", "Manila", "United Kingdom", 
-                       "Pasay", "Pasig", "Batangas", "Taguig", "Cavite",
-                       "Laguna"];
+    const countries = ["Philippines", "United States", "Canada", "United Kingdom", "Australia", "India"];
 
     // Sample cities per country
     const citiesByCountry = {
+        "Philippines": ["Manila", "Cebu", "Davao", "Iloilo"],
         "United States": ["New York", "Los Angeles", "Chicago"],
         "Canada": ["Toronto", "Vancouver", "Montreal"],
         "United Kingdom": ["London", "Manchester", "Birmingham"],
         "Australia": ["Sydney", "Melbourne", "Brisbane"],
-        "India": ["Mumbai", "Philippines", "Bangalore"]
+        "India": ["Mumbai", "Delhi", "Bangalore"]
     };
 
     // Populate country dropdown
@@ -40,23 +39,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Form submission
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const formData = {
-            firstName: form.elements[0].value,
-            lastName: form.elements[1].value,
-            dob: form.elements[2].value,
-            gender: form.elements[3].value,
-            age: form.elements[4].value,
-            phone: form.elements[10].value,
-            address: form.elements[5].value,
-            zipCode: form.elements[6].value,
-            city: form.elements[7].value,
-            country: form.elements[8].value,
-            email: form.elements[9].value,
-            password: form.elements[11].value,
-            confirmPassword: form.elements[12].value
+            firstName: document.getElementById("firstName").value,
+            lastName: document.getElementById("lastName").value,
+            dob: document.getElementById("dob").value,
+            gender: document.getElementById("gender").value,
+            age: document.getElementById("age").value,
+            phone: document.getElementById("phone").value,
+            address: document.getElementById("address").value,
+            zipCode: document.getElementById("zipCode").value,
+            city: document.getElementById("city").value,
+            country: document.getElementById("country").value,
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+            confirmPassword: document.getElementById("confirmPassword").value
         };
 
         if (formData.password !== formData.confirmPassword) {
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const response = await fetch("http://localhost:5000/signup", {
+            const response = await fetch("http://localhost:8000/api/signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
