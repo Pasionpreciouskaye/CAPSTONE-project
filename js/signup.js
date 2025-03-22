@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const result = await response.json();
             if (response.ok) {
-                alert("Signup successful!");
+                alert("Signup successfully!");
                 form.reset();
             } else {
                 alert("Error: " + result.error);
