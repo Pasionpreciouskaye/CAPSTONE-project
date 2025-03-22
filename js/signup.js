@@ -1,71 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("form");
-    const cityDropdown = document.getElementById("city");
-    const countryDropdown = document.getElementById("country");
-
-    // Sample list of countries
-    const countries = ["Ilo-Ilo", "Manila", "United Kingdom", 
-                       "Pasay", "Pasig", "Batangas", "Taguig", "Cavite",
-                       "Laguna"];
-
-    // Sample cities per country
-    const citiesByCountry = {
-        "United States": ["New York", "Los Angeles", "Chicago"],
-        "Canada": ["Toronto", "Vancouver", "Montreal"],
-        "United Kingdom": ["London", "Manchester", "Birmingham"],
-        "Australia": ["Sydney", "Melbourne", "Brisbane"],
-        "India": ["Mumbai", "Philippines", "Bangalore"]
-    };
-
-    // Populate country dropdown
-    countries.forEach(country => {
-        let option = document.createElement("option");
-        option.value = country;
-        option.textContent = country;
-        countryDropdown.appendChild(option);
-    });
-
-    // Update city dropdown based on selected country
-    countryDropdown.addEventListener("change", () => {
-        const selectedCountry = countryDropdown.value;
-        cityDropdown.innerHTML = '<option disabled selected>Select City</option>'; // Reset city dropdown
-
-        if (citiesByCountry[selectedCountry]) {
-            citiesByCountry[selectedCountry].forEach(city => {
-                let option = document.createElement("option");
-                option.value = city;
-                option.textContent = city;
-                cityDropdown.appendChild(option);
-            });
-        }
-    });
+    const form = document.getElementById("signupForm");
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const formData = {
-            firstName: form.elements[0].value,
-            lastName: form.elements[1].value,
-            dob: form.elements[2].value,
-            gender: form.elements[3].value,
-            age: form.elements[4].value,
-            phone: form.elements[10].value,
-            address: form.elements[5].value,
-            zipCode: form.elements[6].value,
-            city: form.elements[7].value,
-            country: form.elements[8].value,
-            email: form.elements[9].value,
-            password: form.elements[11].value,
-            confirmPassword: form.elements[12].value
+            firstName: document.getElementById("firstName").value,
+            lastName: document.getElementById("lastName").value,
+            dob: document.getElementById("dob").value,
+            gender: document.getElementById("gender").value,
+            phone: document.getElementById("phone").value,
+            address: document.getElementById("address").value,
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+            passwordConfirm: document.getElementById("confirmPassword").value
         };
 
-        if (formData.password !== formData.confirmPassword) {
+        if (formData.password !== formData.passwordConfirm) {
             alert("Passwords do not match!");
+            console.log(formData)
             return;
         }
 
         try {
-            const response = await fetch("http://localhost:5000/signup", {
+            const response = await fetch("http://localhost:8090/api/collections/users/records", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
