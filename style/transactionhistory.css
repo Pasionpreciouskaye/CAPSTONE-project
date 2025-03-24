@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.tabs {
+    margin-bottom: 20px;
+}
+
+.tab {
+    margin-right: 10px;
+    padding: 10px 15px;
+    border: none;
+    background: #e4e4e4;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tab.active {
+    background: #ff4081;
+    color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #f9f9f9;
+}
+
+.load-more {
+    background: #ff4081;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.load-more:hover {
+    background: #ff007f;
+}
