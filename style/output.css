@@ -465,6 +465,9 @@
     height: var(--tabs-height);
     flex-direction: var(--tabs-direction);
   }
+  .contents {
+    display: contents;
+  }
   .text-xl {
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
