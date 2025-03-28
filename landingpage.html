@@ -16,7 +16,7 @@
     <header class="main-header">
       <div class="header-container">
         <div class="logo">
-          <img src="./logo/SK-Logo.jpg" alt="Logo" />
+          <img src="./logo/SK-Logo.png" alt="Logo" />
         </div>
 
         <div class="header-title">
@@ -25,9 +25,12 @@
 
         <nav class="nav-links">
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="signup.html">Sign Up</a></li>
-            <li><a href="login.html">Log In</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="./login.html">Login</a><a></li>
+              <li><a href="./signup.html">Signup</a><a></li>
+
           </ul>
         </nav>
       </div>
@@ -38,127 +41,70 @@
     </header>
 
     <main>
-        <section class="welcome-box">
-          <h1>Welcome to the Sangguniang Kabataan Management System!</h1>
-          <p>
-            This platform is designed to help streamline the management of SK
-            projects, track inventory, and ensure transparency and accountability
-            within the organization. It provides an efficient and user-friendly
-            system for managing events, monitoring financial records, and
-            maintaining accurate asset inventories. Explore the features to see
-            ongoing initiatives, project statuses, and comprehensive reports that
-            promote openness and community engagement.
-          </p>
-      
-          <p class="cta-text">
-            What’s stopping you? <strong>Sign up now</strong> and be part of an
-            SK that values transparency and teamwork!<br>
-            Already signed up? <strong>Log in</strong> and let’s continue the 
-            good work!
-          </p>
-        </section>
-      </main>
-      
+      <section id="home" class="welcome-box">
+        <h1>Welcome to the Sangguniang Kabataan Management System!</h1>
+        <p>
+          This platform is designed to help streamline the management of SK
+          projects, track inventory, and ensure transparency and accountability
+          within the organization. It provides an efficient and user-friendly
+          system for managing events, monitoring financial records, and
+          maintaining accurate asset inventories. Explore the features to see
+          ongoing initiatives, project statuses, and comprehensive reports that
+          promote openness and community engagement.
+        </p>
+      </section>
 
-      <section class="admins">
-        <h3>ADMINS</h3>
+      <section id="about" class="about-us">
+        <h2>About Us</h2>
+        <p>
+          Learn more about our mission, vision, and goals to empower youth
+          through active participation and leadership in the community.
+        </p>
+      </section>
 
-        <div class="carousel-container">
-          <button class="carousel-arrow prev-arrow">&#10094;</button>
-          <div class="carousel-wrapper">
-            <div class="admin-card">
-              <div class="card-image">
-                <img src="./assets/admin1.jpg" alt="June Lyn Tabanao" />
-              </div>
-              <h4 class="sk-name">June Lyn Tabanao</h4>
-              <p class="specialty">SK CHAIRWOMAN / MANAGER</p>
-            </div>
-
-            <div class="admin-card">
-              <div class="card-image">
-                <img src="./assets/admin2.jpg" alt="MAC Admin" />
-              </div>
-              <h4 class="sk-name">SKK MAC</h4>
-              <p class="specialty">ADMIN</p>
-            </div>
-
-            <div class="admin-card">
-              <div class="card-image">
-                <img src="./assets/admin3.jpg" alt="Tonton Admin" />
-              </div>
-              <h4 class="sk-name">SKS Tonton</h4>
-              <p class="specialty">ADMIN</p>
-            </div>
-
-            <div class="admin-card">
-              <div class="card-image">
-                <img src="./assets/admin4.jpg" alt="Chester Admin" />
-              </div>
-              <h4 class="sk-name">SKK Chester</h4>
-              <p class="specialty">ADMIN</p>
-            </div>
-
-            <div class="admin-card">
-              <div class="card-image">
-                <img src="./assets/admin5.jpg" alt="Jam Admin" />
-              </div>
-              <h4 class="sk-name">SKK Jam</h4>
-              <p class="specialty">ADMIN</p>
-            </div>
-
-            <div class="admin-card">
-              <div class="card-image">
-                <img src="./assets/admin6.jpg" alt="AJ Admin" />
-              </div>
-              <h4 class="sk-name">SKK AJ</h4>
-              <p class="specialty">ADMIN</p>
-            </div>
-
-            <div class="admin-card">
-              <div class="card-image">
-                <img src="./assets/admin7.jpg" alt="Noime Admin" />
-              </div>
-              <h4 class="sk-name">SKK Noime</h4>
-              <p class="specialty">ADMIN</p>
-            </div>
-
-            <div class="admin-card">
-              <div class="card-image">
-                <img src="./assets/admin8.jpg" alt="Summer Admin" />
-              </div>
-              <h4 class="sk-name">SKK Summer</h4>
-              <p class="specialty">ADMIN</p>
-            </div>
-
-            <div class="admin-card">
-              <div class="card-image">
-                <img src="./assets/admin9.jpg" alt="Iris Admin" />
-              </div>
-              <h4 class="sk-name">SKK Iris</h4>
-              <p class="specialty">ADMIN</p>
-            </div>
-
-            <div class="admin-card">
-              <div class="card-image">
-                <img src="./assets/admin10.jpg" alt="Karen Admin" />
-              </div>
-              <h4 class="sk-name">SKT Karen</h4>
-              <p class="specialty">ADMIN</p>
-            </div>
+      <section id="contact" class="contact-us">
+        <h2>Contact Us</h2>
+        <div class="contact-cards">
+          <div class="card">
+            <h3>📞 CALL US</h3>
+            <p>0919 079 3112</p>
           </div>
-          <button class="carousel-arrow next-arrow">&#10095;</button>
+          <div class="card">
+            <h3>📧 EMAIL</h3>
+            <p>sk.taguig@gmail.com</p>
+          </div>
+          <div class="card">
+            <h3>📍 ADDRESS</h3>
+            <p>Taguig, Pateros & District 02, NCR</p>
+          </div>
         </div>
+        <section class="map">
+          <img src="./assets/skmap.png" alt="Map" />
+        </section>
+        <section class="contact-form">
+          <h2>GET IN <span>TOUCH</span></h2>
+          <form>
+            <input type="text" placeholder="Your Name" />
+            <input type="email" placeholder="Your Email" />
+            <input type="text" placeholder="Your Subject" />
+            <textarea placeholder="Your Message"></textarea>
+            <button type="submit">SEND MESSAGE</button>
+          </form>
+        </section>
       </section>
     </main>
 
     <footer>
       <div class="footer-content">
-        <img src="./logo/SK-Logo.jpg" alt="Logo" />
+        <img src="./logo/SK-Logo.png" alt="Logo" />
         <p>&copy; 2025 | CITY OF TAGUIG. All rights reserved.</p>
       </div>
     </footer>
 
     <script src="./js/landingpage.js"></script>
-    <script src="./js/carousel.js"></script>
+    <!-- Scroll-to-Top Button -->
+<button id="scrollTopBtn" onclick="scrollToTop()" title="Go to Home">
+  ↑
+</button>
   </body>
 </html>
