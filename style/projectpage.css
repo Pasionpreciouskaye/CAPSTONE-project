@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background-color: #f857f0;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+h1 {
+    font-size: 46px;
+    margin: 0;
+}
+
+p {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+nav {
+    background-color: #f8f9fa;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav li {
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+nav li:hover {
+    background-color: #e2e6ea;
+}
+
+main {
+    padding: 20px;
+}
+
+.small-image {
+    width: 60%; /* Adjusts the width to 50% of the parent container */
+    height: auto; /* Maintains the aspect ratio */
+    max-width: 250px; /* Maximum width is set to 200 pixels */
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
