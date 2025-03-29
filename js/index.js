@@ -1,4 +1,3 @@
-
 const carouselWrapper = document.querySelector(".carousel-wrapper");
 const prevButton = document.querySelector(".prev-arrow");
 const nextButton = document.querySelector(".next-arrow");
