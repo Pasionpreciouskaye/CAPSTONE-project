@@ -30,10 +30,25 @@
               </select>
             </div>
 
-            <!-- Email Input -->
-            <div class="form-group">
-              <input type="email" name="email" placeholder="Email" required />
-            </div>
+        <!-- Right Section with Login Form -->
+        <div class="right-section">
+            <div class="login-wrapper">
+                <h2>Login</h2>
+                <form id="loginForm" action="process_login.php" method="POST">
+                    
+                    <!-- User Role Selection -->
+                    <div class="form-group">
+                        <select name="role" id="role" required>
+                            <option value="" disabled selected>Select Role</option>
+                            <option value="member">Member</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
 
             <!-- Password Input -->
             <div class="form-group">
