@@ -38,6 +38,11 @@ body {
   color: #ffffff;
 }
 
+header h1 {
+  font-size: 24px;
+  color: #b30059;
+}
+
 /* Navigation Links */
 .nav-links ul {
   list-style: none;
