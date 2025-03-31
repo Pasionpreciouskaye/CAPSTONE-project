@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Budget Transparency Test</title>
+  <link rel="stylesheet" href="./style/transparency-test.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" />
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Budget Transparency</h2>
+
+    <!-- Budget Table -->
+    <table class="table table-bordered table-striped" id="budgetTable">
+      <thead class="table-dark">
+        <tr>
+          <th>Category</th>
+          <th>Allocated Amount</th>
+          <th>Spent Amount</th>
+          <th>Remaining</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="budgetBody"></tbody>
+    </table>
+
+    <!-- Add Budget Button -->
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBudgetModal">Add Budget</button>
+  </div>
+
+  <!-- Add/Edit Budget Modal -->
+  <div class="modal fade" id="addBudgetModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="budgetForm">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Add/Edit Budget</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="budgetId" />
+            <div class="mb-3">
+              <label for="category" class="form-label">Category</label>
+              <input type="text" id="category" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label for="allocated" class="form-label">Allocated Amount</label>
+              <input type="number" id="allocated" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label for="spent" class="form-label">Spent Amount</label>
+              <input type="number" id="spent" class="form-control" required />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="./node_modules/pocketbase/dist/pocketbase.umd.js"></script>
+  <script src="./js/budget.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
