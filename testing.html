@@ -1,15 +1,121 @@
 <!DOCTYPE html>
-<html data-theme="light" lang="en"> 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Document</title>
-    <link rel="stylesheet" href="./style/output.css" />
-</head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Listing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+  <body class="bg-gradient-to-b from-indigo-900 to-purple-900 text-white">
+    <!-- Navbar -->
+    <div class="navbar bg-black bg-opacity-50 px-8">
+      <div class="flex-1">
+        <a class="text-xl font-bold">EVENT2 CLUB PARTY</a>
+      </div>
+      <div class="flex-none">
+        <ul class="menu menu-horizontal px-1">
+          <li><a>Home</a></li>
+          <li><a>Event</a></li>
+          <li><a>Artist</a></li>
+          <li><a>Media</a></li>
+          <li><a>News</a></li>
+          <li><a>Shop</a></li>
+          <li><a>Contact</a></li>
+          <li><a>Timetable</a></li>
+        </ul>
+      </div>
+    </div>
 
-<body>
-    <div class="text-red-500 text-xl"> Hello World ^^</div> 
-    <button class="btn btn-soft btn-accent">Accent</button>
-</body>
+    <!-- Upcoming Events -->
+    <section class="py-16 px-8">
+      <h2 class="text-4xl font-bold">Upcoming Events</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <div class="card w-full bg-base-100 shadow-xl image-full">
+          <figure>
+            <img src="https://via.placeholder.com/600x400" alt="Event" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">
+              The second single to be taken from Coldplay’s
+            </h2>
+            <p>29.9.2016 | 21 Shares</p>
+            <div class="card-actions justify-end">
+              <button class="btn btn-primary">Buy Tickets</button>
+            </div>
+          </div>
+        </div>
+        <div class="card w-full bg-base-100 shadow-xl image-full">
+          <figure>
+            <img src="https://via.placeholder.com/600x400" alt="Event" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">
+              TRAFFIC, the world's largest wildlife trade monitoring network
+            </h2>
+            <p>29.9.2016 | 21 Shares</p>
+            <div class="card-actions justify-end">
+              <button class="btn btn-primary">Buy Tickets</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Events -->
+    <section class="py-16 px-8">
+      <h2 class="text-4xl font-bold">Recent Events</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        <div class="card bg-base-100 shadow-xl">
+          <figure>
+            <img src="https://via.placeholder.com/400x300" alt="Event" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">
+              The second single to be taken from Coldplay’s
+            </h2>
+            <p>29.9.2016 | 21 Shares</p>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-xl">
+          <figure>
+            <img src="https://via.placeholder.com/400x300" alt="Event" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">
+              It is a long established fact that a reader will be distracted
+            </h2>
+            <p>29.9.2016 | 21 Shares</p>
+          </div>
+        </div>
+        <div class="card bg-base-100 shadow-xl">
+          <figure>
+            <img src="https://via.placeholder.com/400x300" alt="Event" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">Girl, please tell me why</h2>
+            <p>29.9.2016 | 21 Shares</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer p-10 bg-black text-neutral-content">
+      <div>
+        <h2 class="font-bold text-lg">EVENT2 CLUB PARTY</h2>
+        <p>© 2025 Event2 Club Party. All rights reserved.</p>
+      </div>
+      <div>
+        <h3 class="footer-title">Contact</h3>
+        <p>(033) 205-35-78</p>
+        <p>info@event2.com</p>
+        <p>New York | Los Angeles</p>
+      </div>
+    </footer>
+  </body>
 </html>
