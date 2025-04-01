@@ -9,6 +9,7 @@
 body {
   background-color: #f4f6f8;
   display: flex;
+  min-height: 100vh;
 }
 
 /* Sidebar */
@@ -24,7 +25,7 @@ body {
 }
 
 .sidebar .logo img {
-  width: 120px;
+  width: 100px;
   height: auto;
   margin-bottom: 30px;
 }
@@ -32,20 +33,36 @@ body {
 .sidebar nav ul {
   list-style: none;
   width: 100%;
+  padding: 0;
 }
 
 .sidebar nav ul li {
-  padding: 15px;
   text-align: center;
   cursor: pointer;
-  color: #333;
+  margin: 5px 20px;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
 }
 
-.sidebar nav ul li.active {
+.sidebar nav ul li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar nav ul li a:hover {
   background-color: #f875aa;
   color: #fff;
-  border-radius: 20px;
-  margin: 0 20px;
+  transform: scale(1.05);
+}
+
+/* Active State */
+.sidebar nav ul li.active a {
+  background-color: #f875aa;
+  color: white;
+  font-weight: bold;
 }
 
 /* Main Content */
@@ -121,6 +138,7 @@ header h1 {
 
 .btn:hover {
   transform: scale(1.05);
+  opacity: 0.9;
 }
 
 /* Chart Container */

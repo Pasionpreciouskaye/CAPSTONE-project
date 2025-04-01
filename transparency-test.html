@@ -5,11 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Budget Transparency</title>
-
-  <!-- Link to External CSS -->
   <link rel="stylesheet" href="./style/transparency-test.css" />
-
-  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -23,7 +19,7 @@
     <nav>
       <ul>
         <li class="active">Budget Transparency</li>
-        <li>Transaction History</li>
+        <li><a href="transactionhistory.html">Transaction History</a></li>
       </ul>
     </nav>
   </aside>
@@ -44,6 +40,8 @@
             <th>Allocated</th>
             <th>Spent</th>
             <th>Remaining</th>
+            <th>Date Allocated</th>
+            <th>Date Spent</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -53,6 +51,8 @@
             <td>₱100,000</td>
             <td>₱50,000</td>
             <td>₱50,000</td>
+            <td>2024-04-01</td>
+            <td>2024-04-15</td>
             <td>
               <button class="btn btn-edit">Edit</button>
               <button class="btn btn-delete">Delete</button>
@@ -88,13 +88,20 @@
           <label for="spent">Spent Amount:</label>
           <input type="number" id="spent" required />
         </div>
+        <div class="form-group">
+          <label for="dateAllocated">Date Allocated:</label>
+          <input type="date" id="dateAllocated" required />
+        </div>
+        <div class="form-group">
+          <label for="dateSpent">Date Spent:</label>
+          <input type="date" id="dateSpent" required />
+        </div>
         <button type="submit" class="btn btn-save">Save</button>
       </form>
     </div>
   </div>
 
-  <!-- Link to External JS -->
-  <script src="./js/budget.js"></script>
+  <script src="./jsso/budget.js"></script>
 </body>
 
 </html>
