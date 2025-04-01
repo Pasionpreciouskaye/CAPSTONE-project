@@ -35,14 +35,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const password = loginForm.password.value;
 
         const pb = new PocketBase("http://127.0.0.1:8090");
-
+ 
         try {
             const authData = await pb.collection("users").authWithPassword(email, password);
+
+            if (authData && authData.record && authData.record.role) {
+                const role = authData.record.role; // Extract role from the response
             
-            if (role === "admin") {
-                window.location.href = "admin_dashboard.html";
+                if (role === "admin") {
+                    console.log("Admin access granted");
+                    window.location.href = "admin_dashboard.html";
+                    // Perform admin-specific actions
+                } else {
+                    console.log("User access granted");
+                    window.location.href = "member_dashboard.html";
+                    // Perform user-specific actions
+                }
             } else {
-                window.location.href = "member_dashboard.html";
+                console.error("Role not found in authData");
             }
 
             alert("Login successful");
