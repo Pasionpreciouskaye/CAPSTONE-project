@@ -4,77 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/transactionhistory.css">
+    <script defer src="./js/transactionhistory.js"></script>
     <title>Recent Transactions</title>
 </head>
 <body>
     <div class="container">
-        <h1>Recent Transaction</h1>
+        <h1>Recent Transactions</h1>
         <div class="tabs">
-            <button class="tab active">All</button>
-            <button class="tab">Expenses</button>
+            <button class="tab active" data-filter="all">All</button>
+            <button class="tab" data-filter="expenses">Expenses</button>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Items</th>
-                    <th>Shop Name</th>
-                    <th>Date</th>
-                    <th>Payment Method</th>
-                    <th>Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>headsets</td>
-                    <td>Simba</td>
-                    <td>17 May, 2023</td>
-                    <td>Credit Card</td>
-                    <td>$160.00</td>
-                </tr>
-                <tr>
-                    <td>furniture</td>
-                    <td>Electro</td>
-                    <td>17 May, 2023</td>
-                    <td>Invoice</td>
-                    <td>$20.00</td>
-                </tr>
-                <tr>
-                    <td>Biriyani</td>
-                    <td>Marketplace</td>
-                    <td>17 May, 2023</td>
-                    <td>Credit Card</td>
-                    <td>$12.00</td>
-                </tr>
-                <tr>
-                    <td>Internet</td>
-                    <td>Marketplace</td>
-                    <td>17 May, 2023</td>
-                    <td>Credit Card</td>
-                    <td>$15.00</td>
-                </tr>
-                <tr>
-                    <td>Car</td>
-                    <td>Marketplace</td>
-                    <td>17 May, 2023</td>
-                    <td>cash</td>
-                    <td>$10.00</td>
-                </tr>
-                <tr>
-                    <td>Lunch items</td>
-                    <td>Market</td>
-                    <td>17 May, 2023</td>
-                    <td>Credit Card</td>
-                    <td>$20.00</td>
-                </tr>
-                <tr>
-                    <td>Keyboard</td>
-                    <td>Market</td>
-                    <td>17 May, 2023</td>
-                    <td>Credit Card</td>
-                    <td>$30.00</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Items</th>
+                        <th>Shop Name</th>
+                        <th>Date</th>
+                        <th>Payment Method</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="transaction-body">
+                    <tr>
+                        <td>Headsets</td>
+                        <td>Simba</td>
+                        <td>17 May, 2023</td>
+                        <td>Credit Card</td>
+                        <td>$160.00</td>
+                    </tr>
+                    <tr class="expense">
+                        <td>Furniture</td>
+                        <td>Electro</td>
+                        <td>17 May, 2023</td>
+                        <td>Invoice</td>
+                        <td>$20.00</td>
+                    </tr>
+                    <tr>
+                        <td>Biriyani</td>
+                        <td>Marketplace</td>
+                        <td>17 May, 2023</td>
+                        <td>Credit Card</td>
+                        <td>$12.00</td>
+                    </tr>
+                    <tr class="expense">
+                        <td>Internet</td>
+                        <td>Marketplace</td>
+                        <td>17 May, 2023</td>
+                        <td>Credit Card</td>
+                        <td>$15.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <button class="load-more">Load More</button>
     </div>
 </body>
