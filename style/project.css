@@ -37,7 +37,7 @@ header {
     margin: 5px;
     border-radius: 10px;
 }
-/* General body styles */
+
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -46,7 +46,7 @@ body {
     color: #333;
 }
 
-/* Header styles */
+
 .main-header {
     width: 100%;
     background-color: #ffffff;
@@ -78,7 +78,7 @@ body {
     margin: 0;
 }
 
-/* Main content section */
+
 .main-content {
     display: flex;
     justify-content: center;
@@ -93,7 +93,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* Container for the project cards */
+
 .project-container {
     display: flex;
     flex-wrap: wrap;
@@ -101,7 +101,7 @@ body {
     gap: 20px;
 }
 
-/* Individual project card styles */
+
 .project-card {
     background-color: white;
     border-radius: 8px;
@@ -129,13 +129,13 @@ body {
     font-size: 1em;
 }
 
-/* Hover effect for project cards */
+
 .project-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Footer styles */
+
 footer {
     background-color: #ffffff;
     color: #000000;
