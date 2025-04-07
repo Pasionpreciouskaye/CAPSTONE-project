@@ -2,132 +2,131 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
 }
 
 body {
+  font-family: 'Poppins', sans-serif;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url('../logo/SK-Logo.png') no-repeat center center;
-  background-size: cover;
-  text-align: center;
-  color: #fff;
-  padding-top: 80px;
+  background-color: #f4f7fa;
+  overflow: hidden;
+}
+
+.main-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.left-side {
+  flex: 1;
+  background: url('../assets/banner.jpg') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
 }
 
-body::before {
-  content: "";
+.intro-image {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
   height: 100%;
-  background: inherit;
-  filter: blur(5px);
-  z-index: -1;
-}
-
-.header {
-  position: fixed;
-  top: 0;
   width: 100%;
-  background: white;
-  padding: 15px 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
+  object-fit: cover;
+  filter: blur(8px);
 }
 
-.header-content {
+.right-side {
+  flex: 1;
+  background-color: white;
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  padding: 20px;
 }
 
-.header-logo {
-  height: 55px;
-  margin-left: 25px;
-  margin-right: 20px;
-}
-
-.header h1 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #ff6699;
+.login-container {
   text-align: center;
-  flex-grow: 1;
+  max-width: 400px;
+  width: 100%;
+  animation: fadeIn 2s ease-out; /* Animation for fade-in */
 }
 
-.container {
-  background: rgba(255, 255, 255, 0.4);
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  max-width: 650px;
-  width: 95%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.logo {
+  width: 120px;
+  margin-bottom: 20px;
+  animation: logoFloat 3s ease-in-out infinite; /* Logo float animation */
 }
 
+h1 {
+  font-size: 32px;
+  color: #000000;
+  margin-bottom: 10px;
+}
 
-
-.title-box {
+p {
+  font-size: 18px;
+  color: #555;
   margin-bottom: 20px;
 }
 
-.title-box h2 {
-  font-size: 30px;
-  font-weight: 700;
-  color: #000000;
-  text-shadow: none;
+.auth-buttons {
+  margin-top: 30px;
 }
 
-.text-box {
-  background: white;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  margin-bottom: 25px;
-}
-
-.text-box p {
-  font-size: 18px;
-  color: black;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 14px 28px;
-  font-size: 20px;
-  font-weight: 600;
-  color: #000000;
-  background: white;
+.auth-buttons .btn {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  background-color: #f05a82;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 30px;
   text-decoration: none;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  border: 2px solid #ff6699;
+  margin-bottom: 10px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn:hover {
-  background: white;
-  color: #ff6699;
-  transform: scale(1.1);
-  border-color: #ff6699;
+.auth-buttons .btn:hover {
+  background-color: #f673a3;
+  transform: translateY(-3px);
+}
+
+.auth-buttons .btn:active {
+  transform: translateY(0);
+}
+
+@keyframes logoFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .left-side {
+    height: 200px;
+  }
 }
