@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inventory Manager</title>
-    <link rel="stylesheet" href="./style/inventory.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supplies Inventory</title>
+  <link rel="stylesheet" href="./style/inventory.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
   </head>
-  <body>
-    <aside class="sidebar">
-      <h2>SK Projects</h2>
-      <ul>
-        <li><a href="#">📁 Recent</a></li>
-        <li><a href="#">📅 Upcoming</a></li>
-        <li><a href="#">📨 Solicitation</a></li>
-      </ul>
-    </aside>
+<body>
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="sidebar-content">
+      <div class="profile-container">
+         </div>
+      <nav role="navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="budgetdashboard.html">Budget Transparency</a></li>
+          <li><a href="logout.html" class="logout-btn">Log Out</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <div class="app-container">
+    <header class="app-header">
+      <button class="hamburger-menu" id="hamburger-icon" aria-label="Toggle Menu" aria-controls="sidebar" aria-expanded="false">
+        &#9776; </button>
+      <h1 class="page-title">📦 Supplies Inventory</h1>
+    </header>
 
     <main class="main-content">
-      <nav class="top-nav">
-        <a href="index.html" class="nav-link">🏠 Home</a>
-      </nav>
-
-      <header class="header">
-        <h1>📦 Supplies Inventory</h1>
+      <header class="content-header">
         <div class="search-add">
           <input type="text" id="search" placeholder="🔍 Search product..." />
-          <button id="addItemBtn" class="action-btn">➕ Add Item</button>
+          <button id="addItemBtn" class="action-btn add-item-btn">➕ Add Item</button>
         </div>
       </header>
 
@@ -49,23 +57,23 @@
             </tr>
           </thead>
           <tbody id="inventoryTable">
-            <!-- Dynamic rows -->
-          </tbody>
+            </tbody>
         </table>
       </section>
     </main>
+  </div>
 
-    <!-- Modal Form -->
-    <div id="itemModal" class="modal hidden">
-      <div class="modal-content">
-        <span id="closeModal" class="close">&times;</span>
-        <h3 id="modalTitle">Add Item</h3>
-        <form id="itemForm">
-          <input type="hidden" id="editIndex" />
+  <div id="itemModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <button id="closeModal" class="close" aria-label="Close modal">&times;</button>
+      <h3 id="modalTitle">Add Item</h3>
+      <form id="itemForm">
+        <input type="hidden" id="editIndex" />
+        <div class="form-grid"> {/* Optional: Use grid for better layout */}
           <input type="text" placeholder="Item Name" id="itemName" required />
           <input type="text" placeholder="Category" id="itemCategory" required />
           <input type="number" placeholder="Quantity" id="itemQty" required />
-          <input type="text" placeholder="Unit Cost" id="itemCost" required />
+          <input type="text" placeholder="Unit Cost (e.g., 10.50)" id="itemCost" required pattern="^\d+(\.\d{1,2})?$" title="Enter cost like 10.00 or 10.50"/>
           <input type="text" placeholder="Supplier" id="itemSupplier" />
           <input type="number" placeholder="Reorder Point" id="itemReorder" />
           <input type="text" placeholder="Location" id="itemLocation" />
@@ -73,11 +81,14 @@
           <input type="text" placeholder="Packaging" id="itemPackaging" />
           <input type="date" placeholder="Last Order Date" id="itemDate" />
           <input type="text" placeholder="Usage Rate" id="itemUsage" />
-          <button type="submit">💾 Save Item</button>
-        </form>
-      </div>
+        </div>
+        <button type="submit" class="action-btn save-btn">💾 Save Item</button>
+      </form>
     </div>
+  </div>
 
-    <script src="./js/inventory.js"></script>
-  </body>
-</html>
+  <div class="overlay"></div>
+
+  <script src="./js/inventory.js"></script>
+</body>
+</html>`

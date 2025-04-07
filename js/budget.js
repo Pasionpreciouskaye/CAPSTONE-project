@@ -3,7 +3,8 @@ const ctx = document.getElementById("expenseChart").getContext("2d");
 const expenseChart = new Chart(ctx, {
   type: "bar",
   data: {
-    labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    labels: ["January", "February", "March", "April", "May", "June", "July"
+      , "August", "September", "Ocrober", "November", "December"],
     datasets: [
       {
         label: "Community Projects",
