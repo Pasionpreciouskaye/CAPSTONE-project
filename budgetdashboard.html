@@ -2,68 +2,106 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budget Transparency</title>
-    <link rel="stylesheet" href="./style/budgetdashboard.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Budget Transparency</title>
+  <link rel="stylesheet" href="./style/budgetdashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-    <aside class="sidebar">
-        <div class="logo">
-            <img src="./logo/SK-Logo.png" alt="SK Logo">
-        </div>
-        <nav>
-            <ul>
-                <li class="active">Budget Transparency</li>
-                <li>Transaction History</li>
-            </ul>
-        </nav>
-    </aside>
-
-    <div class="main-content">
-        <header>
-            <h1>Budget Transparency</h1>
-        </header>
-
-        <section class="chart-container">
-            <h2>Total Expense</h2>
-            <canvas id="expenseChart"></canvas>
-        </section>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="./logo/SK-Logo.png" alt="SK Logo" />
     </div>
+    <nav>
+      <ul>
+        <li class="active">Budget Transparency</li>
+        <li><a href="transactionhistory.html">Transaction History</a></li>
+      </ul>
+    </nav>
+  </aside>
 
-    <script>
-        const ctx = document.getElementById('expenseChart').getContext('2d');
-        const expenseChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-                datasets: [
-                    {
-                        label: 'Online Sales',
-                        backgroundColor: '#2196F3',
-                        data: [120, 150, 80, 170, 110, 140, 180]
-                    },
-                    {
-                        label: 'Offline Sales',
-                        backgroundColor: '#4CAF50',
-                        data: [100, 120, 200, 60, 90, 130, 100]
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
-    </script>
+  <!-- Main Content -->
+  <div class="main-content">
+    <header>
+      <h1>Budget Transparency</h1>
+    </header>
 
+    <!-- Budget Table Section -->
+    <section class="table-container">
+      <h2>Budget Overview</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Allocated</th>
+            <th>Spent</th>
+            <th>Remaining</th>
+            <th>Date Allocated</th>
+            <th>Date Spent</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="budgetBody">
+          <tr>
+            <td>Community Projects</td>
+            <td>₱100,000</td>
+            <td>₱50,000</td>
+            <td>₱50,000</td>
+            <td>2024-04-01</td>
+            <td>2024-04-15</td>
+            <td>
+              <button class="btn btn-edit">Edit</button>
+              <button class="btn btn-delete">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-add" onclick="openModal()">Add Budget</button>
+    </section>
+
+    <!-- Chart Section -->
+    <section class="chart-container">
+      <h2>Total Expense</h2>
+      <canvas id="expenseChart"></canvas>
+    </section>
+  </div>
+
+  <!-- Add/Edit Budget Modal -->
+  <div class="modal" id="addBudgetModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h3>Add/Edit Budget</h3>
+      <form id="budgetForm">
+        <div class="form-group">
+          <label for="category">Category:</label>
+          <input type="text" id="category" required />
+        </div>
+        <div class="form-group">
+          <label for="allocated">Allocated Amount:</label>
+          <input type="number" id="allocated" required />
+        </div>
+        <div class="form-group">
+          <label for="spent">Spent Amount:</label>
+          <input type="number" id="spent" required />
+        </div>
+        <div class="form-group">
+          <label for="dateAllocated">Date Allocated:</label>
+          <input type="date" id="dateAllocated" required />
+        </div>
+        <div class="form-group">
+          <label for="dateSpent">Date Spent:</label>
+          <input type="date" id="dateSpent" required />
+        </div>
+        <button type="submit" class="btn btn-save">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./js/budget.js"></script>
 </body>
 
 </html>

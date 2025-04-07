@@ -76,9 +76,36 @@ budgetBody.addEventListener("click", function (e) {
 
   if (e.target.classList.contains("btn-delete")) {
     if (confirm("Are you sure you want to delete this budget entry?")) {
-      e.target.closest("tr").remove();
+      const row = e.target.closest("tr");
+      const cells = row.getElementsByTagName("td");
+  
+      // Prepare deleted data
+      const deletedTransaction = {
+        category: cells[0].innerText,
+        allocated: cells[1].innerText,
+        spent: cells[2].innerText,
+        remaining: cells[3].innerText,
+        dateAllocated: cells[4].innerText,
+        dateSpent: cells[5].innerText,
+        deletedAt: new Date().toLocaleString()
+      };
+  
+      // Store in localStorage
+      let deletedList = JSON.parse(localStorage.getItem("deletedTransactions")) || [];
+      deletedList.push(deletedTransaction);
+      localStorage.setItem("deletedTransactions", JSON.stringify(deletedList));
+  
+      // Remove row
+      row.remove();
+  
+      // Redirect
+      setTimeout(() => {
+        window.location.href = "transactionhistory.html";
+      }, 300);
     }
   }
+  
+  
 });
 
 // Handle Form Submission - Add/Edit Budget
