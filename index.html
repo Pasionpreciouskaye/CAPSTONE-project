@@ -13,7 +13,6 @@
       <div class="logo">
         <img src="./logo/SK-Logo.png" alt="Logo">
       </div>
-      <div class="hamburger-menu" id="hamburger-icon">☰</div>
 
       <div class="header-title">
         <h2>SANGGUNIANG KABATAAN</h2>
@@ -22,23 +21,13 @@
 
 
     <div class="sidebar" id="sidebar">
-      <div class="sidebar-content">
-        <div class="profile-container">
-          <div class="profile-image">
-            <img src="./assets/profile.jpg" alt="User Profile">
-          </div>
-          <p class="user-name">Jane Doe</p>
-        </div>
+      <nav class="nav-links">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="budgetdashboard.html">Budget Transparency</a></li>
-          <li><a href="inventory.html">Inventory</a></li>
-          <li><a href="aboutus.html">About Us</a></li>
-          <li><a href="contactus.html">Contact Us</a></li>
-          <li><a href="logout.html" class="logout-btn">Log Out</a></li>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./aboutus.html">About Us</a></li>
+          <li><a href="./contactus.html">Contact Us</a></li>        
         </ul>
-      </div>
+      </nav>
     </div>
 
     <div class="banner">
@@ -47,21 +36,27 @@
   </header>
 
   <main>
-    <section class="announcement">
-      <h3>Announcement!</h3>
-      <p>
-        Stay tuned for upcoming events, projects, and news that will make a
-        difference in our community!
-      </p>
 
-      <div class="bulletin-box">
-        <p>
-          We are excited to announce a new initiative focused on empowering
-          the youth in our community. More details coming soon!
-        </p>
+    <section class="feature-boxes">
+      <div class="box" onclick="location.href='./projects.html'">
+        <img src="./assets/projects.jpg" alt="Projects Icon">
+        <h4>Projects</h4>
+        <p>Discover our youth-led initiatives and community efforts.</p>
+      </div>
+  
+      <div class="box" onclick="location.href='./eventinfo.html'">
+        <img src="./assets/events.jpg" alt="Events Icon">
+        <h4>Events</h4>
+        <p>Stay up-to-date with upcoming events and activities.</p>
+      </div>
+  
+      <div class="box" onclick="location.href='./budgetdashboard.html'">
+        <img src="./assets/budget.jpg" alt="Budget Icon">
+        <h4>Budget Transparency</h4>
+        <p>Review budget allocations and financial transparency.</p>
       </div>
     </section>
-
+  
     <section class="admins">
       <h3>ADMINS</h3>
 
