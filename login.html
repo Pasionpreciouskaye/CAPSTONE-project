@@ -20,10 +20,10 @@
       <div class="right-section">
         <div class="login-wrapper">
           <h2>Login</h2>
-          <form id="loginForm" action="process_login.php" method="POST">
+          <form id="loginForm">
             <!-- User Role Selection -->
             <div class="form-group">
-              <select name="role" title="role" id="role" required>
+              <select name="role" id="role" required>
                 <option value="" disabled selected>Select Role</option>
                 <option value="member">Member</option>
                 <option value="admin">Admin</option>
@@ -32,14 +32,14 @@
 
             <!-- Email Input -->
             <div class="form-group">
-              <input type="email" name="email" placeholder="Email" required />
+              <input type="email" id="email" placeholder="Email" required />
             </div>
 
             <!-- Password Input -->
             <div class="form-group">
               <input
                 type="password"
-                name="password"
+                id="password"
                 placeholder="Password"
                 required
               />
@@ -54,6 +54,8 @@
         </div>
       </div>
     </div>
+
+    <!-- PocketBase and Login Script -->
     <script src="./node_modules/pocketbase/dist/pocketbase.umd.js"></script>
     <script src="./js/login.js"></script>
   </body>
