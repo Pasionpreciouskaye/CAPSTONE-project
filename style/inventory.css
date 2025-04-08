@@ -1,192 +1,438 @@
-/* Reset */
+/* CSS Variables for Colors */
+:root {
+  --primary-bg: #f9fafc; /* Light grey background */
+  --sidebar-bg: #34495e; /* Dark blue-grey */
+  --sidebar-link-bg: #4a627a; /* Slightly lighter than sidebar */
+  --sidebar-link-hover-bg: #1abc9c; /* Teal */
+  --header-bg: #ffffff; /* White header */
+  --header-shadow: rgba(0, 0, 0, 0.1);
+  --text-dark: #333;
+  --text-light: #ffffff;
+  --accent-color: #e07a8c; /* Original pink/coral for title */
+  --button-add-bg: #27ae60; /* Green */
+  --button-add-hover-bg: #219150;
+  --button-edit-bg: #2980b9; /* Blue */
+  --button-edit-hover-bg: #2471a3;
+  --button-delete-bg: #c0392b; /* Red */
+  --button-delete-hover-bg: #a93226;
+  --table-header-bg: #3498db; /* Lighter blue for table header */
+  --table-border-color: #e0e0e0;
+  --table-row-even-bg: #f4f4f4;
+  --modal-bg: rgba(0, 0, 0, 0.5); /* Darker overlay for modal */
+  --modal-content-bg: #ffffff;
+  --input-border-color: #ccc;
+  --font-family: 'Inter', sans-serif;
+  --sidebar-width: 260px;
+  --transition-speed: 0.3s;
+}
+
+/* Global Reset & Base Styles */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  font-family: "Inter", sans-serif;
-  margin: 0;
-  background-color: #f9fafc;
-  display: flex;
+  font-family: var(--font-family);
+  background-color: var(--primary-bg);
+  color: var(--text-dark);
+  /* Prevent horizontal scrollbar caused by sidebar animation */
+  overflow-x: hidden;
 }
+
+body.no-scroll {
+  overflow: hidden; /* Prevent background scroll when sidebar is open */
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  /* Push content right when sidebar is active */
+  margin-left: 0;
+  width: 100%;
+  transition: margin-left var(--transition-speed) ease-in-out;
+}
+
+body.sidebar-active .app-container {
+   margin-left: var(--sidebar-width);
+}
+
 
 /* Sidebar */
 .sidebar {
-  width: 240px;
-  background: #e07a8c;
-  color: white;
-  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: calc(-1 * var(--sidebar-width)); /* Initially hidden */
+  width: var(--sidebar-width);
   height: 100vh;
+  background: var(--sidebar-bg);
+  color: var(--text-light);
+  padding: 20px;
+  overflow-y: auto;
+  transition: left var(--transition-speed) ease-in-out;
+  z-index: 1000; /* Above main content but below overlay */
 }
-.sidebar h2 {
+
+.sidebar.active {
+  left: 0; /* Slide in */
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.profile-container {
   text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+.profile-image img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.user-name {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.sidebar nav {
+  flex-grow: 1; /* Pushes logout to bottom if needed */
+}
+
 .sidebar ul {
   list-style: none;
-  padding: 0;
 }
+
 .sidebar ul li {
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
+
 .sidebar ul li a {
   display: block;
-  background: #34495e;
-  padding: 12px;
-  border-radius: 8px;
-  color: white;
+  padding: 12px 15px;
+  border-radius: 6px;
+  background: var(--sidebar-link-bg);
+  color: var(--text-light);
   text-decoration: none;
-  text-align: center;
-}
-.sidebar ul li:hover a {
-  background-color: #1abc9c;
-}
-
-/* Main Content */
-.main-content {
-  flex: 1;
-  padding: 30px 40px;
+  text-align: left; /* Align text left */
+  font-weight: 400;
+  transition: background-color var(--transition-speed), color 0.2s;
 }
 
-/* Navigation */
-.top-nav {
+.sidebar ul li a:hover {
+  background-color: var(--sidebar-link-hover-bg);
+  color: var(--text-light); /* Keep text light on hover */
+}
+
+.sidebar ul li a.logout-btn {
+  background-color: var(--button-delete-bg);
+  margin-top: 30px; /* Add space above logout */
+}
+.sidebar ul li a.logout-btn:hover {
+  background-color: var(--button-delete-hover-bg);
+}
+
+/* Application Header (Contains Hamburger & Page Title) */
+.app-header {
+  background-color: var(--header-bg);
+  padding: 15px 20px;
   display: flex;
-  justify-content: flex-end;
-}
-.nav-link {
-  text-decoration: none;
-  font-weight: 600;
-  color: #b30059;
-}
-
-/* Header */
-.header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  box-shadow: 0 2px 4px var(--header-shadow);
+  position: sticky; /* Keep header visible on scroll */
+  top: 0;
+  z-index: 900; /* Below sidebar */
+  width: 100%; /* Ensure it spans width within app-container */
 }
-.header h1 {
-  color: #b30059;
+
+.hamburger-menu {
   font-size: 24px;
+  background: none;
+  border: none;
+  color: var(--text-dark);
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 15px;
 }
+
+.page-title {
+  color: var(--accent-color);
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+  margin: 0;
+  flex-grow: 1; /* Allow title to take space */
+}
+
+
+/* Main Content Area */
+.main-content {
+  padding: 30px 40px;
+  flex: 1; /* Allow main content to grow */
+}
+
+.content-header {
+    display: flex;
+    justify-content: flex-end; /* Align search/add to the right */
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 15px;
+}
+
 .search-add {
   display: flex;
-  gap: 10px;
+  gap: 15px; /* Increased gap */
   flex-wrap: wrap;
 }
-.search-add input {
-  padding: 10px;
+
+.search-add input[type="text"] {
+  padding: 10px 15px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 15px;
+  border: 1px solid var(--input-border-color);
+  font-size: 0.95rem; /* 15px */
+  min-width: 250px; /* Give search some base width */
 }
+
+/* General Action Button Style */
 .action-btn {
-  background-color: #27ae60;
-  color: white;
+  color: var(--text-light);
   border: none;
   border-radius: 6px;
   padding: 10px 16px;
   cursor: pointer;
   font-weight: 600;
+  font-size: 0.9rem; /* ~14px */
+  transition: background-color var(--transition-speed);
 }
 .action-btn:hover {
-  background-color: #219150;
+  opacity: 0.9; /* Slight fade on hover */
 }
 
-/* Table */
+/* Specific Button Colors */
+.add-item-btn { background-color: var(--button-add-bg); }
+.add-item-btn:hover { background-color: var(--button-add-hover-bg); }
+.editBtn { background-color: var(--button-edit-bg); }
+.editBtn:hover { background-color: var(--button-edit-hover-bg); }
+.deleteBtn { background-color: var(--button-delete-bg); }
+.deleteBtn:hover { background-color: var(--button-delete-hover-bg); }
+.save-btn { background-color: var(--button-edit-bg); } /* Using edit blue for save */
+.save-btn:hover { background-color: var(--button-edit-hover-bg); }
+
+
+/* Table Styles */
 .table-container {
-  overflow-x: auto;
+  overflow-x: auto; /* Allow horizontal scrolling on smaller screens */
+  background: var(--modal-content-bg); /* White background */
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
+
 table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-}
-th, td {
-  padding: 12px;
-  border: 1px solid #e0e0e0;
-  font-size: 14px;
-}
-th {
-  background: #3498db;
-  color: white;
-  text-align: left;
-}
-tbody tr:nth-child(even) {
-  background: #f4f4f4;
 }
 
-/* Action Buttons */
+th, td {
+  padding: 12px 15px; /* More horizontal padding */
+  border: 1px solid var(--table-border-color);
+  font-size: 0.875rem; /* 14px */
+  text-align: left;
+  vertical-align: middle;
+}
+
+th {
+  background: var(--table-header-bg);
+  color: var(--text-light);
+  font-weight: 600;
+  white-space: nowrap; /* Prevent headers from wrapping */
+}
+
+tbody tr:nth-child(even) {
+  background: var(--table-row-even-bg);
+}
+tbody tr:hover {
+    background-color: #e9f5fb; /* Light blue hover for rows */
+}
+
+td:last-child { /* Action buttons column */
+  white-space: nowrap; /* Prevent buttons wrapping */
+  text-align: center;
+}
+
+/* Action Buttons inside Table */
 .editBtn, .deleteBtn {
   padding: 6px 10px;
-  margin: 2px;
+  margin: 0 3px; /* Adjust spacing */
   border: none;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 0.8rem; /* 13px */
   cursor: pointer;
-}
-.editBtn {
-  background: #2980b9;
-  color: white;
-}
-.deleteBtn {
-  background: #c0392b;
-  color: white;
-}
-.editBtn:hover {
-  background: #2471a3;
-}
-.deleteBtn:hover {
-  background: #a93226;
+  color: var(--text-light);
 }
 
-/* Modal */
+/* Modal Styles */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.3);
+  background-color: var(--modal-bg);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 1050; /* Above overlay */
+  opacity: 0; /* Start hidden */
+  visibility: hidden;
+  transition: opacity var(--transition-speed) ease, visibility 0s var(--transition-speed) linear;
 }
-.modal.hidden {
-  display: none;
+
+.modal:not(.hidden) {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--transition-speed) ease, visibility 0s linear;
 }
+
+
 .modal-content {
-  background: white;
-  padding: 25px;
+  background: var(--modal-content-bg);
+  padding: 30px; /* More padding */
   border-radius: 10px;
-  width: 420px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  width: 90%; /* Responsive width */
+  max-width: 550px; /* Max width for larger screens */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  position: relative; /* For positioning close button */
+  transform: scale(0.95); /* Slight scale effect */
+  transition: transform var(--transition-speed) ease;
 }
+
+.modal:not(.hidden) .modal-content {
+    transform: scale(1);
+}
+
+
 .modal-content h3 {
   margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--sidebar-bg); /* Use dark sidebar color for modal title */
+  font-size: 1.3rem;
 }
-.modal-content input {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
+
+/* Optional: Use grid for better form layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Responsive columns */
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="number"],
+.modal-content input[type="date"] {
+  /* Remove individual width: 100% if using grid */
+  /* width: 100%; */
+  margin-bottom: 0; /* Remove margin if using grid gap */
+  padding: 12px; /* Slightly more padding */
+  border: 1px solid var(--input-border-color);
   border-radius: 6px;
+  font-size: 0.9rem;
 }
-.modal-content button {
+.modal-content input:focus {
+    border-color: var(--button-edit-bg); /* Highlight focus */
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.2);
+}
+
+.modal-content button[type="submit"] {
   width: 100%;
-  padding: 10px;
-  background: #3498db;
-  color: white;
+  padding: 12px;
+  margin-top: 10px; /* Add margin if not using grid or below grid */
   font-weight: 600;
-  border: none;
-  border-radius: 6px;
+  font-size: 1rem;
 }
-.modal-content button:hover {
-  background: #2980b9;
-}
+
 .close {
-  float: right;
-  font-size: 24px;
+  position: absolute; /* Position relative to modal-content */
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #aaa;
+  background: none;
+  border: none;
   cursor: pointer;
+  line-height: 1; /* Ensure tight bounding box */
+}
+.close:hover {
+  color: var(--text-dark);
+}
+
+/* Overlay Styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+  z-index: 999; /* Below sidebar but above main content */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-speed) ease, visibility 0s var(--transition-speed) linear;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--transition-speed) ease, visibility 0s linear;
+}
+
+/* Responsive Adjustments (Example) */
+@media (max-width: 768px) {
+  .app-container {
+      margin-left: 0 !important; /* Override margin shift on small screens when sidebar is open */
+  }
+
+  .sidebar {
+      z-index: 1100; /* Ensure sidebar is on top on mobile */
+  }
+
+   body.sidebar-active .app-container {
+       /* Prevent content shift on mobile if preferred */
+       margin-left: 0;
+   }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  .content-header {
+    flex-direction: column;
+    align-items: stretch; /* Make search/add full width */
+  }
+
+  .search-add input[type="text"] {
+      min-width: auto; /* Remove min-width */
+      width: 100%;
+  }
+   .search-add .action-btn {
+       width: 100%; /* Make button full width */
+   }
+
+   th, td {
+       padding: 10px 8px;
+       font-size: 0.8rem; /* Smaller font on mobile */
+   }
 }
