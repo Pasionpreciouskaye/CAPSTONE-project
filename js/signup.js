@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
             address: document.getElementById("address").value,
             email: document.getElementById("email").value,
             password: document.getElementById("password").value,
-            passwordConfirm: document.getElementById("confirmPassword").value
+            passwordConfirm: document.getElementById("confirmPassword").value,
         };
 
         if (formData.password !== formData.passwordConfirm) {
@@ -29,16 +29,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    first_name: formData.firstName,
-                    middle_name: formData.middleName,
-                    last_name: formData.lastName,
+                    firstName: formData.firstName,
+                    middleName: formData.middleName,
+                    lastName: formData.lastName,
                     dob: formData.dob,
                     gender: formData.gender,
                     phone: formData.phone,
                     address: formData.address,
                     email: formData.email,
                     password: formData.password,
-                    passwordConfirm: formData.passwordConfirm
+                    passwordConfirm: formData.passwordConfirm,
+                    role: "member"
                 }),
             });
 
@@ -50,6 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             alert("Signup successful!");
             form.reset();
+            window.location.href = "login.html";
+
         } catch (error) {
             console.error("Error submitting form:", error);
             alert("Failed to sign up. Check console for details.");

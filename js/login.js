@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Perform admin-specific actions
                 } else {
                     console.log("User access granted");
-                    window.location.href = "member_dashboard.html";
+                    window.location.href = "/";
                     // Perform user-specific actions
                 }
             } else {
