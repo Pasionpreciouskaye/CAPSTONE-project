@@ -62,3 +62,20 @@ carouselWrapper.addEventListener("scroll", () => {
 });
 
 updateArrows();
+let currentIndex = 0;
+const images = document.querySelectorAll('.image-wrapper img');
+const totalImages = images.length;
+
+function showNextImage() {
+    currentIndex = (currentIndex + 1) % totalImages;
+    updateSliderPosition();
+}
+
+function updateSliderPosition() {
+    const wrapper = document.querySelector('.image-wrapper');
+    const offset = -currentIndex * 100;  // Move the image-wrapper to show the next image
+    wrapper.style.transform = `translateX(${offset}%)`;
+}
+
+// Auto slide every 3 seconds
+setInterval(showNextImage, 3000);
