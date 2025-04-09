@@ -137,15 +137,16 @@ body {
 
 
 footer {
-    background-color: #ffffff;
-    color: #000000;
-    padding: 30px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top: 1px solid #e0e0e0;
-}
-
+    background-color: #f688b6;
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    width: 300%;
+    position: relative;
+    left: 0;
+  }
+  
 .footer-content {
     display: flex;
     align-items: center;
