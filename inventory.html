@@ -4,20 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Supplies Inventory</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./style/inventory.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
-  </head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+</head>
 <body>
   <aside class="sidebar" id="sidebar" aria-hidden="true">
     <div class="sidebar-content">
       <div class="profile-container">
-         </div>
+          <div class="user-name">Admin Menu</div> </div>
       <nav role="navigation">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="budgetdashboard.html">Budget Transparency</a></li>
-          <li><a href="logout.html" class="logout-btn">Log Out</a></li>
+          <li><a href="index.html"><i class="fa-solid fa-house fa-fw"></i> Home</a></li>
+          <li><a href="projects.html"><i class="fa-solid fa-briefcase fa-fw"></i> Projects</a></li>
+          <li><a href="budgetdashboard.html"><i class="fa-solid fa-chart-pie fa-fw"></i> Budget Transparency</a></li>
+          <li><a href="logout.html" class="logout-btn"><i class="fa-solid fa-right-from-bracket fa-fw"></i> Log Out</a></li>
         </ul>
       </nav>
     </div>
@@ -26,15 +27,16 @@
   <div class="app-container">
     <header class="app-header">
       <button class="hamburger-menu" id="hamburger-icon" aria-label="Toggle Menu" aria-controls="sidebar" aria-expanded="false">
-        &#9776; </button>
-      <h1 class="page-title">📦 Supplies Inventory</h1>
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <h1 class="page-title"><i class="fa-solid fa-boxes-stacked"></i> Supplies Inventory</h1>
     </header>
 
     <main class="main-content">
       <header class="content-header">
         <div class="search-add">
-          <input type="text" id="search" placeholder="🔍 Search product..." />
-          <button id="addItemBtn" class="action-btn add-item-btn">➕ Add Item</button>
+           <input type="text" id="search" placeholder="Search product..." />
+          <button id="addItemBtn" class="action-btn add-item-btn"><i class="fa-solid fa-plus"></i> Add Item</button>
         </div>
       </header>
 
@@ -65,11 +67,11 @@
 
   <div id="itemModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-content">
-      <button id="closeModal" class="close" aria-label="Close modal">&times;</button>
+      <button id="closeModal" class="close" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
       <h3 id="modalTitle">Add Item</h3>
       <form id="itemForm">
         <input type="hidden" id="editIndex" />
-        <div class="form-grid"> {/* Optional: Use grid for better layout */}
+        <div class="form-grid">
           <input type="text" placeholder="Item Name" id="itemName" required />
           <input type="text" placeholder="Category" id="itemCategory" required />
           <input type="number" placeholder="Quantity" id="itemQty" required />
@@ -82,13 +84,14 @@
           <input type="date" placeholder="Last Order Date" id="itemDate" />
           <input type="text" placeholder="Usage Rate" id="itemUsage" />
         </div>
-        <button type="submit" class="action-btn save-btn">💾 Save Item</button>
+        <button type="submit" class="action-btn save-btn"><i class="fa-solid fa-save"></i> Save Item</button>
       </form>
     </div>
   </div>
 
   <div class="overlay"></div>
 
+  <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.umd.js"></script>
   <script src="./js/inventory.js"></script>
 </body>
-</html>`
+</html>

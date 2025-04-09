@@ -144,12 +144,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // --- Event Listeners ---
-  addBtn.onclick = () => openModal(); // Open modal in 'add' mode
-  closeModalBtn.onclick = closeModalFn; // Use correct close button variable
+  addBtn.onclick = () => openModal(); 
+  closeModalBtn.onclick = closeModalFn; 
 
   // Close modal if user clicks outside the modal content
   modal.addEventListener('click', (event) => {
-      if (event.target === modal) { // Check if the click was directly on the modal background
+      if (event.target === modal) { 
           closeModalFn();
       }
   });
@@ -158,12 +158,10 @@ document.addEventListener("DOMContentLoaded", () => {
   searchInput.addEventListener("keyup", () => {
     const query = searchInput.value.toLowerCase().trim();
     document.querySelectorAll("#inventoryTable tr").forEach(row => {
-      // Check if any cell text content (converted to lowercase) includes the query
       const match = Array.from(row.cells).some(cell =>
-         // Ignore the last cell (actions) for searching
          !cell.querySelector('button') && cell.textContent.toLowerCase().includes(query)
       );
-      row.style.display = match ? "" : "none"; // Show if match, hide if not
+      row.style.display = match ? "" : "none";
     });
   });
 
@@ -187,4 +185,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // function loadInventory() { ... }
   // loadInventory();
 
-}); // End DOMContentLoadedq
+});
