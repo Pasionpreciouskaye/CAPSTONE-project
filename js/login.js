@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
                 if (role === "admin") {
                     console.log("Admin access granted");
-                    window.location.href = "admin_dashboard.html";
+                    window.location.href = "admin-dashboard.html";
                     // Perform admin-specific actions
                 } else {
                     console.log("User access granted");
