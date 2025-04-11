@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -50,12 +50,11 @@ body {
     text-align: center;
 }
 
-
 .nav-links {
     position: absolute;
-    top: 25px;        
-    right: 50px; 
-    text-align: center;      
+    top: 25px;
+    right: 50px;
+    text-align: center;
 }
 
 .nav-links ul {
@@ -68,6 +67,7 @@ body {
 
 .nav-links ul li {
     display: inline-block;
+    position: relative;
 }
 
 .nav-links ul li a {
@@ -82,6 +82,62 @@ body {
     color: #000000;
 }
 
+.nav-links ul li {
+    position: relative;
+}
+
+.nav-links ul li .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    flex-direction: column;
+    z-index: 99;
+    padding: 10px 0;
+}
+
+.nav-links ul li:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-content a {
+    padding: 10px 16px;
+    text-align: left;
+    text-decoration: none;
+    color: rgb(243, 121, 159);
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    width: 100%;
+}
+
+.dropdown-content a:hover {
+    background-color: #f9f9f9;
+    color: #000000;
+}
+
+
+.dropdown-content a {
+    padding: 12px 16px;
+    text-align: left;
+    text-decoration: none;
+    color: rgb(243, 121, 159);
+    font-weight: 500;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f9f9f9;
+    color: #000000;
+}
+
+/* Media Query for Mobile */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -98,6 +154,41 @@ body {
     .nav-links.active {
         display: flex;
     }
+
+    .nav-links ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links ul li .dropdown-content {
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+        width: 100%;
+        display: none;
+    }
+
+    .nav-links ul li:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content a {
+        padding: 10px;
+        border-bottom: none;
+    }
+}
+
+.user-image {
+    width: 20px; 
+    height: 20px; 
+    border-radius: 60%; 
+    object-fit: cover;
+    border: 2px solid #f5829d;
+    transition: border 0.3s ease;
+}
+
+.user-icon:hover .user-image {
+    border: 2px solid #000; 
 }
 
 .banner {
@@ -111,6 +202,16 @@ body {
     width: 100%;
     height: auto;
     object-fit: contain;
+}
+
+.banner-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .contact-cards {
@@ -137,7 +238,6 @@ body {
     font-size: 16px;
 }
 
-/* Map Section */
 .map {
     text-align: center;
     margin: 40px 0;
@@ -217,20 +317,31 @@ body {
     font-size: 18px;
 }
 
+/* Footer Section */
 footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 30px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #e0e0e0;
 }
 
-footer img {
-    width: 50px;
-    margin-bottom: 10px;
+.footer-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-footer p {
-    font-size: 16px;
+.footer-content img {
+    height: 60px;
+}
+
+.footer-content p {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
 }
 
 @media (max-width: 768px) {
@@ -252,17 +363,27 @@ footer p {
     }
 }
 
-.user-image {
-    width: 20spx; 
-    height: 20px; 
-    border-radius: 60%; 
-    object-fit: cover;
-    border: 2px solid #f5829d;
-    transition: border 0.3s ease;
-  }
+.contact-intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px 30px;
+    background-color: #ffffff;
+}
 
+.intro-box {
+    background-color: #fce7ef;
+    padding: 30px 40px;
+    border-radius: 16px;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
 
-.user-icon:hover .user-image {
-    border: 2px solid #000; 
-  }
-  
+.intro-box p {
+    font-size: 20px;
+    color: #333333;
+    line-height: 1.6;
+    font-weight: 500;
+}
