@@ -1,16 +1,19 @@
 // Array of image paths
 const images = [
-    './assets/project2.png',
-    './assets/proj2 (1).jpg',
-    './assets/proj2 (2).jpg',
-    './assets/proj2 (3).jpg',
-    './assets/proj2 (4).jpg',
-    './assets/proj2 (5).jpg',
-    './assets/proj2 (6).jpg',
-    './assets/proj2 (7).jpg',
-    './assets/proj2 (8).jpg',
-    './assets/proj2 (9).jpg',
-    './assets/proj2 (10).jpg',
+    '/assets/pic5 (1).jpg',
+    '/assets/pic5 (2).jpg',
+    '/assets/pic5 (3).jpg',
+    '/assets/pic5 (4).jpg',
+    '/assets/pic5 (5).jpg',
+    '/assets/pic5 (6).jpg',
+    '/assets/pic5 (7).jpg',
+    '/assets/pic5 (8).jpg',
+    '/assets/pic5 (9).jpg',
+    '/assets/pic5 (10).jpg',
+    '/assets/pic5 (11).jpg',
+    '/assets/pic5 (12).jpg',
+    '/assets/pic5 (13).jpg',
+    '/assets/pic5 (14).jpg',
 
     
 ];
