@@ -1,15 +1,13 @@
 // Array of image paths
 const images = [
-    './assets/project1.png',
-    './assets/pic1 (9).jpg',
-    './assets/pic1 (5).jpg',
-    './assets/pic1 (1).jpg',
-    './assets/pic1 (2).jpg',
-    './assets/pic1 (3).jpg',
-    './assets/pic1 (4).jpg',
-    './assets/pic1 (5).jpg',
-    './assets/pic1 (6).jpg',
-    './assets/pic1 (7).jpg',
+    '/assets/pic4 (8).jpg',
+    '/assets/pic4 (7).jpg',
+    '/assets/pic4 (6).jpg',
+    '/assets/pic4 (5).jpg',
+    '/assets/pic4 (4).jpg',
+    '/assets/pic4 (3).jpg',
+    '/assets/pic4 (2).jpg',
+    '/assets/pic4 (1).jpg',
 ];
 
 // Get reference to the slider

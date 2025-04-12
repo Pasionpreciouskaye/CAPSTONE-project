@@ -1,71 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./style/transactionhistory.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./style/transactionhistory.css" />
     <script defer src="./js/transactionhistory.js"></script>
     <title>Transaction History</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Transaction History</h1>
+      <h1>Transaction History</h1>
 
-        <div class="toolbar">
-            <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" id="search-input" placeholder="Search transactions...">
-            </div>
-            <div class="tabs">
-                <button class="tab active" data-filter="all">All</button>
-                <button class="tab" data-filter="income">Income</button>
-                <button class="tab" data-filter="expense">Expenses</button>
-                <button class="tab" data-filter="deleted">Deleted Items</button>
-            </div>
+      <div class="toolbar">
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search transactions..."
+          />
         </div>
-
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">Description</th>
-                        <th scope="col">Vendor/Source</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Payment Method</th>
-                        <th scope="col" class="amount-header">Amount</th>
-                    </tr>
-                </thead>
-                <tbody id="transaction-body">
-                    <tr class="transaction-income" data-searchable="Salary Payment Company XYZ 2023-05-20 Direct Deposit +$2500.00">
-                        <td>Salary Payment</td>
-                        <td>Company XYZ</td>
-                        <td>20 May, 2023</td>
-                        <td><i class="fas fa-university icon-margin"></i> Direct Deposit</td>
-                        <td class="amount income"><span class="currency-symbol">+</span>$2500.00</td>
-                    </tr>
-                    <tr class="transaction-expense" data-searchable="Furniture Electro 2023-05-17 Invoice -$20.00">
-                         <td>Furniture</td>
-                         <td>Electro</td>
-                         <td>17 May, 2023</td>
-                         <td><i class="fas fa-file-invoice icon-margin"></i> Invoice</td>
-                         <td class="amount expense"><span class="currency-symbol">-</span>$20.00</td>
-                     </tr>
-                    </tbody>
-                <tbody id="deleted-transaction-body">
-                    </tbody>
-            </table>
-            <p id="no-results-message" class="no-results" style="display: none;">No transactions match your search or filter.</p>
+        <div class="tabs">
+          <button class="tab active" data-filter="all">All</button>
+          <button class="tab" data-filter="income">Income</button>
+          <button class="tab" data-filter="expense">Expenses</button>
+          <button class="tab" data-filter="deleted">Deleted Items</button>
         </div>
+      </div>
 
-        <a href="./budgetdashboard.html" class="dashboard-button">
-             <i class="fas fa-arrow-left icon-margin"></i> Back to Dashboard
-        </a>
-        <button id="clear-deleted-button" class="clear-deleted-button" style="display: none;">Clear Viewed Deleted Items</button>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Description</th>
+              <th scope="col">Vendor/Source</th>
+              <th scope="col">Date</th>
+              <th scope="col">Payment Method</th>
+              <th scope="col" class="amount-header">Amount</th>
+            </tr>
+          </thead>
+          <tbody id="transaction-body">
+            <tr
+              class="transaction-income"
+              data-searchable="Salary Payment Company XYZ 2023-05-20 Direct Deposit +$2500.00"
+            >
+              <td>Salary Payment</td>
+              <td>Company XYZ</td>
+              <td>20 May, 2023</td>
+              <td>
+                <i class="fas fa-university icon-margin"></i> Direct Deposit
+              </td>
+              <td class="amount income">
+                <span class="currency-symbol">+</span>$2500.00
+              </td>
+            </tr>
+            <tr
+              class="transaction-expense"
+              data-searchable="Furniture Electro 2023-05-17 Invoice -$20.00"
+            >
+              <td>Furniture</td>
+              <td>Electro</td>
+              <td>17 May, 2023</td>
+              <td><i class="fas fa-file-invoice icon-margin"></i> Invoice</td>
+              <td class="amount expense">
+                <span class="currency-symbol">-</span>$20.00
+              </td>
+            </tr>
+          </tbody>
+          <tbody id="deleted-transaction-body"></tbody>
+        </table>
+        <p id="no-results-message" class="no-results" style="display: none">
+          No transactions match your search or filter.
+        </p>
+      </div>
 
+      <a href="./budgetdashboard.html" class="dashboard-button">
+        <i class="fas fa-arrow-left icon-margin"></i> Back to Dashboard
+      </a>
+      <button
+        id="clear-deleted-button"
+        class="clear-deleted-button"
+        style="display: none"
+      >
+        Clear Viewed Deleted Items
+      </button>
     </div>
-</body>
+  </body>
 </html>
