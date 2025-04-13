@@ -1,155 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Supplies Inventory</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <title>Supplies Inventory - Create Item</title>
     <link rel="stylesheet" href="./style/inventory.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-    />
-  </head>
-  <body>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+</head>
+<body>
     <aside class="sidebar" id="sidebar" aria-hidden="true">
-      <div class="sidebar-content">
-        <div class="profile-container">
-          <div class="user-name">Admin Menu</div>
+        <div class="sidebar-content">
+            <div class="profile-container">
+                </div>
+            <nav role="navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="budgetdashboard.html">Budget Transparency</a></li>
+                    <li><a href="logout.html" class="logout-btn">Log Out</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav role="navigation">
-          <ul>
-            <li>
-              <a href="index.html"
-                ><i class="fa-solid fa-house fa-fw"></i> Home</a
-              >
-            </li>
-            <li>
-              <a href="/Project/projects.html"
-                ><i class="fa-solid fa-briefcase fa-fw"></i> Projects</a
-              >
-            </li>
-            <li>
-              <a href="budgetdashboard.html"
-                ><i class="fa-solid fa-chart-pie fa-fw"></i> Budget
-                Transparency</a
-              >
-            </li>
-            <li>
-              <a href="logout.html" class="logout-btn"
-                ><i class="fa-solid fa-right-from-bracket fa-fw"></i> Log Out</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </div>
     </aside>
 
     <div class="app-container">
-      <header class="app-header">
-        <button
-          class="hamburger-menu"
-          id="hamburger-icon"
-          aria-label="Toggle Menu"
-          aria-controls="sidebar"
-          aria-expanded="false"
-        >
-          <i class="fa-solid fa-bars"></i>
-        </button>
-        <h1 class="page-title">
-          <i class="fa-solid fa-boxes-stacked"></i> Supplies Inventory
-        </h1>
-      </header>
-
-      <main class="main-content">
-        <header class="content-header">
-          <div class="search-add">
-            <input type="text" id="search" placeholder="Search product..." />
-            <button id="addItemBtn" class="action-btn add-item-btn">
-              <i class="fa-solid fa-plus"></i> Add Item
-            </button>
-          </div>
+        <header class="app-header">
+            <button class="hamburger-menu" id="hamburger-icon" aria-label="Toggle Menu" aria-controls="sidebar" aria-expanded="false">
+                &#9776; </button>
+            <h1 class="page-title">📦 Supplies Inventory</h1>
         </header>
 
-        <section class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Category</th>
-                <th>Qty</th>
-                <th>Cost</th>
-                <th>Supplier</th>
-                <th>Reorder</th>
-                <th>Location</th>
-                <th>SKU</th>
-                <th>Packaging</th>
-                <th>Last Order</th>
-                <th>Usage</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="inventoryTable"></tbody>
-          </table>
-        </section>
-      </main>
+        <main class="main-content">
+            <header class="content-header">
+                <div class="search-add">
+                    <button id="addItemBtn" class="action-btn add-item-btn">➕ Add Item</button>
+                </div>
+            </header>
+
+            <section class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Category</th>
+                            <th>Quantity</th>
+                            <th>Cost (PHP)</th>
+                            <th>SKU</th>
+                            <th>Actions</th> </tr>
+                    </thead>
+                    <tbody id="inventoryTable">
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 20px;">
+                                Inventory data will be loaded in the full version. Use "Add Item" to save to PocketBase.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
     </div>
 
-    <div
-      id="itemModal"
-      class="modal hidden"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modalTitle"
-    >
-      <div class="modal-content">
-        <button id="closeModal" class="close" aria-label="Close modal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-        <h3 id="modalTitle">Add Item</h3>
-        <form id="itemForm">
-          <input type="hidden" id="editIndex" />
-          <div class="form-grid">
-            <input type="text" placeholder="Item Name" id="itemName" required />
-            <input
-              type="text"
-              placeholder="Category"
-              id="itemCategory"
-              required
-            />
-            <input type="number" placeholder="Quantity" id="itemQty" required />
-            <input
-              type="text"
-              placeholder="Unit Cost (e.g., 10.50)"
-              id="itemCost"
-              required
-              pattern="^\d+(\.\d{1,2})?$"
-              title="Enter cost like 10.00 or 10.50"
-            />
-            <input type="text" placeholder="Supplier" id="itemSupplier" />
-            <input type="number" placeholder="Reorder Point" id="itemReorder" />
-            <input type="text" placeholder="Location" id="itemLocation" />
-            <input type="text" placeholder="SKU" id="itemSKU" />
-            <input type="text" placeholder="Packaging" id="itemPackaging" />
-            <input type="date" placeholder="Last Order Date" id="itemDate" />
-            <input type="text" placeholder="Usage Rate" id="itemUsage" />
-          </div>
-          <button type="submit" class="action-btn save-btn">
-            <i class="fa-solid fa-save"></i> Save Item
-          </button>
-        </form>
-      </div>
+    <div id="itemModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <button id="closeModal" class="close" aria-label="Close modal">&times;</button>
+            <h3 id="modalTitle">Add Item</h3>
+            <form id="itemForm">
+                <div class="form-grid">
+                    <input type="text" placeholder="Item Name" id="itemName" required />
+                    <input type="text" placeholder="Category" id="itemCategory" />
+                    <input type="number" placeholder="Quantity" id="itemQty" required />
+                    <input type="text" placeholder="Unit Cost (e.g., 150.75)" id="itemCost" required pattern="^\d+(\.\d{1,2})?$" title="Enter cost like 150.00 or 150.75"/>
+                    <input type="text" placeholder="SKU (Unique Code)" id="itemSKU" />
+                </div>
+                <button type="submit" class="action-btn save-btn">💾 Save Item</button>
+            </form>
+        </div>
     </div>
 
     <div class="overlay"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.umd.js"></script>
     <script src="./js/inventory.js"></script>
-  </body>
+</body>
 </html>
