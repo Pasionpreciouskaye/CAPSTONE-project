@@ -1,0 +1,204 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  color: #333;
+}
+
+.section {
+  padding: 40px 20px;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #d63384;
+}
+
+.upcoming-events {
+  background: linear-gradient(90deg, #ff69b4, #ffc0cb);
+  color: white;
+  padding: 40px 20px;
+}
+
+.event-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+}
+
+.event-card {
+  min-width: 300px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.event-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.event-card .info {
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #fff;
+}
+
+.recent-events {
+  background-color: #fff;
+}
+
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.recent-card {
+  background-color: #ffe6f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.recent-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.recent-card .info {
+  padding: 10px;
+}
+
+.recent-card .info h4 {
+  margin: 0;
+  color: #d63384;
+}
+
+.recent-card .info p {
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.event-slider::-webkit-scrollbar {
+  height: 8px;
+}
+
+.event-slider::-webkit-scrollbar-thumb {
+  background: #ff99cc;
+  border-radius: 10px;
+}
+
+/* Registration Form Styles */
+.registration {
+  background-color: #ffe6f0;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.registration label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #d63384;
+}
+
+.registration input,
+.registration select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.registration button {
+  background-color: #d63384;
+  color: white;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.registration button:hover {
+  background-color: #c2186a;
+}
+
+.success-message {
+  margin-top: 15px;
+  color: green;
+  font-weight: bold;
+  display: none;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .logo {
+    height: 60px;
+  }
+
+  .title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.8rem;
+    color: #d63384;
+    font-weight: 700;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .nav-right a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+  }
+
+  .profile-pic {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #d63384;
+  }
+
+  @media (max-width: 600px) {
+    .title {
+      font-size: 1.2rem;
+    }
+    .nav-right a {
+      font-size: 0.9rem;
+    }
+}
