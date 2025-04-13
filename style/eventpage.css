@@ -1,204 +1,115 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
-
+/* Global Styles */
 body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #fff;
-  color: #333;
+  font-family: "Poppins", sans-serif;
+  color: #000;
+  background-color: #ffffff;
 }
 
-.section {
-  padding: 40px 20px;
-}
-
-.section-title {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #d63384;
-}
-
-.upcoming-events {
-  background: linear-gradient(90deg, #ff69b4, #ffc0cb);
-  color: white;
-  padding: 40px 20px;
-}
-
-.event-slider {
+/* Header Styling */
+.header-container {
   display: flex;
-  overflow-x: auto;
-  gap: 20px;
-}
-
-.event-card {
-  min-width: 300px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 20px; /* Reduced padding */
+  background-color: #ffffff;
   position: relative;
-  cursor: pointer;
-}
-
-.event-card img {
+  height: 60px; /* Reduced header height */
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
 }
 
-.event-card .info {
-  padding: 15px;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  color: #fff;
+.header-container .logo img {
+  height: 40px; /* Reduced logo size */
 }
 
-.recent-events {
-  background-color: #fff;
+/* Header Navigation */
+.header-container .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.recent-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.recent-card {
-  background-color: #ffe6f0;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.recent-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-}
-
-.recent-card .info {
-  padding: 10px;
-}
-
-.recent-card .info h4 {
-  margin: 0;
-  color: #d63384;
-}
-
-.recent-card .info p {
-  font-size: 0.9rem;
-  margin-top: 5px;
-}
-
-.event-slider::-webkit-scrollbar {
-  height: 8px;
-}
-
-.event-slider::-webkit-scrollbar-thumb {
-  background: #ff99cc;
-  border-radius: 10px;
-}
-
-/* Registration Form Styles */
-.registration {
-  background-color: #ffe6f0;
-  border-radius: 12px;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 30px 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
-
-.registration label {
-  display: block;
-  margin-bottom: 5px;
+.header-container .nav-links a {
+  text-decoration: none;
+  color: #4a4a4a;
   font-weight: 600;
-  color: #d63384;
+  transition: color 0.3s ease;
 }
 
-.registration input,
-.registration select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+.header-container .nav-links a:hover {
+  color: #f39c12;
 }
 
-.registration button {
-  background-color: #d63384;
+/* Footer Styling */
+footer {
+  background-color: #f39c12;
   color: white;
-  padding: 12px 20px;
+  text-align: center;
+  padding: 24px 0;
+  margin-top: 64px;
+}
+
+footer h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+footer p {
   font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
 }
 
-.registration button:hover {
-  background-color: #c2186a;
+footer .text-sm {
+  font-size: 0.875rem;
 }
 
-.success-message {
-  margin-top: 15px;
-  color: green;
-  font-weight: bold;
-  display: none;
+footer .text-sm a {
+  color: white;
+  text-decoration: underline;
+  transition: color 0.3s ease;
 }
 
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+footer .text-sm a:hover {
+  color: #f39c12;
+}
+
+/* Mobile Header & Navigation Adjustments */
+@media (max-width: 640px) {
+  header .nav-links {
+    display: none;
   }
 
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 30px;
-    background-color: white;
-    border-bottom: 1px solid #ddd;
+  header .logo {
+    height: 35px; /* Adjusted logo size for mobile */
   }
 
-  .logo {
-    height: 60px;
-  }
-
-  .title {
-    flex-grow: 1;
+  .section-title {
     text-align: center;
-    font-size: 1.8rem;
-    color: #d63384;
-    font-weight: 700;
+  }
+}
+
+/* Mobile Form Styling */
+@media (max-width: 640px) {
+  form#eventForm {
+    padding: 1.5rem;
   }
 
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .nav-right a {
-    text-decoration: none;
-    color: #333;
+  form#eventForm input,
+  form#eventForm select {
     font-size: 1rem;
   }
 
-  .profile-pic {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #d63384;
+  form#eventForm button {
+    width: 100%;
+  }
+}
+
+/* Mobile Grid Adjustment */
+@media (max-width: 640px) {
+  .recent-events .grid {
+    grid-template-columns: 1fr !important;
   }
 
-  @media (max-width: 600px) {
-    .title {
-      font-size: 1.2rem;
-    }
-    .nav-right a {
-      font-size: 0.9rem;
-    }
+  .recent-events .card {
+    margin-bottom: 1rem;
+  }
 }
