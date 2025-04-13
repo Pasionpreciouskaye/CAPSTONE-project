@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Location coordinates for the SK Taguig address
     const location = { lat: 14.5628, lng: 121.0398 };
 
-    // Create a map centered at the given location
     const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 15,
       center: location,
