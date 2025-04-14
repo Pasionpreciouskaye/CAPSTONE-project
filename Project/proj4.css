@@ -44,11 +44,12 @@ body {
   object-fit: cover;
   transition: opacity 1s ease-in-out;
 }
+
 .about-text {
-    padding: 50x 40px; /* Slightly reduced padding for better fit */
-    text-align: center;
-    flex-grow: 1; /* Allow it to take remaining space */
-    overflow-y: auto; /* Allow scrolling if text overflows */
+  padding: 50px 40px; /* Slightly reduced padding for better fit */
+  text-align: center;
+  flex-grow: 1; /* Allow it to take remaining space */
+  overflow-y: auto; /* Allow scrolling if text overflows */
 }
 
 .about-text h2 {
@@ -65,13 +66,13 @@ body {
 }
 
 @media (max-width: 600px) {
-    .login-wrapper {
-      width: 95%;
-      max-width: 320px;
-      padding: 20px;
-    }
-  
-    .center-section {
-      height: 30vh;
-    }
+  .login-wrapper {
+    width: 95%;
+    max-width: 320px;
+    padding: 20px;
   }
+
+  .center-section {
+    height: 30vh;
+  }
+}
