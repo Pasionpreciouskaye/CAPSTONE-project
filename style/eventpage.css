@@ -202,3 +202,120 @@ body {
       font-size: 0.9rem;
     }
 }
+=======
+/* Global Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  color: #000;
+  background-color: #ffffff;
+}
+
+/* Header Styling */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 20px; /* Reduced padding */
+  background-color: #ffffff;
+  position: relative;
+  height: 60px; /* Reduced header height */
+  width: 100%;
+}
+
+.header-container .logo img {
+  height: 40px; /* Reduced logo size */
+}
+
+/* Header Navigation */
+.header-container .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-container .nav-links a {
+  text-decoration: none;
+  color: #4a4a4a;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.header-container .nav-links a:hover {
+  color: #f39c12;
+}
+
+/* Footer Styling */
+footer {
+  background-color: #f39c12;
+  color: white;
+  text-align: center;
+  padding: 24px 0;
+  margin-top: 64px;
+}
+
+footer h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+footer p {
+  font-size: 1rem;
+}
+
+footer .text-sm {
+  font-size: 0.875rem;
+}
+
+footer .text-sm a {
+  color: white;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+footer .text-sm a:hover {
+  color: #f39c12;
+}
+
+/* Mobile Header & Navigation Adjustments */
+@media (max-width: 640px) {
+  header .nav-links {
+    display: none;
+  }
+
+  header .logo {
+    height: 35px; /* Adjusted logo size for mobile */
+  }
+
+  .section-title {
+    text-align: center;
+  }
+}
+
+/* Mobile Form Styling */
+@media (max-width: 640px) {
+  form#eventForm {
+    padding: 1.5rem;
+  }
+
+  form#eventForm input,
+  form#eventForm select {
+    font-size: 1rem;
+  }
+
+  form#eventForm button {
+    width: 100%;
+  }
+}
+
+/* Mobile Grid Adjustment */
+@media (max-width: 640px) {
+  .recent-events .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .recent-events .card {
+    margin-bottom: 1rem;
+  }
+}
+>>>>>>> c0e032a5b06d336ff7e02f523621b1d4d637673d
