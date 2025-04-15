@@ -1,0 +1,237 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Use the imported font */
+    font-family: "Poppins", "Arial", sans-serif;
+}
+
+body {
+    background-color: #f8f9fa; /* Slightly lighter grey background */
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* === Sidebar Styles === */
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    transition: width 0.3s ease;
+}
+
+.sidebar .logo {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 0 15px;
+}
+
+.sidebar .logo img {
+    width: 110px;
+    height: auto;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav ul li {
+    cursor: pointer;
+    margin: 8px 15px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #555;
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    border-radius: 8px;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.sidebar nav ul li a i {
+    margin-right: 15px;
+    font-size: 1.1em;
+    width: 20px;
+    text-align: center;
+    color: #888;
+    transition: color 0.2s ease-in-out;
+}
+
+.sidebar nav ul li a span {
+    flex-grow: 1;
+}
+
+.sidebar nav ul li:not(.active):hover {
+    background-color: #f8f0f4;
+}
+
+.sidebar nav ul li:not(.active):hover a {
+    color: #d83a87;
+}
+
+.sidebar nav ul li:not(.active):hover a i {
+    color: #d83a87;
+}
+
+.sidebar nav ul li.active a {
+    background-color: #f875aa;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(248, 117, 170, 0.3);
+}
+
+.sidebar nav ul li.active a i {
+    color: white;
+}
+
+/* === End of Sidebar Styles === */
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 25px;
+    overflow-y: auto;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+
+/* Header */
+header h1 {
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* Table Section */
+.table-container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+    margin-bottom: 25px;
+    overflow-x: auto;
+}
+.table-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+    min-width: 700px;
+}
+
+.table th,
+.table td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.table td:last-child,
+.table th:last-child {
+    text-align: center;
+}
+
+.table th {
+    background-color: #f1f3f5;
+    color: #555;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Buttons */
+.btn {
+    padding: 9px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    border: none;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    margin: 2px;
+    white-space: nowrap;
+}
+
+.btn-add { background-color: #4caf50; color: white; display: block; margin: 20px auto 0; width: fit-content; }
+.btn-add:hover { background-color: #45a049; }
+.btn-edit { background-color: #ffc107; color: #333; }
+.btn-edit:hover { background-color: #e0a800; }
+.btn-delete { background-color: #dc3545; color: white; }
+.btn-delete:hover { background-color: #c82333; }
+.btn-save { background-color: #28a745; color: white; margin-top: 15px; width: 100%; padding: 12px; font-size: 1rem; }
+.btn-save:hover { background-color: #218838; }
+
+
+/* Chart Container */
+.chart-container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+    margin-top: 25px;
+    /* ***** CHANGES APPLIED HERE ***** */
+    position: relative; /* Added for positioning context */
+    max-height: 500px;  /* Limit the container height (Adjust value as needed) */
+    overflow: auto;     /* Add scrollbars IF content overflows max-height */
+    /* ******************************** */
+}
+.chart-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+canvas#expenseChart {
+    width: 100% !important;
+    height: auto !important;
+    margin-top: 10px;
+    display: block;
+    /* ***** ADDED THIS ***** */
+    max-height: 100%; /* Ensure canvas tries to fit container */
+     /* ******************** */
+}
+
+/* Modal */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); overflow-y: auto; padding-top: 50px; }
+.modal-content { background-color: #fff; margin: 5% auto; padding: 30px 35px; border-radius: 8px; width: 90%; max-width: 550px; position: relative; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25); }
+.modal-content h3 { margin-bottom: 30px; text-align: center; font-size: 1.5rem; color: #333; font-weight: 600; }
+.close-btn { position: absolute; right: 18px; top: 12px; font-size: 1.8rem; font-weight: normal; color: #aaa; cursor: pointer; transition: color 0.2s ease; line-height: 1; }
+.close-btn:hover { color: #333; }
+
+/* Form */
+.form-group { margin-bottom: 22px; }
+.form-group label { display: block; font-weight: 500; margin-bottom: 8px; color: #444; font-size: 0.9rem; }
+.form-group input[type="text"], .form-group input[type="number"], .form-group input[type="date"] { width: 100%; padding: 12px 15px; border: 1px solid #ced4da; border-radius: 6px; font-size: 0.95rem; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.form-group input:focus { border-color: #f875aa; outline: none; box-shadow: 0 0 0 3px rgba(248, 117, 170, 0.25); }

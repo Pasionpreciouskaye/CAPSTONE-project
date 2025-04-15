@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f7fa;
+  overflow: hidden;
+}
+
+.main-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.left-side {
+  flex: 1;
+  background: url('../assets/banner.jpg') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.intro-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  filter: blur(8px);
+}
+
+.right-side {
+  flex: 1;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-container {
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  animation: fadeIn 2s ease-out; /* Animation for fade-in */
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 20px;
+  animation: logoFloat 3s ease-in-out infinite; /* Logo float animation */
+}
+
+h1 {
+  font-size: 32px;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.auth-buttons {
+  margin-top: 30px;
+}
+
+.auth-buttons .btn {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  background-color: #f05a82;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 30px;
+  text-decoration: none;
+  margin-bottom: 10px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.auth-buttons .btn:hover {
+  background-color: #f673a3;
+  transform: translateY(-3px);
+}
+
+.auth-buttons .btn:active {
+  transform: translateY(0);
+}
+
+@keyframes logoFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .left-side {
+    height: 200px;
+  }
+}

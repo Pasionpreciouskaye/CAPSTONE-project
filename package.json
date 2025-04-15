@@ -1,0 +1,29 @@
+{
+  "name": "capstone-project",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Pasionpreciouskaye/CAPSTONE-project#readme",
+  "bugs": {
+    "url": "https://github.com/Pasionpreciouskaye/CAPSTONE-project/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pasionpreciouskaye/CAPSTONE-project.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tailwind": "npx @tailwindcss/cli -i ./style/styles.css -o ./style/output.css --watch"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.16",
+    "pocketbase": "^0.25.2",
+    "tailwindcss": "^4.0.16"
+  },
+  "devDependencies": {
+    "daisyui": "^5.0.9"
+  }
+}

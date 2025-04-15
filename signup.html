@@ -10,98 +10,73 @@
     <div class="overlay"></div>
     <div class="container">
       <h2>Sign Up</h2>
-      <form>
+      <form id="signupForm">
         <div class="form-group">
-          <input type="text" placeholder="First Name" required />
-          <input type="email" placeholder="Email" required />
+          <input type="text" id="firstName" placeholder="First Name" required />
+          <input
+            type="text"
+            id="middleName"
+            placeholder="Middle Name"
+            required
+          />
+          <input type="text" id="lastName" placeholder="Last Name" required />
         </div>
+
         <div class="form-group">
-          <input type="text" placeholder="Last Name" required />
-          <input type="text" placeholder="Phone No." required />
+          <input type="email" id="email" placeholder="Email" required />
+          <input type="text" id="phone" placeholder="Phone No." required />
         </div>
+
         <div class="form-group">
-          <input type="date" class="full-width" required />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            required
+          />
         </div>
+
         <div class="form-group">
-          <select required>
-            <option>Gender</option>
+          <input
+            type="date"
+            id="dob"
+            class="full-width"
+            title="date"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <select id="gender" title="gender" required>
+            <option disabled selected>Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
           </select>
-          <input type="number" placeholder="Age" required />
         </div>
+
         <div class="form-group">
           <input
             type="text"
+            id="address"
             class="full-width"
             placeholder="Address"
             required
           />
         </div>
-        <div class="form-group">
-          <input type="text" placeholder="Zip Code" required />
-          <select required>
-            <option>City</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <select class="full-width" required>
-            <option>Country</option>
-          </select>
-        </div>
+
+        <input type="hidden" id="role" value="member" />
         <button type="submit">Sign up</button>
       </form>
-      <a href="index.html" class="back-button">Back</a>
-        <h2>Sign Up</h2>
-        <form>
-            <div class="form-group">
-                <input type="text" placeholder="First Name" required>
-                <input type="text" placeholder="Last Name" required>
-            </div>
-            
-            <div class="form-group">
-                <input type="email" placeholder="Email" required>
-                <input type="text" placeholder="Phone No." required>
-            </div>
-
-            <div class="form-group">
-                <input type="password" placeholder="Password" required>
-                <input type="password" placeholder="Confirm Password" required>
-            </div>
-
-            <div class="form-group">
-                <input type="date" class="full-width" required>
-            </div>
-
-            <div class="form-group">
-                <select required>
-                    <option disabled selected>Gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
-                </select>
-                <input type="number" placeholder="Age" required>
-            </div>
-
-            <div class="form-group">
-                <input type="text" class="full-width" 
-                       placeholder="Address" required>
-            </div>
-
-            <div class="form-group">
-                <input type="text" placeholder="Zip Code" required>
-                <select required>
-                    <option disabled selected>City</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <select class="full-width" required>
-                    <option disabled selected>Country</option>
-                </select>
-            </div>
-
-            <button type="submit">Sign up</button>
-        </form>
-        <a href="index.html" class="back-button">Back</a>
+      <a href="landing.html" class="back-button">Back</a>
     </div>
+
+    <script src="./js/signup.js"></script>
   </body>
 </html>

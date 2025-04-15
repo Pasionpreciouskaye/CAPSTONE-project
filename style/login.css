@@ -1,61 +1,159 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background: url('../logo/SK-Logo.jpg') no-repeat center center;
-    background-size: contain;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    margin: 0;
-    position: relative;
+  font-family: "Poppins", sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(224, 222, 222, 0.05);
-    backdrop-filter: blur(3px);
-}
-
+/* Container holding left and right sections */
 .container {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 450px;
-    width: 85%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
+  display: flex;
+  width: 100vw;
+  max-width: 1000px; /* Increased width for bigger view */
+  height: 90vh;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Left section with image slider */
+.left-section {
+  width: 55%;
+  height: 100%;
+  background: #f3f3f3;
+  overflow: hidden;
+}
+
+.image-slider {
+  width: 100%;
+  height: 100%;
+}
+
+.image-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 1s ease-in-out;
+}
+
+/* Right section with login form */
+.right-section {
+  width: 45%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Login content wrapper */
+.login-wrapper {
+  width: 100%;
+  max-width: 450px; /* Increased width for better spacing */
+  padding: 40px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+}
+
+/* Form styling */
+h2 {
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
 }
 
 .form-group {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
+  margin-bottom: 18px; /* Increased margin for spacing */
+  text-align: left;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+/* Consistent form bar sizes */
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  margin-top: 5px;
+  box-sizing: border-box;
 }
 
+/* Button Styling */
 button {
-    background-color: rgb(243, 121, 159);
-    border: none;
-    padding: 10px;
+  background-color: rgb(243, 121, 159);
+  border: none;
+  padding: 14px 0;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #ff4d88;
+}
+
+/* Back button */
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: center;
+  display: block;
+}
+
+.back-button:hover {
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .container {
+    width: 95vw;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-section {
     width: 100%;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+    height: 40vh;
+  }
+
+  .right-section {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+
+  .login-wrapper {
+    width: 90%;
+    max-width: 350px;
+    padding: 25px;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-wrapper {
+    width: 95%;
+    max-width: 320px;
+    padding: 20px;
+  }
+
+  .left-section {
+    height: 30vh;
+  }
 }

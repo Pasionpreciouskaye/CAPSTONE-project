@@ -1,0 +1,363 @@
+/* transactionhistory.css */
+
+/* Use CSS Variables for easier theme management */
+:root {
+    --primary-color: #4F46E5; /* Indigo */
+    --primary-hover-color: #4338CA;
+    --text-color: #374151; /* Gray 700 */
+    --text-light-color: #6B7280; /* Gray 500 */
+    --border-color: #E5E7EB; /* Gray 200 */
+    --background-color: #F9FAFB; /* Gray 50 */
+    --container-bg-color: #FFFFFF;
+    --header-bg-color: #F3F4F6; /* Gray 100 */
+    --row-hover-color: #F9FAFB; /* Gray 50 */
+    --income-color: #10B981; /* Emerald 500 */
+    --expense-color: #EF4444; /* Red 500 */
+    --font-family: 'Inter', sans-serif; /* Modern font */
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    background: var(--container-bg-color);
+    border-radius: 12px; /* Slightly larger radius */
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 900px; /* Slightly wider */
+    width: 100%;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px; /* Space between search and tabs */
+}
+
+/* Search Bar Styling */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Allow search bar to take available space */
+    min-width: 250px; /* Minimum width */
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    color: var(--text-light-color);
+}
+
+#search-input {
+    width: 100%;
+    padding: 10px 10px 10px 35px; /* Left padding for icon */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); /* Focus ring */
+}
+
+/* Tabs Styling */
+.tabs {
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0; /* Prevent tabs from shrinking too much */
+    flex-wrap: wrap; /* Allow tabs to wrap if needed */
+    gap: 5px; /* Add gap between wrapped tabs */
+}
+
+.tab {
+    margin: 0 3px; /* Reduced horizontal margin slightly */
+    padding: 8px 16px; /* Adjust padding */
+    border: 1px solid var(--border-color);
+    background: var(--container-bg-color);
+    color: var(--text-light-color);
+    border-radius: 8px; /* Match input radius */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap; /* Prevent text wrapping within a tab */
+}
+
+.tab:hover {
+    background-color: var(--header-bg-color);
+    border-color: #D1D5DB; /* Gray 300 */
+}
+
+.tab.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Table Styling */
+.table-container {
+    overflow-x: auto; /* Keep horizontal scroll for tables */
+    width: 100%; /* Ensure container takes full width */
+    margin-top: 10px; /* Add some space above table if tabs wrapped */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove space between borders */
+    background: var(--container-bg-color);
+    border: 1px solid var(--border-color); /* Optional: border around table */
+    border-radius: 8px; /* Optional: rounded corners for table */
+    overflow: hidden; /* Ensures border-radius clips content */
+    min-width: 600px; /* Prevent table content from squishing too much */
+}
+
+th, td {
+    padding: 14px 16px; /* Increased padding */
+    text-align: left;
+    border-bottom: 1px solid var(--border-color); /* Horizontal lines only */
+    font-size: 14px;
+    vertical-align: middle; /* Align cell content vertically */
+}
+
+th {
+    background: var(--header-bg-color);
+    font-weight: 600;
+    color: var(--text-color);
+    text-transform: uppercase; /* Optional: Uppercase headers */
+    letter-spacing: 0.05em; /* Optional: Slight spacing */
+    font-size: 12px;
+    white-space: nowrap; /* Prevent header text wrapping */
+}
+
+/* Align amount header and cells to the right */
+.amount-header,
+.amount {
+    text-align: right;
+    font-weight: 500;
+    white-space: nowrap; /* Prevent amount wrapping */
+}
+
+.amount .currency-symbol {
+    margin-right: 2px;
+    color: var(--text-light-color); /* Default symbol color */
+    display: inline-block; /* Ensure spacing */
+}
+
+/* Color coding amounts */
+.amount.income {
+    color: var(--income-color);
+}
+.amount.income .currency-symbol {
+    color: var(--income-color);
+}
+
+.amount.expense {
+    color: var(--expense-color);
+}
+.amount.expense .currency-symbol {
+    color: var(--expense-color);
+}
+/* Default/implicit expenses */
+tbody#transaction-body tr:not([class*="transaction-"]) .amount {
+     color: var(--expense-color); /* Default non-classified rows to expense color */
+}
+tbody#transaction-body tr:not([class*="transaction-"]) .amount .currency-symbol {
+     color: var(--expense-color);
+}
+
+
+/* Row hover effect */
+tbody tr:hover {
+    background-color: var(--row-hover-color);
+}
+
+/* Remove bottom border from last row IN EACH TBODY */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+/* If using multiple tbodies, ensure border between them */
+tbody + tbody {
+    border-top: 2px solid var(--border-color); /* Separator between main and deleted */
+}
+
+
+/* Icon margin helper */
+.icon-margin {
+    margin-right: 8px;
+    width: 1.1em; /* Ensure icons roughly align */
+    text-align: center;
+    color: var(--text-light-color); /* Default icon color */
+}
+/* Adjust specific icon colors if needed */
+td .fa-credit-card { color: #2563EB; } /* Example: Blue for card */
+td .fa-file-invoice { color: #F59E0B; } /* Example: Amber for invoice */
+td .fa-university { color: #10B981; } /* Example: Green for deposit */
+td .fa-paypal { color: #1E40AF; } /* Example: PayPal Blue */
+
+
+/* Styling for the new Back to Dashboard button */
+.dashboard-button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-block; /* Allows it to sit next to other inline/inline-block elements */
+    margin: 25px 10px 0 0; /* Top margin, Right margin, No bottom/left margin */
+    font-size: 15px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    text-decoration: none; /* Remove underline from link */
+    text-align: center;
+    vertical-align: middle; /* Align vertically with other buttons */
+}
+
+.dashboard-button:hover {
+    background: var(--primary-hover-color);
+    color: white; /* Ensure text color remains on hover */
+}
+
+/* Icon inside dashboard button inherits color */
+.dashboard-button .icon-margin {
+    margin-right: 8px;
+    /* Color is inherited (white) */
+}
+
+
+/* Styling for Deleted Item Rows (Added Dynamically) */
+.deleted-item-row td {
+    color: var(--text-light-color); /* Gray out text */
+    text-decoration: line-through; /* Strikethrough */
+    font-style: italic;
+}
+
+/* Apply strikethrough etc. to amount in deleted rows */
+.deleted-item-row .amount {
+     color: var(--text-light-color);
+     text-decoration: line-through;
+     font-weight: normal; /* Make it less prominent */
+}
+.deleted-item-row .amount .currency-symbol {
+    color: inherit; /* Inherit the grayed-out color */
+     text-decoration: line-through; /* Strikethrough symbol too */
+}
+
+/* Gray out icons in deleted rows */
+.deleted-item-row .icon-margin {
+     color: var(--text-light-color);
+}
+
+
+/* Styling for the Clear Deleted Button (Optional) */
+.clear-deleted-button {
+    background: var(--expense-color); /* Use expense color for deletion actions */
+    color: white;
+    border: none;
+    padding: 10px 15px; /* Slightly smaller */
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-block; /* Initially hidden by JS, shown when items exist */
+    margin: 25px 0 0 10px; /* Top margin, Left margin */
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    vertical-align: middle; /* Align with dashboard button */
+}
+
+.clear-deleted-button:hover {
+    background: #CC2525; /* Darker red */
+}
+
+
+/* No Results Message */
+.no-results {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-light-color);
+    font-style: italic;
+    display: none; /* Initially hidden, shown by JS */
+}
+
+/* Ensure consistent top margin for buttons below the table */
+.container > a.dashboard-button,
+.container > button.clear-deleted-button {
+    margin-top: 25px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    .toolbar {
+        flex-direction: column; /* Stack search and tabs */
+        align-items: stretch; /* Make items full width */
+    }
+    .search-container {
+       min-width: unset; /* Remove min-width */
+       margin-bottom: 10px; /* Add space below search when stacked */
+    }
+     .tabs {
+        justify-content: flex-start; /* Align tabs left */
+        overflow-x: auto; /* Allow tabs to scroll horizontally if needed */
+        padding-bottom: 5px; /* Space for scrollbar if it appears */
+        width: 100%; /* Ensure tabs container takes full width */
+    }
+    th, td {
+        padding: 12px 10px;
+        font-size: 13px;
+    }
+    /* Adjust button sizes and margins for smaller screens */
+    .dashboard-button,
+    .clear-deleted-button {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin-top: 20px; /* Slightly reduce top margin */
+    }
+    /* Ensure buttons stack nicely */
+    .container > a.dashboard-button,
+    .container > button.clear-deleted-button {
+        display: block; /* Stack buttons */
+        width: fit-content; /* Allow buttons to size to content */
+        margin-left: auto; /* Center buttons */
+        margin-right: auto;
+        margin-bottom: 10px; /* Add space between stacked buttons */
+    }
+     .container > a.dashboard-button {
+         margin-right: auto; /* Reset right margin when stacking */
+     }
+      .container > button.clear-deleted-button {
+         margin-left: auto; /* Reset left margin when stacking */
+     }
+
+    table {
+        min-width: auto; /* Allow table to shrink below 600px */
+    }
+}

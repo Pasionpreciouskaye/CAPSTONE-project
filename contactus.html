@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - SK Taguig</title>
+    <link rel="stylesheet" href="./style/contactus.css" />
+  </head>
+
+  <body>
+    <header class="main-header">
+      <div class="header-container">
+        <div class="logo">
+          <img src="./logo/SK-Logo.png" alt="Logo" />
+        </div>
+
+        <div class="header-title">
+          <h2>Contact Us</h2>
+        </div>
+      </div>
+
+      <div class="sidebar" id="sidebar">
+        <nav class="nav-links">
+          <ul>
+            <li><a href="./index.html">Home</a></li>
+
+            <li class="dropdown">
+              <a href="#">Menu ▾</a>
+              <div class="dropdown-content">
+                <a href="/Project/projects.html">Projects</a>
+                <a href="./budget.html">Budget Transparency</a>
+                <a href="./inventory.html">Inventory</a>
+              </div>
+            </li>
+
+            <li>
+              <a href="./userpage.html" class="user-icon">
+                <img
+                  src="./assets/userpic.png"
+                  alt="User Profile"
+                  class="user-image"
+                />
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="banner">
+      <img src="./assets/banner2.jpg" alt="SK Banner" />
+    </section>
+
+    <section class="contact-intro">
+      <div class="intro-box">
+        <p>
+          Got a question? We'd love to hear from you. Send us a message and
+          we’ll respond as soon as possible.
+        </p>
+      </div>
+    </section>
+
+    <section class="contact-cards">
+      <div class="card">
+        <h3>📞 CALL US</h3>
+        <p>0919 079 3112</p>
+      </div>
+      <div class="card">
+        <h3>📧 EMAIL</h3>
+        <p>sk.taguig@gmail.com</p>
+      </div>
+      <div class="card">
+        <h3>📍 ADDRESS</h3>
+        <p>Taguig, Pateros & District 02, NCR</p>
+      </div>
+    </section>
+
+    <section class="map">
+      <h3>Our Location</h3>
+      <div id="map" style="width: 100%; height: 400px"></div>
+    </section>
+
+    <section class="contact-form">
+      <h2>GET IN <span>TOUCH</span></h2>
+      <form>
+        <input type="text" placeholder="Your Name" />
+        <input type="email" placeholder="Your Email" />
+        <input type="text" placeholder="Your Subject" />
+        <textarea placeholder="Your Message"></textarea>
+        <button type="submit">SEND MESSAGE</button>
+      </form>
+    </section>
+
+    <section class="hotlines">
+      <h2>EMERGENCY HOTLINES</h2>
+      <div class="hotline-grid">
+        <div>
+          <strong>TAGUIG COMMAND CENTER</strong><br />
+          (02) 8789 3200
+        </div>
+        <div>
+          <strong>TAGUIG RESCUE</strong><br />
+          0916 079 3112
+        </div>
+        <div>
+          <strong>TAGUIG PNP</strong><br />
+          0968 850 7912
+        </div>
+        <div>
+          <strong>DOCTOR-ON-CALL</strong><br />
+          0919 079 3112
+        </div>
+        <div>
+          <strong>R.E.A.C.T.</strong><br />
+          0916 851 7712
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <img src="./logo/SK-Logo.png" alt="Logo" />
+        <p>© 2025 | CITY OF TAGUIG. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Add Google Maps API key in the script URL -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"
+      async
+      defer
+    ></script>
+
+    <script src="/js/contactus.js"></script>
+  </body>
+</html>
