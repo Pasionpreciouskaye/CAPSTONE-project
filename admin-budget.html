@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Budget</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style/admin-dashboard.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+             <img src="./logo/SK-Logo.png" alt="SK Logo" class="logo">
+             <h2>Admin Panel</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="./index.html"><i class="fas fa-home"></i><span>Home</span></a></li>
+                <li><a href="./admin-dashboard.html"><i class="fas fa-chart-pie"></i><span>Budget Transparency</span></a></li>
+                <li class="active"><a href="#"><i class="fas fa-users"></i><span>Members</span></a></li>
+                <li><a href="./inventory.html"><i class="fas fa-boxes"></i><span>Inventory</span></a></li>
+                <li><a href="admin_transactionhistory.html"><i class="fas fa-history"></i><span>Transaction History</span></a></li>
+                <li><a href="./contactus.html"><i class="fas fa-comment-alt"></i><span>Feedback</span></a></li>
+            </ul>
+        </nav>
+         <div class="sidebar-footer">
+            <a href="./landing.html" class="logout-link"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+        </div>
+    </aside>
+
+    <main class="main-content">~~
+        <header class="main-header">
+            <div class="header-greeting">
+                <h1>Hello, <span id="userName">Admin</span>! 👋🏼</h1>
+                <p>Welcome back to the dashboard.</p>
+            </div>
+            <div class="header-actions">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="search" id="headerSearch" placeholder="Search anything..." />
+                </div>
+                 <div class="user-profile">
+                    <i class="fas fa-user-circle user-icon"></i>
+                    <span id="profileUserName">Admin User</span>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </div>
+            </div>
+        </header>
+
+    <div class="main-content">
+      <header>
+        <h1>Budget Transparency</h1>
+      </header>
+
+      <section class="table-container">
+        <h2>Budget Overview</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Allocated</th>
+              <th>Spent</th>
+              <th>Remaining</th>
+              <th>Date Allocated</th>
+              <th>Date Spent</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="budgetBody">
+            <tr>
+              <td>Community Projects</td>
+              <td>₱100,000</td>
+              <td>₱50,000</td>
+              <td>₱50,000</td>
+              <td>2024-04-01</td>
+              <td>2024-04-15</td>
+              <td>
+                <button class="btn btn-edit">Edit</button>
+                <button class="btn btn-delete">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-add" onclick="openModal()">Add Budget</button>
+      </section>
+
+      <section class="chart-container">
+        <h2>Total Expense</h2>
+        <canvas id="expenseChart"></canvas>
+      </section>
+    </div>
+
+    <div class="modal" id="addBudgetModal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3>Add/Edit Budget</h3>
+        <form id="budgetForm">
+          <div class="form-group">
+            <label for="category">Category:</label>
+            <input type="text" id="category" required />
+          </div>
+          <div class="form-group">
+            <label for="allocated">Allocated Amount:</label>
+            <input type="number" id="allocated" required />
+          </div>
+          <div class="form-group">
+            <label for="spent">Spent Amount:</label>
+            <input type="number" id="spent" required />
+          </div>
+          <div class="form-group">
+            <label for="dateAllocated">Date Allocated:</label>
+            <input type="date" id="dateAllocated" required />
+          </div>
+          <div class="form-group">
+            <label for="dateSpent">Date Spent:</label>
+            <input type="date" id="dateSpent" required />
+          </div>
+          <button type="submit" class="btn btn-save">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="./js/budget.js"></script>
+  </body>
+</html>
