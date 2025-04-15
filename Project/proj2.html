@@ -1,37 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Community</title>
-  <link rel="stylesheet" href="/Project/proj2.html" />
-</head>
-<body>
-  <div class="container">
-    <div class="content-section">
-      <div class="image-slider">
-        <img id="slider" src="/assets/project2.png" alt="Highlight Image" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project 1 - Seed to Lead</title>
+    <link rel="stylesheet" href="/Project/project.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="font-poppins bg-gradient-to-b from-[#fdfdff] to-[#f190d4] text-gray-800 text-center overflow-x-hidden"
+  >
+    <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+      <div
+        class="flex items-center justify-between px-10 py-2 max-h-20 relative"
+      >
+        <div class="logo">
+          <img src="/logo/SK-Logo.png" alt="Logo" class="h-16" />
+        </div>
+        <div class="absolute left-1/2 transform -translate-x-1/2 text-center">
+          <h2
+            class="text-2xl sm:text-3xl font-bold text-[#f3799f] tracking-wide"
+          >
+            SEED TO LEAD – FROM TEAM PLAYER TO VISIONARY LEADER
+          </h2>
+        </div>
+        <div class="sidebar">
+          <nav>
+            <ul class="flex items-center space-x-6">
+              <li>
+                <a href="/index.html" class="hover:text-[#f3799f]">Home</a>
+              </li>
+              <li class="relative">
+                <button
+                  id="menuButton"
+                  class="hover:text-[#f3799f] focus:outline-none flex items-center gap-1"
+                >
+                  Menu ▾
+                </button>
+                <div
+                  id="dropdownMenu"
+                  class="absolute right-0 mt-2 bg-white shadow-md rounded-lg text-left py-2 w-48 hidden z-50"
+                >
+                  <a
+                    href="/eventpage.html"
+                    class="block px-4 py-2 hover:bg-gray-100"
+                    >Events</a
+                  >
+                  <a
+                    href="/budgetdashboard.html"
+                    class="block px-4 py-2 hover:bg-gray-100"
+                    >Budget Transparency</a
+                  >
+                  <a
+                    href="/user-inventory.html"
+                    class="block px-4 py-2 hover:bg-gray-100"
+                    >Inventory</a
+                  >
+                  <a
+                    href="/user-transaction.html"
+                    class="block px-4 py-2 hover:bg-gray-100"
+                    >Transaction</a
+                  >
+                </div>
+              </li>
+              <li>
+                <a href="/userpage.html" class="user-icon">
+                  <img
+                    src="/assets/userpic.png"
+                    alt="User Profile"
+                    class="h-10 rounded-full"
+                  />
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
-      <div class="about-text">
-        <h2>𝐊𝐀𝐓𝐈𝐏𝐔𝐍𝐀𝐍 𝐍𝐆 𝐊𝐀𝐁𝐀𝐓𝐀𝐀𝐍 𝐀𝐒𝐒𝐄𝐌𝐁𝐋𝐘</h2>
-        <p>
-            The Sangguniang Kabataan (SK) of Lower Bicutan, Taguig, led by SK Chairwoman June Lyn Tabanao and the Council, successfully held their very first Katipunan ng Kabataan Assembly, which also included a raffle for the youth attendees of this annual event.
+    </header>
 
-           The assembly was attended by various Youth Organizations from Barangay Lower Bicutan. Students from the following schools also participated:
+    <!-- Project Content Section -->
+    <section class="py-10 px-5 mt-20">
+      <div class="container mx-auto flex flex-col lg:flex-row gap-8">
+        <!-- Image Section with the Slider -->
+        <div class="w-full lg:w-1/2">
+          <div
+            id="imageSlider"
+            class="image-slider relative w-full h-auto overflow-hidden"
+          >
+            <!-- JavaScript will insert image here -->
+          </div>
+        </div>
 
-           St. Theodore School (STS), Monlimar Development Academy (MDA), Bicutan Parochial School (BPS), Upper Bicutan National High School (UBNHS), Taguig City University (TCU), Technological University of the Philippines (TUP), Polytechnic University of the Philippines (PUP)
+        <!-- Project Description Section -->
+        <div class="w-full lg:w-1/2">
+          <h2 class="text-2xl font-bold text-[#f3799f]">Project Overview</h2>
+          <p class="text-lg mt-4">
+            <h2>𝐊𝐀𝐓𝐈𝐏𝐔𝐍𝐀𝐍 𝐍𝐆 𝐊𝐀𝐁𝐀𝐓𝐀𝐀𝐍 𝐀𝐒𝐒𝐄𝐌𝐁𝐋𝐘</h2>
+<p>
+    The Sangguniang Kabataan (SK) of Lower Bicutan, Taguig, led by SK Chairwoman June Lyn Tabanao and the Council, successfully held their very first Katipunan ng Kabataan Assembly, which also included a raffle for the youth attendees of this annual event.
 
-          — all of whom are residents of our barangay.
-          <br></br>
+   The assembly was attended by various Youth Organizations from Barangay Lower Bicutan. Students from the following schools also participated:
 
-          The Sangguniang Kabataan of Lower Bicutan extends heartfelt thanks to everyone who attended, participated, and listened during our KK Assembly — especially to our guests: Barangay Councilor Goma Cruz, The Barangay Council of Lower Bicutan headed by Kap. Roel Pacayra, Our future Taguig councilor, Kap. Kim Abbang, Our beloved Mayor Lani Cayetano, Our Vice Mayor Arvin Ian Alit.
-          This event wouldn’t have been a success without all of you. We hope we were able to present clearly everything we’ve accomplished in our almost one year of service as your youth leaders.
-          <br></br>
-          The Sangguniang Kabataan of Lower Bicutan looks forward to having you with us again in our upcoming meaningful projects for the youth of Barangay Lower Bicutan.
-          #SKLowerBicutan
-          #lynkodkabataan
+   St. Theodore School (STS), Monlimar Development Academy (MDA), Bicutan Parochial School (BPS), Upper Bicutan National High School (UBNHS), Taguig City University (TCU), Technological University of the Philippines (TUP), Polytechnic University of the Philippines (PUP)
+
+  — all of whom are residents of our barangay.
+  <br></br>
+
+  The Sangguniang Kabataan of Lower Bicutan extends heartfelt thanks to everyone who attended, participated, and listened during our KK Assembly — especially to our guests: Barangay Councilor Goma Cruz, The Barangay Council of Lower Bicutan headed by Kap. Roel Pacayra, Our future Taguig councilor, Kap. Kim Abbang, Our beloved Mayor Lani Cayetano, Our Vice Mayor Arvin Ian Alit.
+  This event wouldn’t have been a success without all of you. We hope we were able to present clearly everything we’ve accomplished in our almost one year of service as your youth leaders.
+  <br></br>
+  The Sangguniang Kabataan of Lower Bicutan looks forward to having you with us again in our upcoming meaningful projects for the youth of Barangay Lower Bicutan.
+  #SKLowerBicutan
+  #lynkodkabataan
+</p>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-5 text-black text-sm relative mt-20">
+      <div class="flex justify-center items-center gap-5 flex-wrap">
+        <img src="/logo/SK-Logo.png" alt="Logo" class="h-16 w-auto" />
+        <p class="text-xl font-bold text-black m-0">
+          © 2025 | CITY OF TAGUIG. All rights reserved.
         </p>
       </div>
-      <script src="/Project/proj2.js"></script>
-</body>
+    </footer>
+
+    <!-- Image Slider Script -->
+    <script src="/Project/proj2.js"></script>
+  </body>
 </html>
+
+
+
+

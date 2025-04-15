@@ -1,35 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Community</title>
-  <link rel="stylesheet" href="/Project/proj8.css" />
-</head>
-<body>
-  <div class="container">
-    <div class="content-section">
-      <div class="image-slider">
-        <img id="slider" src="/assets/pic8 (10).jpg" alt="Highlight Image" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project 1 - Seed to Lead</title>
+    <link rel="stylesheet" href="/Project/project.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="font-poppins bg-gradient-to-b from-[#fdfdff] to-[#f190d4] text-gray-800 text-center overflow-x-hidden"
+  >
+    <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+      <div
+        class="flex items-center justify-between px-10 py-2 max-h-20 relative"
+      >
+        <div class="logo">
+          <img src="/logo/SK-Logo.png" alt="Logo" class="h-16" />
+        </div>
+        <div class="absolute left-1/2 transform -translate-x-1/2 text-center">
+          <h2
+            class="text-2xl sm:text-3xl font-bold text-[#f3799f] tracking-wide"
+          >
+            SEED TO LEAD – FROM TEAM PLAYER TO VISIONARY LEADER
+          </h2>
+        </div>
+        <div class="sidebar">
+          <nav>
+            <ul class="flex items-center space-x-6">
+              <li>
+                <a href="/index.html" class="hover:text-[#f3799f]">Home</a>
+              </li>
+              <li class="relative">
+                <button
+                  id="menuButton"
+                  class="hover:text-[#f3799f] focus:outline-none flex items-center gap-1"
+                >
+                  Menu ▾
+                </button>
+                <div
+                  id="dropdownMenu"
+                  class="absolute right-0 mt-2 bg-white shadow-md rounded-lg text-left py-2 w-48 hidden z-50"
+                >
+                  <a
+                    href="/eventpage.html"
+                    class="block px-4 py-2 hover:bg-gray-100"
+                    >Events</a
+                  >
+                  <a
+                    href="/budgetdashboard.html"
+                    class="block px-4 py-2 hover:bg-gray-100"
+                    >Budget Transparency</a
+                  >
+                  <a
+                    href="/user-inventory.html"
+                    class="block px-4 py-2 hover:bg-gray-100"
+                    >Inventory</a
+                  >
+                  <a
+                    href="/user-transaction.html"
+                    class="block px-4 py-2 hover:bg-gray-100"
+                    >Transaction</a
+                  >
+                </div>
+              </li>
+              <li>
+                <a href="/userpage.html" class="user-icon">
+                  <img
+                    src="/assets/userpic.png"
+                    alt="User Profile"
+                    class="h-10 rounded-full"
+                  />
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
-      <div class="about-text">
-        <h2> The SEEN IT, CLEAN IT</h2>
-        <p>
-            Initiative by the Sangguniang Kabataan of Lower Bicutan aims to promote cleanliness and environmental awareness in the community. Through this project, three labeled trash cans--biodegradable, non-biodegradable, and recyclable--are provided to every active basketball court in Lower Bicutan. 
-            environment for all residents.
-            <br></br>
-            This marks Day 1 and Day 2 of our distribution of trash bins, “walis tingting” (broomsticks), and dustpans to the designated courts in Barangay Lower Bicutan.
-            Together with the Sangguniang Kabataan of Lower Bicutan, led by our SK Chairwoman June Lyn Tabanao and our hardworking SK Council, this program reflects our support for the barangay and the city in maintaining cleanliness and order in our community playgrounds.
-            <br></br>
-            BE MATURE, AND SAVE NATURE.
-           <br></br>
-           "Seen It, Clean It."
-           <br></br>
-          #lynkodkabataan
-          <br></br>
-          #SKLowerBicutan 
+    </header>
 
+    <!-- Project Content Section -->
+    <section class="py-10 px-5 mt-20">
+      <div class="container mx-auto flex flex-col lg:flex-row gap-8">
+        <!-- Image Section with the Slider -->
+        <div class="w-full lg:w-1/2">
+          <div
+            id="imageSlider"
+            class="image-slider relative w-full h-auto overflow-hidden"
+          >
+            <!-- JavaScript will insert image here -->
+          </div>
+        </div>
+
+        <!-- Project Description Section -->
+        <div class="w-full lg:w-1/2">
+          <h2 class="text-2xl font-bold text-[#f3799f]">Project Overview</h2>
+          <p class="text-lg mt-4">
+            
+<h2> The SEEN IT, CLEAN IT</h2>
+<p>
+    Initiative by the Sangguniang Kabataan of Lower Bicutan aims to promote cleanliness and environmental awareness in the community. Through this project, three labeled trash cans--biodegradable, non-biodegradable, and recyclable--are provided to every active basketball court in Lower Bicutan. 
+    environment for all residents.
+    <br></br>
+    This marks Day 1 and Day 2 of our distribution of trash bins, “walis tingting” (broomsticks), and dustpans to the designated courts in Barangay Lower Bicutan.
+    Together with the Sangguniang Kabataan of Lower Bicutan, led by our SK Chairwoman June Lyn Tabanao and our hardworking SK Council, this program reflects our support for the barangay and the city in maintaining cleanliness and order in our community playgrounds.
+    <br></br>
+    BE MATURE, AND SAVE NATURE.
+   <br></br>
+   "Seen It, Clean It."
+   <br></br>
+  #lynkodkabataan
+  <br></br>
+  #SKLowerBicutan 
+
+        </div>
       </div>
-      <script src="/Project/proj8.js"></script>
-</body>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-5 text-black text-sm relative mt-20">
+      <div class="flex justify-center items-center gap-5 flex-wrap">
+        <img src="/logo/SK-Logo.png" alt="Logo" class="h-16 w-auto" />
+        <p class="text-xl font-bold text-black m-0">
+          © 2025 | CITY OF TAGUIG. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Image Slider Script -->
+    <script src="/Project/proj8.js"></script>
+  </body>
 </html>
+
