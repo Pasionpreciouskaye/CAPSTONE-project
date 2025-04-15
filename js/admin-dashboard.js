@@ -1,14 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Sample Data (Replace with actual data fetching) ---
     const sampleUserData = {
-        name: "Mark Admin", // Replace with actual logged-in user name
+        name: "Mark Admin",
     };
 
     const sampleStats = {
         totalMembers: 5423,
-        totalMembersChange: 8, // Positive number for increase
+        totalMembersChange: 8,
         newMembers: 1893,
-        newMembersChange: -3, // Negative number for decrease
+        newMembersChange: -3,
         activeMembers: 189,
     };
 
@@ -18,10 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 3, name: "Jhay Dominique Velasco", age: 21, phone: "09380170854", email: "jhayvelasco@gmail.com", gender: "Male", status: "Inactive", joined: "2024-03-15" },
         { id: 4, name: "Gigi Asetre", age: 22, phone: "09380170854", email: "asetregigi@gmail.com", gender: "Female", status: "Active", joined: "2024-04-08" },
         { id: 5, name: "Angelica Ignacio", age: 23, phone: "09380170854", email: "anggeignco@gmail.com", gender: "Female", status: "Pending", joined: "2024-02-20" },
-        // Add more sample members
     ];
 
-    // --- Get DOM Elements ---
     const userNameSpan = document.getElementById('userName');
     const profileUserNameSpan = document.getElementById('profileUserName');
     const totalMembersEl = document.getElementById('totalMembers');
@@ -33,10 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const memberSearchInput = document.getElementById('memberSearch');
     const memberSortSelect = document.getElementById('memberSort');
 
-    // --- Update UI Functions ---
     function updateUserInfo(userData) {
         if (userNameSpan) {
-            userNameSpan.textContent = userData.name.split(' ')[0]; // Display first name
+            userNameSpan.textContent = userData.name.split(' ')[0];
         }
          if (profileUserNameSpan) {
              profileUserNameSpan.textContent = userData.name;
@@ -68,8 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
              if(icon) icon.className = 'fas fa-arrow-down';
             element.childNodes[element.childNodes.length - 1].nodeValue = ` ${Math.abs(changeValue)}% this month`;
         } else {
-            // Optional: handle zero change
-             if(icon) icon.className = 'fas fa-minus'; // Example for no change
+             if(icon) icon.className = 'fas fa-minus';
             element.childNodes[element.childNodes.length - 1].nodeValue = ` No change this month`;
         }
     }
@@ -77,10 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderMembersTable(members) {
         if (!membersTableBody) return;
-        membersTableBody.innerHTML = ''; // Clear existing rows
+        membersTableBody.innerHTML = '';
 
         if (members.length === 0) {
-            membersTableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 20px;">No members found.</td></tr>';
+            // Use the CSS class instead of inline styles
+            membersTableBody.innerHTML = '<tr><td colspan="7" class="table-placeholder-message">No members found.</td></tr>';
             return;
         }
 
@@ -101,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
             membersTableBody.appendChild(row);
         });
 
-        // Add event listeners for action buttons (optional)
         addActionButtonListeners();
     }
 
@@ -110,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', (e) => {
                 const id = e.currentTarget.dataset.id;
                 console.log(`Edit member with ID: ${id}`);
-                // Add your edit logic here (e.g., open a modal)
                  alert(`Edit member ID: ${id}`);
             });
         });
@@ -119,22 +113,18 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', (e) => {
                 const id = e.currentTarget.dataset.id;
                 console.log(`Delete member with ID: ${id}`);
-                 // Add your delete logic here (e.g., show confirmation)
                  if(confirm(`Are you sure you want to delete member ID: ${id}?`)) {
                      alert(`Deleting member ID: ${id}`);
-                     // Find index and remove from sampleMembers (for demo)
                      const index = sampleMembers.findIndex(m => m.id == id);
                      if (index > -1) {
-                         sampleMembers.splice(index, 1);
-                         filterAndSortMembers(); // Re-render the table
+                          sampleMembers.splice(index, 1);
+                          filterAndSortMembers();
                      }
                  }
             });
         });
     }
 
-
-    // --- Filtering and Sorting Logic ---
     function filterAndSortMembers() {
         const searchTerm = memberSearchInput ? memberSearchInput.value.toLowerCase() : '';
         const sortBy = memberSortSelect ? memberSortSelect.value : 'recent';
@@ -148,39 +138,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         switch (sortBy) {
-            case 'nameAsc':
-                filteredMembers.sort((a, b) => a.name.localeCompare(b.name));
-                break;
-            case 'nameDesc':
-                filteredMembers.sort((a, b) => b.name.localeCompare(a.name));
-                break;
-            case 'active':
-                filteredMembers.sort((a, b) => {
-                    if (a.status === 'Active' && b.status !== 'Active') return -1;
-                    if (a.status !== 'Active' && b.status === 'Active') return 1;
-                    // Optional: secondary sort by name if statuses are the same or neither is Active
-                     return a.name.localeCompare(b.name);
-                });
-                break;
-             case 'recent': // Assuming 'recent' means sort by ID descending or a join date
+             case 'nameAsc':
+                 filteredMembers.sort((a, b) => a.name.localeCompare(b.name));
+                 break;
+             case 'nameDesc':
+                 filteredMembers.sort((a, b) => b.name.localeCompare(a.name));
+                 break;
+             case 'active':
+                 filteredMembers.sort((a, b) => {
+                     if (a.status === 'Active' && b.status !== 'Active') return -1;
+                     if (a.status !== 'Active' && b.status === 'Active') return 1;
+                      return a.name.localeCompare(b.name);
+                 });
+                 break;
+               case 'recent':
              default:
-                  // Sort by ID descending for 'recent' (newest first) - Requires IDs to be sequential
-                 filteredMembers.sort((a, b) => (b.id || 0) - (a.id || 0)); // Basic ID sort
-                  // Or sort by date if you have it:
-                 // filteredMembers.sort((a, b) => new Date(b.joined) - new Date(a.joined));
+                 filteredMembers.sort((a, b) => (b.id || 0) - (a.id || 0));
                  break;
         }
 
         renderMembersTable(filteredMembers);
     }
 
-    // --- Initial Load ---
     updateUserInfo(sampleUserData);
     updateStats(sampleStats);
-    filterAndSortMembers(); // Initial render of the table
+    filterAndSortMembers();
 
-
-    // --- Event Listeners ---
     if (memberSearchInput) {
         memberSearchInput.addEventListener('input', filterAndSortMembers);
     }
@@ -188,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
         memberSortSelect.addEventListener('change', filterAndSortMembers);
     }
 
-    // Add listener for the "Add Member" button (example)
     const addMemberBtn = document.querySelector('.add-member-btn');
     if (addMemberBtn) {
         addMemberBtn.addEventListener('click', () => {
