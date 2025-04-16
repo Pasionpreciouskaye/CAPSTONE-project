@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="./node_modules/pocketbase/dist/pocketbase.umd.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile Settings</title>
@@ -28,7 +29,16 @@
             </ul>
           </li>
           <li><a href="/contactus.html">Contact Us</a></li>
-          <li class="logout">Logout</li>
+          <script>
+            function logout() {
+              // Log out the current user
+              pb.authStore.clear();
+
+              console.log("User logged out.");
+              location.href = "landing.html";
+            }
+          </script>
+          <li onclick="logout()" class="logout">Logout</li>
         </ul>
       </div>
 
@@ -39,15 +49,15 @@
           <div class="row">
             <div class="col">
               <label>First Name</label>
-              <input type="text" id="first-name" value="Jane" />
+              <input type="text" id="firstName" value="Jane" />
             </div>
             <div class="col">
               <label>Middle Name</label>
-              <input type="text" id="middle-name" value="Anne" />
+              <input type="text" id="middleName" value="Anne" />
             </div>
             <div class="col">
               <label>Last Name</label>
-              <input type="text" id="last-name" value="Cooper" />
+              <input type="text" id="lastName" value="Cooper" />
             </div>
           </div>
 

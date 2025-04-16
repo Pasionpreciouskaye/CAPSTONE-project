@@ -82,11 +82,9 @@
 
     <section class="contact-form">
       <h2>GET IN <span>TOUCH</span></h2>
-      <form>
-        <input type="text" placeholder="Your Name" />
-        <input type="email" placeholder="Your Email" />
-        <input type="text" placeholder="Your Subject" />
-        <textarea placeholder="Your Message"></textarea>
+      <form id="contact_form">
+        <input type="text" name="subject" placeholder="Your Subject" />
+        <textarea name="message" placeholder="Your Message"></textarea>
         <button type="submit">SEND MESSAGE</button>
       </form>
     </section>
@@ -131,6 +129,7 @@
       defer
     ></script>
 
+    <script src="./node_modules/pocketbase/dist/pocketbase.umd.js"></script>
     <script src="/js/contactus.js"></script>
   </body>
 </html>

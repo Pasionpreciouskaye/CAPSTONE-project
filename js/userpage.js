@@ -1,17 +1,17 @@
 const userId = "USER_ID_HERE"; // Change this to the actual user ID
+const pb = new PocketBase("http://127.0.0.1:8090");
+if (!pb.authStore.isValid) {
+    location.href="landing.html"
+} 
 
 document.addEventListener("DOMContentLoaded", async function () {
     try {
-        const response = await fetch(`http://127.0.0.1:8090/api/collections/users/records/${userId}`);
-        if (!response.ok) throw new Error("Failed to fetch user data");
-
-        const userData = await response.json();
-
-        // Populate fields with user data
-        document.getElementById("user-name").innerText = userData.first_name + " " + userData.last_name;
-        document.getElementById("first-name").value = userData.first_name;
-        document.getElementById("middle-name").value = userData.middle_name;
-        document.getElementById("last-name").value = userData.last_name;
+        const userData = await pb.collection('users').getOne(pb.authStore.model.id);
+        console.log (userData)
+        //Populate fields with user data
+        document.getElementById("firstName").value = userData.firstName;
+        document.getElementById("middleName").value = userData.middleName;
+        document.getElementById("lastName").value = userData.lastName;
         document.getElementById("email").value = userData.email;
         document.getElementById("phone").value = userData.phone;
         document.getElementById("dob").value = userData.dob;
