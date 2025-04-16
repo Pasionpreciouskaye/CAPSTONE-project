@@ -73,6 +73,17 @@
 
         <input type="hidden" id="role" value="member" />
         <button type="submit">Sign up</button>
+
+        <div id="confirmationModal" class="modal-overlay">
+          <div class="modal-content">
+            <h1>Thank You For Signing Up!</h1>
+            <p>Do you want to proceed?</p>
+            <div class="button-group">
+              <button class="btn yes" onclick="confirmYes()">Yes</button>
+              <button class="btn no" onclick="confirmNo()">No</button>
+            </div>
+          </div>
+        </div>
       </form>
       <a href="landing.html" class="back-button">Back</a>
     </div>
