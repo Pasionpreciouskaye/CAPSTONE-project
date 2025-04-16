@@ -1,17 +1,3 @@
-document.getElementById('eventForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    // Simulate registration success
-    document.getElementById('successMsg').style.display = 'block';
-
-    // Optionally, clear form
-    this.reset();
-
-    // Hide message after 4 seconds
-    setTimeout(() => {
-      document.getElementById('successMsg').style.display = 'none';
-    }, 4000);
-  });
 document.addEventListener("DOMContentLoaded", () => {
   // Menu dropdown logic
   const menuButton = document.getElementById("menuButton");
@@ -52,13 +38,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Event registration form logic
+  // Event Registration Logic
   const eventForm = document.getElementById("eventForm");
   const successMsg = document.getElementById("successMsg");
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const eventSelect = document.getElementById("event");
 
-  // Auto-fill name and email from localStorage
-  const nameInput = eventForm.name;
-  const emailInput = eventForm.email;
+  const pb = new PocketBase("http://127.0.0.1:8090");
 
   const storedFirstName = localStorage.getItem("firstName");
   const storedMiddleName = localStorage.getItem("middleName");
@@ -66,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const storedEmail = localStorage.getItem("email");
 
   if (storedFirstName && storedLastName && storedEmail) {
-    nameInput.value = `${storedFirstName} ${storedMiddleName || ""} ${storedLastName}`.trim();
+    nameInput.value = `${storedFirstName} ${storedMiddleName || ""} ${storedLastName}`;
     emailInput.value = storedEmail;
   }
 
@@ -74,9 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
     eventForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const name = nameInput.value.trim();
-      const email = emailInput.value.trim();
-      const selectedEvent = eventForm.event.value;
+      const name = nameInput.value;
+      const email = emailInput.value;
+      const selectedEvent = eventSelect.value;
 
       if (!name || !email || !selectedEvent) {
         alert("Please fill in all fields.");
@@ -84,24 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        // Save to PocketBase
-        const response = await fetch("http://127.0.0.1:8090/api/collections/event_registrations/records", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            selectedEvent,
-          }),
-        });
+        const data = {
+          name: name,
+          email: email,
+          selectedEvent: selectedEvent,
+        };
 
-        const result = await response.json();
-
-        if (!response.ok) {
-          throw new Error(result.message || "Registration failed");
-        }
+        await pb.collection("event_registrations").create(data);
 
         successMsg.classList.remove("hidden");
         eventForm.reset();

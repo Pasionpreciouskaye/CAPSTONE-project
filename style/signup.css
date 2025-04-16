@@ -73,3 +73,62 @@ button {
   text-decoration: none;
   color: #333;
 }
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 70vw; /* Half the viewport width */
+  height: 80vh; /* Half the viewport height */
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(8px); /* Soft blur */
+  background: rgba(0, 0, 0, 0.3); /* Dimmed overlay */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  border-radius: 20px;
+}
+
+.modal-content {
+  background: #ffffff;
+  padding: 30px 25px;
+  border-radius: 15px;
+  text-align: center;
+  width: 40%; /* Scales relative to the overlay */
+  box-shadow: 0 8px 25px wheat; /* Wheat shadow */
+}
+
+.modal-content h1 {
+  font-size: 22px;
+  color: #333333;
+  margin-bottom: 12px;
+}
+
+.modal-content p {
+  font-size: 16px;
+  color: #555555;
+  margin-bottom: 22px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 2px solid pink;
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: pink;
+  color: white;
+}

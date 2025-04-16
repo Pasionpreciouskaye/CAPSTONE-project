@@ -157,3 +157,20 @@ button:hover {
     height: 30vh;
   }
 }
+
+.success-popup {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #d6336c; /* darker pink background */
+  color: #ffffff; /* white text for strong contrast */
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
