@@ -21,13 +21,14 @@
           <li><a href="/Project/projects.html">Projects</a></li>
 
           <li class="dropdown">
-            Budget Transparency ▼
+            Budget Transparency
             <ul class="dropdown-content">
               <li><a href="./user-transparency.html">Transparency</a></li>
               <li><a href="./user-inventory.html">Inventory</a></li>
               <li><a href="./user-transaction.html">Transaction</a></li>
             </ul>
           </li>
+
           <li><a href="/contactus.html">Contact Us</a></li>
           <script>
             function logout() {
@@ -45,46 +46,47 @@
       <!-- Profile Form -->
       <main class="content">
         <h2>Personal Information</h2>
-        <form id="profileForm">
+        <form id="profile_Form">
           <div class="row">
             <div class="col">
               <label>First Name</label>
-              <input type="text" id="firstName" value="Jane" />
+              <input type="text" id="firstName" />
             </div>
             <div class="col">
               <label>Middle Name</label>
-              <input type="text" id="middleName" value="Anne" />
+              <input type="text" id="middleName" />
             </div>
             <div class="col">
               <label>Last Name</label>
-              <input type="text" id="lastName" value="Cooper" />
+              <input type="text" id="lastName" />
             </div>
           </div>
 
           <label>Email</label>
-          <input type="email" value="jane234@example.com" disabled />
+          <input type="email" id="email" disabled />
           <p class="verified">✔ Verified</p>
 
           <div class="row">
             <div class="col">
               <label>Phone Number</label>
-              <input type="text" value="(209) 555-0104" />
+              <input type="text" id="phone" />
             </div>
             <div class="col">
               <label>Date of Birth</label>
-              <input type="text" value="17 Nov, 1996" />
+              <input type="text" id="dob" />
             </div>
           </div>
 
           <label>Address</label>
-          <input type="text" value="123 Main St, City, State" />
+          <input type="text" id="address" />
 
           <div class="buttons">
-            <button type="button" id="discardBtn" class="btn-danger">
-              Discard Changes
-            </button>
             <button type="submit" id="saveBtn" class="btn-success">
               Save Changes
+            </button>
+
+            <button type="button" id="discardBtn" class="btn-danger">
+              Discard Changes
             </button>
           </div>
         </form>
