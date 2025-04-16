@@ -1,57 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const contactForm = document.querySelector(".contact-form form");
+  const contact_form = document.getElementById("contact_form");
 
-    contactForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  contact_form.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-      const name = contactForm.querySelector('input[placeholder="Your Name"]').value.trim();
-      const email = contactForm.querySelector('input[placeholder="Your Email"]').value.trim();
-      const subject = contactForm.querySelector('input[placeholder="Your Subject"]').value.trim();
-      const message = contactForm.querySelector("textarea").value.trim();
+    const subject = contact_form.subject.value;
+    const message = contact_form.message.value;
 
-      if (!name || !email || !subject || !message) {
-        alert("Please fill in all fields.");
-        return;
-      }
+    const pb = new PocketBase("http://127.0.0.1:8090");
 
-      try {
-        const response = await fetch("http://127.0.0.1:8090/api/collections/contact_feedback/records", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, email, subject, message }),
-        });
+    try {
+      const data = {
+        user: pb.authStore.model.id,
+        subject: subject,
+        message: message,
+      };
 
-        const result = await response.json();
+      // Create a new record in the "feedbacks" collection
+      const record = await pb.collection("feedbacks").create(data);
 
-        if (!response.ok) {
-          throw new Error(result.message || "Something went wrong.");
-        }
-
-        alert("Thank you for your feedback!");
-        contactForm.reset();
-      } catch (err) {
-        console.error("Error submitting contact form:", err);
-        alert("Failed to send your message. Please try again later.");
-      }
-    });
+      // Optional: clear the form or show a success message
+      contact_form.reset();
+      alert("Feedback submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      alert("Failed to submit feedback. Please try again.");
+    }
   });
-
-  // Function to initialize the map
-  function initMap() {
-    // Location coordinates for the SK Taguig address
-    const location = { lat: 14.5628, lng: 121.0398 };
-
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 15,
-      center: location,
-    });
-
-    // Add a marker to the map at the location
-    const marker = new google.maps.Marker({
-      position: location,
-      map: map,
-      title: "SK Taguig Location",
-    });
-  }
+});

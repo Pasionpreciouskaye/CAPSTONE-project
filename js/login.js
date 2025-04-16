@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        const role = document.getElementById("role").value;
         const email = loginForm.email.value;
         const password = loginForm.password.value;
 
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Perform admin-specific actions
                 } else {
                     console.log("User access granted");
-                    window.location.href = "/";
+                    window.location.href = "index.html";
                     // Perform user-specific actions
                 }
             } else {
