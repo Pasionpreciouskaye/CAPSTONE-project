@@ -1,9 +1,4 @@
-/**
- * Inventory Management Script (Simplified - Create Only)
- * Connects to PocketBase to add new inventory items.
- * Current Location: Manila, Metro Manila, Philippines
- * Current Time: Sunday, April 13, 2025 at 10:46:22 PM PST
- */
+
 document.addEventListener("DOMContentLoaded", () => {
   // --- PocketBase Setup ---
   // Ensure your PocketBase instance is running at this address

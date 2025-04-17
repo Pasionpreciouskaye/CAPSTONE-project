@@ -1,126 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./style/admin-dashboard.css">
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./style/admin-dashboard.css" />
+  </head>
 
-<body>
-
+  <body>
     <aside class="sidebar">
-        <div class="sidebar-header">
-             <img src="./logo/SK-Logo.png" alt="SK Logo" class="logo">
-             <h2>Admin Panel</h2>
-        </div>
-        <nav class="sidebar-nav">
-            <ul>
-                <li><a href="./index.html"><i class="fas fa-home"></i><span>Home</span></a></li>
-                <li><a href="./admin-budget.html"><i class="fas fa-chart-pie"></i><span>Budget Transparency</span></a></li>
-                <li class="active"><a href="#"><i class="fas fa-users"></i><span>Members</span></a></li>
-                <li><a href="#"><i class="fas fa-boxes"></i><span>Inventory</span></a></li>
-                <li><a href="#"><i class="fas fa-history"></i><span>Transaction History</span></a></li>
-                <li><a href="./contactus.html"><i class="fas fa-comment-alt"></i><span>Feedback</span></a></li>
-            </ul>
-        </nav>
-         <div class="sidebar-footer">
-            <a href="#" class="logout-link"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
-        </div>
+      <div class="sidebar-header">
+        <img src="./logo/SK-Logo.png" alt="SK Logo" class="logo" />
+        <h2>Admin Panel</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="./index.html"
+              ><i class="fas fa-home"></i><span>Home</span></a
+            >
+          </li>
+          <li>
+            <a href="./admin-budget.html"
+              ><i class="fas fa-chart-pie"></i
+              ><span>Budget Transparency</span></a
+            >
+          </li>
+          <li class="active">
+            <a href="#"><i class="fas fa-users"></i><span>Members</span></a>
+          </li>
+          <li>
+            <a href="inventory.html"
+              ><i class="fas fa-boxes"></i><span>Inventory</span></a
+            >
+          </li>
+          <li>
+            <a href="user-transparency.html"
+              ><i class="fas fa-history"></i><span>Transaction History</span></a
+            >
+          </li>
+          <li>
+            <a href="./contactus.html"
+              ><i class="fas fa-comment-alt"></i><span>Feedback</span></a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <script>
+          function logout() {
+            // Log out the current user
+            pb.authStore.clear();
+
+            console.log("User logged out.");
+            location.href = "landing.html";
+          }
+        </script>
+        <a href="#" class="logout-link"
+          ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
+        >
+      </div>
     </aside>
 
     <main class="main-content">
-        <header class="main-header">
-            <div class="header-greeting">
-                <h1>Hello, <span id="userName">Admin</span>! 👋🏼</h1>
-                <p>Welcome back to the dashboard.</p>
-            </div>
-            <div class="header-actions">
-                <div class="search-container">
-                    <i class="fas fa-search"></i>
-                    <input type="search" id="headerSearch" placeholder="Search anything..." />
-                </div>
-                 <div class="user-profile">
-                    <i class="fas fa-user-circle user-icon"></i>
-                    <span id="profileUserName">Admin User</span>
-                    <i class="fas fa-chevron-down dropdown-icon"></i>
-                    </div>
-            </div>
-        </header>
+      <header class="main-header">
+        <div class="header-greeting">
+          <h1>Hello, <span id="userName">Admin</span>! 👋🏼</h1>
+          <p>Welcome back to the dashboard.</p>
+        </div>
+        <div class="header-actions">
+          <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input
+              type="search"
+              id="headerSearch"
+              placeholder="Search anything..."
+            />
+          </div>
+          <div class="user-profile">
+            <i class="fas fa-user-circle user-icon"></i>
+            <span id="profileUserName">Admin User</span>
+            <i class="fas fa-chevron-down dropdown-icon"></i>
+          </div>
+        </div>
+      </header>
 
-        <section class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-users"></i></div>
-                <div class="stat-info">
-                    <p>Total Members</p>
-                    <h3 id="totalMembers">0</h3>
-                    <span class="increase" id="totalMembersChange"><i class="fas fa-arrow-up"></i> 0% this month</span>
-                     </div>
-            </div>
-            <div class="stat-card">
-                 <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
-                 <div class="stat-info">
-                    <p>New Members</p>
-                    <h3 id="newMembers">0</h3>
-                    <span class="decrease" id="newMembersChange"><i class="fas fa-arrow-down"></i> 0% this month</span>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-user-check"></i></div>
-                 <div class="stat-info">
-                    <p>Active Members</p>
-                    <h3 id="activeMembers">0</h3>
-                     <span><i class="fas fa-info-circle"></i> Current</span>
-                </div>
-            </div>
-             </section>
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-info">
+            <p>Total Members</p>
+            <h3 id="totalMembers">0</h3>
+            <span class="increase" id="totalMembersChange"
+              ><i class="fas fa-arrow-up"></i> 0% this month</span
+            >
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
+          <div class="stat-info">
+            <p>New Members</p>
+            <h3 id="newMembers">0</h3>
+            <span class="decrease" id="newMembersChange"
+              ><i class="fas fa-arrow-down"></i> 0% this month</span
+            >
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+          <div class="stat-info">
+            <p>Active Members</p>
+            <h3 id="activeMembers">0</h3>
+            <span><i class="fas fa-info-circle"></i> Current</span>
+          </div>
+        </div>
+      </section>
 
-        <section class="members-section">
-            <div class="members-header">
-                <h2>All Members</h2>
-                <div class="members-controls">
-                    <input type="search" id="memberSearch" placeholder="Search members...">
-                    <select id="memberSort">
-                        <option value="recent">Sort by: Recent</option>
-                        <option value="nameAsc">Sort by: Name (A-Z)</option>
-                        <option value="nameDesc">Sort by: Name (Z-A)</option>
-                        <option value="active">Sort by: Active First</option>
-                    </select>
-                    <button class="add-member-btn"><i class="fas fa-plus"></i> Add Member</button>
-                </div>
-            </div>
+      <section class="members-section">
+        <div class="members-header">
+          <h2>All Members</h2>
+          <div class="members-controls">
+            <input
+              type="search"
+              id="memberSearch"
+              placeholder="Search members..."
+            />
+            <select id="memberSort">
+              <option value="recent">Sort by: Recent</option>
+              <option value="nameAsc">Sort by: Name (A-Z)</option>
+              <option value="nameDesc">Sort by: Name (Z-A)</option>
+              <option value="active">Sort by: Active First</option>
+            </select>
+            <button class="add-member-btn">
+              <i class="fas fa-plus"></i> Add Member
+            </button>
+          </div>
+        </div>
 
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Phone Number</th>
-                            <th>Email</th>
-                            <th>Gender</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="membersTableBody">
-                        <tr><td colspan="7" class="table-placeholder-message">Loading members...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-             <div class="pagination">
-                <button>&laquo; Prev</button>
-                <span>Page 1 of 5</span>
-                <button>Next &raquo;</button>
-            </div>
-        </section>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="membersTableBody">
+              <tr>
+                <td colspan="7" class="table-placeholder-message">
+                  Loading members...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <button>&laquo; Prev</button>
+          <span>Page 1 of 5</span>
+          <button>Next &raquo;</button>
+        </div>
+      </section>
     </main>
 
     <script src="./js/admin-dashboard.js"></script>
-</body>
+  </body>
 </html>
