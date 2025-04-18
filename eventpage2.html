@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Registration</title>
+  <link rel="stylesheet" href="./style/eventpage2.css">
+</head>
+<body>
+
+    <div class="registration-section">
+<div class="container">
+  <!-- Left Side: Image Slider -->
+  <div class="slider">
+    <img src="./assets/sk-pic.jpg" id="sliderImage" alt="Slider Image">
+  </div>
+
+  <!-- Right Side: Registration Form -->
+  <div class="form-container">
+    <h1>Events</h1>
+    <h2>Register for an Event</h2>
+
+    <form id="eventForm">
+      <input type="text" placeholder="First Name" required>
+      <input type="text" placeholder="Last Name" required>
+      <input type="text" placeholder="Phone Number" required>
+      <input type="email" placeholder="Email" required>
+
+
+      <select required>
+        <option value="">Select an event</option>
+        <option value="𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃𝐄𝐍𝐓𝐈𝐅𝐈𝐂𝐀𝐓𝐈𝐎𝐍 𝐂𝐀𝐑𝐃 𝐀𝐋𝐄𝐑𝐓">𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃</option>
+        <option value="𝗬𝗢𝗨𝗧𝗛 𝗟𝗘𝗔𝗗𝗘𝗥𝗦 𝗙𝗘𝗟𝗟𝗢𝗪𝗦𝗛𝗜𝗣 2025">𝗬𝗢𝗨𝗧𝗛 𝗟𝗘𝗔𝗗𝗘𝗥𝗦 𝗙𝗘𝗟𝗟𝗢𝗪𝗦𝗛𝗜𝗣 2025</option>
+        <option value="𝐈𝐍𝐓𝐑𝐀 𝐀𝐍𝐃 𝐈𝐍𝐓𝐄𝐑 𝐁𝐀𝐑𝐀𝐍𝐆𝐘 𝟐𝟎𝟐𝟓">𝐈𝐍𝐓𝐑𝐀 & 𝐈𝐍𝐓𝐄𝐑 𝐁𝐀𝐑𝐀𝐍𝐆𝐘 2025</option>
+        <option value="𝐓𝐀𝐆𝐔𝐈𝐆 𝐒𝐏𝐎𝐑𝐓𝐒 𝐋𝐄𝐀𝐆𝐔𝐄 𝘽𝙄𝙇𝙇𝘼𝙍𝘿𝙎 • 𝘿𝘼𝙍𝙏𝙎 • 𝘾𝙃𝙀𝙎𝙎">𝘽𝙄𝙇𝙇𝘼𝙍𝘿𝙎 • 𝘿𝘼𝙍𝙏𝙎 • 𝘾𝙃𝙀𝙎𝙎</option>
+      </select>
+
+      <button type="submit">Register</button>
+    </form>
+</div>
+  </div> <!-- .form-container -->
+</div> <!-- .container -->
+<!-- Recent Event section moved outside of the container -->
+<!-- Recent Events Section -->
+<div class="events-section">
+    <h2 class="events-title">Recent Events</h2>
+    <p class="events-subtitle">Check out our latest activities</p>
+  
+    <div class="events-container">
+      <a href="#" class="event-card">
+        <img src="/assets/youth.jpg" alt="Event 1" class="event-image" />
+        <div class="event-content">
+          <div class="event-title">𝗬𝗢𝗨𝗧𝗛 𝗟𝗘𝗔𝗗𝗘𝗥𝗦 𝗙𝗘𝗟𝗟𝗢𝗪𝗦𝗛𝗜𝗣 2025</div>
+          <div class="event-description">A gathering of youth leaders from different barangays. The SK of Lower Bicutan, together with Kap. Roel Pacayra and the Barangay Council, invites all youth leaders and focal persons to the Youth Leaders Fellowship.</div>
+        </div>
+      </a>
+  
+      <a href="#" class="event-card">
+        <img src="/assets/recentproj-2.jpg" alt="Event 2" class="event-image" />
+        <div class="event-content">
+          <div class="event-title">TAGUIG SPORTS LEAGUE 2025 – INTRA-BARANGAY TOURNAMENT</div>
+          <div class="event-description">🏀🏐🏸 Basketball, Volleyball, Badminton
+
+            The Taguig City Sports and Development Office, in partnership with SK Lower Bicutan, invites you to join the upcoming Intra-Barangay Tournament.</div>
+        </div>
+      </a>
+  
+      <a href="#" class="event-card">
+        <img src="/assets/project7.jpg" alt="Event 3" class="event-image" />
+        <div class="event-content">
+          <div class="event-title">𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃𝐄𝐍𝐓𝐈𝐅𝐈𝐂𝐀𝐓𝐈𝐎𝐍 𝐂𝐀𝐑𝐃</div>
+          <div class="event-description">Youth aged 15–30 are invited to get a free Youth Privilege Card for easy access to SK Lower Bicutan events like sports leagues, seminars, team building, and Christmas programs..</div>
+        </div>
+      </a>
+  
+      <a href="#" class="event-card">
+        <img src="/assets/recentproj5.jpg" alt="Event 4" class="event-image" />
+        <div class="event-content"></div>
+        <div class="event-title">TAGUIG SPORTS LEAGUE 2025</div>
+          <div class="event-description">Calling all youth from Barangay Lower Bicutan!
+            Show your skills and represent our barangay in your chosen game at the upcoming Taguig Sports League 2025.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+<script src="./js/eventpage2.js"></script>
+</body>
+</html>
