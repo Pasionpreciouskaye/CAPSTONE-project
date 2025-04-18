@@ -1,0 +1,173 @@
+/* Remove centering from body */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #ffeaf4, #fff0fa);
+  padding: 0;
+}
+
+/* NEW: Center only the registration container */
+.registration-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* takes full viewport height */
+  padding: 40px 20px; /* spacing for mobile */
+}
+  
+  .container {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    background: white;
+  }
+  
+  .slider {
+    flex: 1;
+    background: #fff;
+  }
+  
+  .slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .form-container {
+    flex: 1;
+    background: #ffe9f5;
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .form-container h1 {
+    color: #f0508b;
+    margin-bottom: 10px;
+  }
+  
+  .form-container h2 {
+    color: #d4005f;
+    margin-bottom: 30px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  input, select {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 12px;
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #d81b60;
+  }
+
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+  }
+
+  .events-section {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .events-title {
+    color: #d63384;
+    font-size: 32px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .events-subtitle {
+    color: #555;
+    margin-bottom: 30px;
+  }
+
+  .events-container {
+    display: grid;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .event-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(214, 51, 132, 0.2);
+    min-width: 250px;
+    max-width: 250px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+
+  .event-card:hover {
+    transform: scale(1.03);
+  }
+
+  .events-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding-bottom: 10px;
+  }
+  
+  .event-card {
+    text-decoration: none;
+    transition: transform 0.3s;
+  }
+
+  .event-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  .event-content {
+    padding: 15px;
+  }
+
+  .event-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #c2185b;
+    margin-bottom: 8px;
+  }
+
+  .event-description {
+    font-size: 14px;
+    color: #555;
+  }
+
+  /* Scrollbar Styling */
+  .events-container::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .events-container::-webkit-scrollbar-thumb {
+    background: #d63384;
+    border-radius: 10px;
+  }
+  
