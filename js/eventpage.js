@@ -1,3 +1,28 @@
+let current = 0;
+
+function changeImage() {
+  const img = document.getElementById("sliderImage");
+  current = (current + 1) % images.length;
+  img.src = images[current];
+}
+
+setInterval(changeImage, 3000); // change every 3 seconds
+
+document.getElementById('eventForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Simulate registration success
+    document.getElementById('successMsg').style.display = 'block';
+
+    // Optionally, clear form
+    this.reset();
+
+    // Hide message after 4 seconds
+    setTimeout(() => {
+      document.getElementById('successMsg').style.display = 'none';
+    }, 4000);
+  });
+
 document.addEventListener("DOMContentLoaded", () => {
   // Menu dropdown logic
   const menuButton = document.getElementById("menuButton");
