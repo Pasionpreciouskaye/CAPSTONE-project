@@ -1,12 +1,5 @@
-/**
- * Inventory Management Script (Simplified - Create Only)
- * Connects to PocketBase to add new inventory items.
- * Current Location: Manila, Metro Manila, Philippines
- * Current Time: Sunday, April 13, 2025 at 10:46:22 PM PST
- */
+
 document.addEventListener("DOMContentLoaded", () => {
-  // --- PocketBase Setup ---
-  // Ensure your PocketBase instance is running at this address
   const POCKETBASE_URL = 'http://127.0.0.1:8090';
   let pb;
   try {
@@ -98,11 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
           alert(`Item "${newRecord.name}" (ID: ${newRecord.id}) created successfully!`);
           closeModalFn(); // Close the modal on success
 
-          // --- NOTE ---
-          // This simplified version DOES NOT automatically update the HTML table.
-          // You would need to implement data loading/real-time features
-          // or refresh the page manually to see the new item in a full app.
-          // --- /NOTE ---
 
       } catch (error) {
           console.error('Failed to create item:', error);

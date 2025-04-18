@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("signupForm");
+    const confirmationModal = document.getElementById("confirmationModal");
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -46,16 +47,39 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
 
             if (!response.ok) {
-                throw new Error(result.message || "Signup failed");
+                let errorMessage = "Signup failed. Please try again.";
+                if (result && result.data) {
+                    const fieldErrors = Object.entries(result.data)
+                        .map(([field, error]) => `${field}: ${error.message}`)
+                        .join("\n");
+                    if (fieldErrors) errorMessage = `Signup failed:\n${fieldErrors}`;
+                    else if (result.message) errorMessage = `Signup failed: ${result.message}`;
+                } else if (result && result.message) {
+                    errorMessage = `Signup failed: ${result.message}`;
+                }
+                console.error("Signup Error Response:", result);
+                throw new Error(errorMessage);
             }
 
-            alert("Signup successful!");
             form.reset();
-            window.location.href = "login.html";
+            confirmationModal.style.display = "flex";
 
         } catch (error) {
             console.error("Error submitting form:", error);
-            alert("Failed to sign up. Check console for details.");
+            alert(error.message || "Failed to sign up. Check console for details.");
         }
     });
 });
+
+function showConfirmationModal() {
+    document.querySelector(".modal-overlay").style.display = "flex";
+}
+
+function confirmYes() {
+    window.location.href = "login.html";
+}
+
+function confirmNo() {
+    window.location.href = "landing.html";
+}
+

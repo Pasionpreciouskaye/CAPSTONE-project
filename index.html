@@ -46,9 +46,9 @@
     </header>
 
     <main>
-      <div class="banner">
-        <img src="./assets/banner.jpg" alt="Banner Image" />
-      </div>
+      <section class="banner">
+        <img id="slider" src="./assets/banner.jpg" alt="Banner Image" />
+      </section>
 
       <section class="feature-boxes">
         <div class="box" onclick="location.href='./Project/projects.html'">
@@ -72,45 +72,47 @@
 
       <section class="about" id="about">
         <h2>About Us</h2>
-        <div class="about-box">
-          <p class="hover-effect">
-            Task Force Youth Council of Barangay Lower Bicutan, Taguig was
-            created/formed by Kagawad Camille Joy Adriano to empower the
-            potentials of the youth and also to give different projects to the
-            youths of barangay.
-          </p>
-          <p class="hover-effect">
-            It was March 2014, TFYC was created. Various projects and seminars
-            conducted by the team, including the annual Summer League for
-            Basketball and Volleyball.
-          </p>
-          <p class="hover-effect">
-            2017, the TFYC was handled by Kagawad Ricardo "Goma" Cruz IV which
-            is also the head of the Youth Development of the Barangay.
-          </p>
-          <p class="hover-effect">
-            2018, the Sangguniang Kabataan Lower Bicutan is under the
-            supervision of SK Chairman Denn Michael “Dingdong” Bahan together
-            with 7 SK Councilors, 1 SK Secretary, and 1 SK Treasurer.
-          </p>
-          <p class="hover-effect">
-            In the current year 2023, the Sangguniang Kabataan Lower Bicutan is
-            now under the supervision of SK Chairwoman June Lyn A. Tabanao
-            together with the team LYNkod Kabataan consisting of 7 SK
-            Councilors, 1 SK Secretary, and 1 SK Treasurer for the year
-            2023–2025.
-          </p>
+        <div class="about-container">
+          <div class="about-box">
+            <p class="hover-effect">
+              Task Force Youth Council of Barangay Lower Bicutan, Taguig was
+              created/formed by Kagawad Camille Joy Adriano to empower the
+              potentials of the youth and also to give different projects to the
+              youths of barangay.
+            </p>
+            <p class="hover-effect">
+              It was March 2014, TFYC was created. Various projects and seminars
+              conducted by the team, including the annual Summer League for
+              Basketball and Volleyball.
+            </p>
+            <p class="hover-effect">
+              2017, the TFYC was handled by Kagawad Ricardo "Goma" Cruz IV which
+              is also the head of the Youth Development of the Barangay.
+            </p>
+            <p class="hover-effect">
+              2018, the Sangguniang Kabataan Lower Bicutan is under the
+              supervision of SK Chairman Denn Michael “Dingdong” Bahan together
+              with 7 SK Councilors, 1 SK Secretary, and 1 SK Treasurer.
+            </p>
+            <p class="hover-effect">
+              In the current year 2023, the Sangguniang Kabataan Lower Bicutan
+              is now under the supervision of SK Chairwoman June Lyn A. Tabanao
+              together with the team LYNkod Kabataan consisting of 7 SK
+              Councilors, 1 SK Secretary, and 1 SK Treasurer for the year
+              2023–2025.
+            </p>
+          </div>
+
+          <div class="image-slider">
+            <div class="image-wrapper">
+              <img src="./assets/grouppic.jpg" alt="Image 1" />
+              <img src="./assets/grouppic2.jpg" alt="Image 2" />
+              <img src="./assets/grouppic3.jpg" alt="Image 3" />
+              <img src="./assets/grouppic4.jpg" alt="Image 4" />
+            </div>
+          </div>
         </div>
       </section>
-
-      <div class="image-slider">
-        <div class="image-wrapper">
-          <img src="./assets/grouppic.jpg" alt="Image 1" />
-          <img src="./assets/grouppic2.jpg" alt="Image 2" />
-          <img src="./assets/grouppic3.jpg" alt="Image 3" />
-          <img src="./assets/grouppic4.jpg" alt="Image 4" />
-        </div>
-      </div>
 
       <section class="vision">
         <h2>Vision</h2>
@@ -270,7 +272,7 @@
         <img src="./logo/SK-Logo.png" alt="Logo" />
         <p>© 2025 | CITY OF TAGUIG. All rights reserved.</p>
       </div>
-    </footer> 
+    </footer>
 
     <button id="scrollTopBtn" onclick="scrollToTop()" title="Go to Home">
       ↑ Go to top

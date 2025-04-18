@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="./style/login.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -21,15 +25,6 @@
         <div class="login-wrapper">
           <h2>Login</h2>
           <form id="loginForm">
-            <!-- User Role Selection -->
-            <div class="form-group">
-              <select name="role" title="role" id="role" required>
-                <option value="" disabled selected>Select Role</option>
-                <option value="member">Member</option>
-                <option value="admin">Admin</option>
-              </select>
-            </div>
-
             <!-- Email Input -->
             <div class="form-group">
               <input type="email" id="email" placeholder="Email" required />
@@ -51,6 +46,9 @@
 
           <!-- Back Button -->
           <a href="landing.html" class="back-button">Back</a>
+          <div id="success-message" class="success-popup">
+            Login Successful!
+          </div>
         </div>
       </div>
     </div>

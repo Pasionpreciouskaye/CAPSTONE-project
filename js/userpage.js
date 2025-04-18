@@ -1,17 +1,17 @@
 const userId = "USER_ID_HERE"; // Change this to the actual user ID
+const pb = new PocketBase("http://127.0.0.1:8090");
+if (!pb.authStore.isValid) {
+    location.href="landing.html"
+} 
 
 document.addEventListener("DOMContentLoaded", async function () {
     try {
-        const response = await fetch(`http://127.0.0.1:8090/api/collections/users/records/${userId}`);
-        if (!response.ok) throw new Error("Failed to fetch user data");
-
-        const userData = await response.json();
-
-        // Populate fields with user data
-        document.getElementById("user-name").innerText = userData.first_name + " " + userData.last_name;
-        document.getElementById("first-name").value = userData.first_name;
-        document.getElementById("middle-name").value = userData.middle_name;
-        document.getElementById("last-name").value = userData.last_name;
+        const userData = await pb.collection('users').getOne(pb.authStore.model.id);
+        console.log (userData)
+        //Populate fields with user data
+        document.getElementById("firstName").value = userData.firstName;
+        document.getElementById("middleName").value = userData.middleName;
+        document.getElementById("lastName").value = userData.lastName;
         document.getElementById("email").value = userData.email;
         document.getElementById("phone").value = userData.phone;
         document.getElementById("dob").value = userData.dob;
@@ -21,36 +21,50 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 });
 
-document.getElementById("profileForm").addEventListener("submit", async function (event) {
-    event.preventDefault();
-
+document.addEventListener("DOMContentLoaded", () => {
+    const profile_Form = document.getElementById("profile_Form");
+    const discardBtn = document.getElementById("discardBtn");
+  
+    // Make sure the form uses 'submit' event
+    profile_Form.addEventListener("submit", saveProfile);
+    // Make sure discard cancels and reloads
+    discardBtn.addEventListener("click", discardChanges);
+  });
+  
+  async function saveProfile(event) {
+    event.preventDefault();  // Prevent form from submitting and reloading
+  
     const updatedData = {
-        first_name: document.getElementById("first-name").value,
-        middle_name: document.getElementById("middle-name").value,
-        last_name: document.getElementById("last-name").value,
+        firstName: document.getElementById("firstName").value,
+        middleName: document.getElementById("middleName").value,
+        lastName: document.getElementById("lastName").value,
         phone: document.getElementById("phone").value,
         dob: document.getElementById("dob").value,
         address: document.getElementById("address").value,
-    };
-
+      };
+      
+  
+    console.log("Saving this data:", updatedData);  // Debug log
+  
     try {
-        const response = await fetch("http://127.0.0.1:8090/api/collections/users/records", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(updatedData),
-        });
-
-        if (!response.ok) throw new Error("Failed to update profile");
-
-        alert("Profile Updated Successfully!");
+      if (!pb.authStore.isValid) {
+        alert("You must be logged in to update your profile.");
+        return;
+      }
+  
+      const userId = pb.authStore.model.id;
+      await pb.collection("users").update(userId, updatedData);
+      alert("Profile Updated Successfully!");
     } catch (error) {
-        console.error("Error updating profile:", error);
-        alert("Failed to update profile. Check console for details.");
+      console.error("Error updating profile:", error);
+      alert("Failed to update profile. Check console for details.");
     }
-});
-
-document.getElementById("discardBtn").addEventListener("click", function () {
-    if (confirm("Are you sure you want to discard changes?")) {
-        location.reload();
+  }
+  
+  function discardChanges() {
+    const confirmDiscard = confirm("Are you sure you want to discard changes?");
+    if (confirmDiscard) {
+      location.reload();  // Refreshes the page to reset the form
     }
-});
+  }
+  
