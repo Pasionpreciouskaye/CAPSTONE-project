@@ -1,498 +1,364 @@
-/* === Modernized Inventory CSS === */
-
-/* --- Root Variables --- */
+/* --- General Styles (Applied to both inventory and admin dashboard) --- */
 :root {
-  /* Color Palette */
-  --primary-bg: #f7f9fc;         /* Lighter, slightly blue-tinted background */
-  --sidebar-bg: #2c3e50;         /* Slightly softer dark blue-grey */
-  --sidebar-link-bg: #34495e;
-  --sidebar-link-hover-bg: #4a6fa5; /* Softer blue hover */
-  --header-bg: #ffffff;
-  --content-bg: #ffffff;        /* Explicit background for content areas */
-  --text-dark: #333;
-  --text-light: #ffffff;
-  --text-muted: #6c757d;       /* Muted text color */
-  --accent-color: #5b8cce;      /* A calmer, professional blue */
-  --border-color: #dee2e6;      /* Lighter border color */
+  /* Color Palette - Adjust to match admin dashboard */
+  --primary-color: #4a90e2;
+  --secondary-color: #f875aa;
+  --text-color: #333;
+  --text-muted: #777;
+  --bg-color: #f4f6f8;
+  --sidebar-bg: #ffffff;
+  --card-bg: #ffffff;
+  --border-color: #e0e0e0;
+  --success-color: #4caf50;
+  --danger-color: #f44336;
+  --warning-color: #ff9800;
+  --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 6px 16px rgba(0, 0, 0, 0.1);
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
 
-  /* Button Colors */
-  --button-add-bg: #28a745;      /* Standard green */
-  --button-add-hover-bg: #218838;
-  --button-edit-bg: #007bff;     /* Standard blue */
-  --button-edit-hover-bg: #0056b3;
-  --button-delete-bg: #dc3545;   /* Standard red */
-  --button-delete-hover-bg: #c82333;
+  /* Font Family - Match admin dashboard */
+  --font-family: 'Poppins', sans-serif;
 
-  /* Table Colors */
-  --table-header-bg: #e9ecef;    /* Light grey header */
-  --table-header-text: #495057; /* Darker text for light header */
-  --table-border-color: var(--border-color);
-  --table-row-hover-bg: #f1f5f9; /* Subtle blue/grey hover */
-
-  /* Other Variables */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --sidebar-width: 250px;
-  --transition-speed: 0.25s;
-  --border-radius-sm: 0.2rem; /* 3.2px */
-  --border-radius-md: 0.375rem; /* 6px */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-}
-
-/* --- Global Resets & Base --- */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  font-size: 16px; /* Base font size */
+  /* Sidebar Width - Match admin dashboard */
+  --sidebar-width: 260px;
+  --transition-speed: 0.3s;
 }
 
 body {
   font-family: var(--font-family);
-  background-color: var(--primary-bg);
-  color: var(--text-dark);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
   overflow-x: hidden;
-  line-height: 1.6;
-}
-
-body.no-scroll {
-  overflow: hidden;
-}
-
-/* --- Layout: App Container & Sidebar --- */
-.app-container {
-  display: flex;
-  flex-direction: column;
-  margin-left: 0;
-  width: 100%;
-  min-height: 100vh; /* Ensure it takes full height */
-  transition: margin-left var(--transition-speed) ease-in-out;
-}
-
-body.sidebar-active .app-container {
-   margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  display: flex; /* Use flex to position sidebar and content */
 }
 
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: calc(-1 * var(--sidebar-width));
   width: var(--sidebar-width);
-  height: 100vh;
   background: var(--sidebar-bg);
-  color: var(--text-light);
-  padding: 20px 15px; /* Adjusted padding */
-  overflow-y: auto;
-  transition: left var(--transition-speed) ease-in-out;
-  z-index: 1100; /* Ensure sidebar is above overlay */
-  scrollbar-width: thin; /* Firefox scrollbar */
-  scrollbar-color: var(--sidebar-link-hover-bg) var(--sidebar-bg); /* Firefox scrollbar */
-}
-/* Webkit scrollbar */
-.sidebar::-webkit-scrollbar { width: 6px; }
-.sidebar::-webkit-scrollbar-track { background: var(--sidebar-bg); }
-.sidebar::-webkit-scrollbar-thumb { background-color: var(--sidebar-link-hover-bg); border-radius: 6px; }
-
-.sidebar.active {
-  left: 0;
-  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-content {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  border-right: 1px solid var(--border-color);
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: width 0.3s ease;
+  z-index: 1050; /* Ensure above overlay */
 }
 
-.profile-container {
-  text-align: center;
-  margin-bottom: 25px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.user-name {
-  margin-top: 10px;
-  font-weight: 500;
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.sidebar nav {
-  flex-grow: 1;
-}
-
-.sidebar ul {
-  list-style: none;
-}
-
-.sidebar ul li {
-  margin-bottom: 8px; /* Slightly reduced margin */
-}
-
-.sidebar ul li a {
-  display: flex; /* Align icon and text */
-  align-items: center;
-  gap: 12px; /* Space between icon and text */
-  padding: 10px 15px;
-  border-radius: var(--border-radius-md);
-  background: transparent; /* Make transparent by default */
-  color: rgba(255, 255, 255, 0.8); /* Lighter text */
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 0.95rem;
-  transition: background-color var(--transition-speed), color var(--transition-speed);
-}
-.sidebar ul li a i.fa-fw { /* Ensure fixed width icons align */
-  width: 1.2em;
-}
-
-.sidebar ul li a:hover,
-.sidebar ul li a.active { /* Add active state style */
-  background-color: var(--sidebar-link-bg);
-  color: var(--text-light);
-}
-
-.sidebar ul li a.logout-btn {
-  margin-top: 30px;
-  background-color: rgba(220, 53, 69, 0.15); /* Transparent red */
-  color: var(--button-delete-bg);
-  border: 1px solid rgba(220, 53, 69, 0.3);
-}
-.sidebar ul li a.logout-btn:hover {
-  background-color: var(--button-delete-bg);
-  color: var(--text-light);
-  border-color: var(--button-delete-bg);
-}
-
-/* --- App Header --- */
-.app-header {
-  background-color: var(--header-bg);
-  padding: 12px 25px; /* Adjusted padding */
+.sidebar-header {
+  padding: 20px;
   display: flex;
   align-items: center;
-  box-shadow: var(--shadow-sm); /* Subtle shadow */
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
+  gap: 15px;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.hamburger-menu {
-  font-size: 1.3rem; /* Adjusted size */
-  background: none;
-  border: none;
-  color: var(--text-muted); /* Use muted color */
-  cursor: pointer;
-  padding: 8px;
-  margin-right: 15px;
-  border-radius: 50%; /* Make it round */
-  transition: background-color 0.2s, color 0.2s;
-}
-.hamburger-menu:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    color: var(--text-dark);
+.sidebar-header .logo {
+  height: 40px;
+  width: auto;
 }
 
-.page-title {
-  color: var(--text-dark); /* Use standard dark text */
-  font-size: 1.3rem; /* Slightly smaller */
+.sidebar-header h2 {
+  font-size: 1.2em;
   font-weight: 600;
   margin: 0;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.page-title i {
-  color: var(--accent-color); /* Accent color for icon */
-  font-size: 1.4rem; /* Slightly larger icon */
 }
 
-/* --- Main Content Area --- */
+.sidebar-nav {
+  flex-grow: 1;
+  padding: 15px 0;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav ul li a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: var(--border-radius-md);
+  margin: 5px 10px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.sidebar-nav ul li a i {
+  width: 20px;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.sidebar-nav ul li a:hover {
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+}
+
+.sidebar-nav ul li.active a {
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: 500;
+}
+
+.sidebar-footer {
+  padding: 15px 10px;
+  border-top: 1px solid var(--border-color);
+}
+.logout-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  color: var(--danger-color);
+  text-decoration: none;
+  border-radius: var(--border-radius-md);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-weight: 500;
+}
+.logout-link:hover {
+  background-color: #fceded;
+}
+.logout-link i {
+  width: 20px;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.app-container {
+  flex-grow: 1;
+  margin-left: var(--sidebar-width);
+  transition: margin-left var(--transition-speed) ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
 .main-content {
-  padding: 25px 30px; /* Consistent padding */
-  flex: 1;
+  padding: 25px;
+  flex-grow: 1;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.header-greeting h1 {
+  font-size: 1.8em;
+  font-weight: 600;
+  margin-bottom: 2px;
 }
 
 .content-header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; /* Align to the right */
   align-items: center;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
-  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .search-add {
   display: flex;
   gap: 15px;
-  flex-wrap: wrap;
 }
 
-.search-add input[type="text"] {
-  padding: 10px 15px;
-  border-radius: var(--border-radius-md);
-  border: 1px solid var(--border-color);
-  font-size: 0.95rem;
-  min-width: 280px; /* Slightly wider search */
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-.search-add input[type="text"]:focus {
-  border-color: var(--accent-color);
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb, 91, 140, 206), 0.2); /* Use RGB for accent */
-}
-/* Placeholder styling (optional) */
-.search-add input[type="text"]::placeholder {
-    color: var(--text-muted);
-    opacity: 1;
-}
-
-/* --- Action Buttons (General) --- */
 .action-btn {
-  display: inline-flex; /* Align icon and text */
-  align-items: center;
-  gap: 8px; /* Space between icon and text */
-  color: var(--text-light);
+  background-color: var(--primary-color); /* Use admin dashboard's primary color */
+  color: #fff;
   border: none;
-  border-radius: var(--border-radius-md);
-  padding: 10px 16px;
+  padding: 10px 15px;
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
-  font-weight: 500; /* Medium weight */
-  font-size: 0.9rem;
-  transition: background-color var(--transition-speed), box-shadow 0.2s;
-  box-shadow: var(--shadow-sm);
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
 }
+
 .action-btn:hover {
-  opacity: 0.9; /* Keep opacity for hover */
-  box-shadow: var(--shadow-md); /* Slightly raise on hover */
-}
-.action-btn i {
-    line-height: 1; /* Ensure icon aligns well vertically */
+  background-color: #3a7bc8;
 }
 
-/* Specific Button Colors */
-.add-item-btn { background-color: var(--button-add-bg); }
-.add-item-btn:hover { background-color: var(--button-add-hover-bg); }
-.editBtn { background-color: var(--button-edit-bg); }
-.editBtn:hover { background-color: var(--button-edit-hover-bg); }
-.deleteBtn { background-color: var(--button-delete-bg); }
-.deleteBtn:hover { background-color: var(--button-delete-hover-bg); }
-.save-btn { background-color: var(--button-edit-bg); }
-.save-btn:hover { background-color: var(--button-edit-hover-bg); }
+.add-item-btn {
+  background-color: var(--success-color); /* Green for add */
+}
 
-/* --- Table Styles --- */
+.add-item-btn:hover {
+  background-color: #45a049;
+}
+
 .table-container {
+  background-color: var(--card-bg); /* Use card background for table container */
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-light);
   overflow-x: auto;
-  background: var(--content-bg);
-  border-radius: var(--border-radius-md); /* Consistent radius */
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--table-border-color); /* Add a subtle outer border */
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  white-space: nowrap; /* Prevent text wrapping initially */
 }
 
-th, td {
+th,
+td {
   padding: 12px 15px;
-  border: none; /* Remove individual cell borders */
-  border-bottom: 1px solid var(--table-border-color); /* Use bottom borders only */
-  font-size: 0.875rem; /* 14px */
   text-align: left;
-  vertical-align: middle;
+  border-bottom: 1px solid var(--border-color);
 }
 
 th {
-  background: var(--table-header-bg);
-  color: var(--table-header-text);
-  font-weight: 600; /* Bold headers */
-  text-transform: uppercase; /* Uppercase headers */
-  font-size: 0.75rem; /* Smaller header text */
+  background-color: var(--bg-color);
+  font-weight: 600;
+  font-size: 0.9em;
+  color: var(--text-muted);
+  text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-bottom-width: 2px; /* Thicker bottom border for header */
 }
 
-tbody tr {
-  transition: background-color 0.15s ease-in-out;
-}
-
-/* Remove bottom border from last row */
-tbody tr:last-child td {
-  border-bottom: none;
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
 tbody tr:hover {
-  background-color: var(--table-row-hover-bg);
+  background-color: #eee;
 }
 
-/* Give first column slightly bolder text (optional) */
-td:first-child {
-    font-weight: 500;
-    color: var(--text-dark);
-}
-
-/* Center action buttons */
-td:last-child {
-  text-align: center;
-  white-space: nowrap;
-}
-
-/* Action Buttons inside Table */
-.editBtn, .deleteBtn {
-  padding: 5px 10px; /* Slightly smaller padding */
-  margin: 0 3px;
-  border: none;
-  border-radius: var(--border-radius-sm); /* Smaller radius */
-  font-size: 0.8rem; /* 13px */
-  cursor: pointer;
-  color: var(--text-light);
-  box-shadow: none; /* Remove shadow for table buttons */
-}
-.editBtn:hover, .deleteBtn:hover {
-    opacity: 0.85;
-    box-shadow: none; /* Ensure no shadow on hover either */
-}
-
-/* --- Modal Styles --- */
+/* Modal Styles - Keep these, they are fairly standard */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Slightly darker overlay */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1050;
+  z-index: 1000;
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-speed) ease, visibility 0s var(--transition-speed) linear;
+  transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
 }
 
-.modal:not(.hidden) {
+.modal.active {
   opacity: 1;
   visibility: visible;
-  transition: opacity var(--transition-speed) ease, visibility 0s linear;
+  transition: opacity 0.3s ease-in-out, visibility 0s 0s;
 }
 
 .modal-content {
-  background: var(--modal-content-bg);
-  padding: 25px 30px; /* Adjusted padding */
-  border-radius: var(--border-radius-md); /* Consistent radius */
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--border-radius-md);
   width: 90%;
-  max-width: 600px; /* Slightly wider modal */
-  box-shadow: var(--shadow-md);
-  position: relative;
-  transform: translateY(-20px); /* Start slightly up */
-  transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
-  opacity: 0; /* Start hidden */
-}
-
-.modal:not(.hidden) .modal-content {
-  transform: translateY(0); /* Slide down */
-  opacity: 1;
+  max-width: 500px;
 }
 
 .modal-content h3 {
+  color: var(--text-color);
   margin-top: 0;
-  margin-bottom: 25px; /* More space below title */
-  color: var(--sidebar-bg);
-  font-size: 1.4rem;
-  font-weight: 600;
+  margin-bottom: 15px;
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust minmax */
-  gap: 18px; /* Increased gap */
-  margin-bottom: 25px; /* More space before save button */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
-.modal-content input[type="text"],
-.modal-content input[type="number"],
-.modal-content input[type="date"] {
-  padding: 12px 15px;
+.form-grid input[type='text'],
+.form-grid input[type='number'] {
+  padding: 10px;
   border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  font-size: 0.95rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-.modal-content input:focus {
-  border-color: var(--accent-color);
-  outline: none;
-  /* Use the same focus shadow as search input */
-  box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb, 91, 140, 206), 0.2);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9em;
 }
 
-.modal-content button[type="submit"] {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.close {
+.modal-content .close {
   position: absolute;
-  top: 15px; /* Position nicely */
-  right: 15px;
-  font-size: 1.5rem; /* Match hamburger */
-  font-weight: normal; /* Not bold */
-  color: var(--text-muted);
+  top: 10px;
+  right: 10px;
+  font-size: 1.2em;
+  cursor: pointer;
   background: none;
   border: none;
-  cursor: pointer;
-  line-height: 1;
-  padding: 5px;
-  border-radius: 50%; /* Round */
-  transition: background-color 0.2s, color 0.2s;
-}
-.close:hover {
-  color: var(--text-dark);
-  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--text-muted);
 }
 
-/* --- Overlay Styles --- */
+.modal-content .close:hover {
+  color: var(--text-color);
+}
+
+.modal-content button[type='submit'] {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-size: 0.9em;
+  width: 100%;
+}
+
+.modal-content button[type='submit']:hover {
+  background-color: #3a7bc8;
+}
+
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 1099; /* Below sidebar, above content */
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 999; /* Below modal */
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-speed) ease, visibility 0s var(--transition-speed) linear;
+  transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
 }
 
 .overlay.active {
   opacity: 1;
   visibility: visible;
-  transition: opacity var(--transition-speed) ease, visibility 0s linear;
+  transition: opacity 0.3s ease-in-out, visibility 0s 0s;
 }
 
 /* --- Responsive Adjustments --- */
-@media (max-width: 992px) { /* Tablet and below */
-   body.sidebar-active .app-container {
-      margin-left: 0; /* Don't shift content if sidebar overlays */
-   }
-   .sidebar {
-       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Keep shadow when overlaying */
-   }
-}
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
 
-@media (max-width: 768px) { /* Mobile */
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    width: 100%;
+    height: auto;
+    min-height: 100vh; /* Ensure full viewport height */
+    padding-bottom: 60px; /* Space for potential fixed footer */
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
   .main-content {
-    padding: 20px 15px; /* Less padding */
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .main-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .content-header {
@@ -501,66 +367,10 @@ td:last-child {
   }
 
   .search-add {
-      width: 100%;
+    width: 100%;
   }
-  .search-add input[type="text"] {
-      min-width: 0;
-      width: 100%;
-      margin-bottom: 10px; /* Space between search and add button */
-  }
+
   .search-add .action-btn {
-      width: 100%;
-      justify-content: center; /* Center button text/icon */
-  }
-
-  /* Consider stacking table data on mobile if too wide */
-  /* This is a basic example - complex stacking might need more CSS or JS */
-  /*
-  table, thead, tbody, th, td, tr {
-      display: block;
-  }
-  thead tr {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-  }
-  tr { border: 1px solid var(--border-color); margin-bottom: 10px; }
-  td {
-      border: none;
-      border-bottom: 1px solid #eee;
-      position: relative;
-      padding-left: 50%;
-      white-space: normal;
-      text-align: left;
-  }
-  td:before {
-      position: absolute;
-      top: 12px;
-      left: 10px;
-      width: 45%;
-      padding-right: 10px;
-      white-space: nowrap;
-      content: attr(data-label); // Needs JS to add data-label attributes
-      font-weight: 600;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-  }
-  td:last-child { text-align: left; } // Reset action alignment
-  td:last-child:before { content: 'Actions'; } // Example for actions
-  */
-
-  th, td {
-      padding: 10px 10px;
-      font-size: 0.85rem;
-      white-space: normal; /* Allow wrapping on mobile */
-  }
-  th { display: none; } /* Hide headers in simple mobile view - use alternative if stacking */
-
-  .modal-content {
-      width: 95%;
-      padding: 20px;
-  }
-  .form-grid {
-      grid-template-columns: 1fr; /* Stack form fields */
+    width: 100%;
   }
 }
