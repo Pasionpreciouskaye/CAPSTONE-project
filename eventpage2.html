@@ -5,82 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Event Registration</title>
     <link rel="stylesheet" href="./style/eventpage2.css" />
+    <script src="./js/eventpage2.js" defer></script>
   </head>
   <body>
     <!-- Header -->
-    <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-      <div
-        class="flex items-center justify-between px-10 py-2 max-h-20 relative"
-      >
+    <header>
+      <div class="header-container">
         <div class="logo">
-          <img src="/logo/SK-Logo.png" alt="Logo" class="h-16" />
+          <img src="./logo/SK-Logo.png" alt="Logo" />
         </div>
-        <div class="absolute left-1/2 transform -translate-x-1/2 text-center">
-          <h2
-            class="text-2xl sm:text-3xl font-bold text-[#f3799f] tracking-wide"
-          >
-            Projects
-          </h2>
+        <div class="header-title">
+          <h2 class="header-text">Events</h2>
         </div>
-        <div class="sidebar">
-          <nav>
-            <ul class="flex items-center space-x-6">
-              <li>
-                <a href="/index.html" class="hover:text-[#f3799f]">Home</a>
-              </li>
-              <li class="relative">
-                <button
-                  id="menuButton"
-                  class="hover:text-[#f3799f] focus:outline-none flex items-center gap-1"
-                >
-                  Menu ▾
-                </button>
-                <div
-                  id="dropdownMenu"
-                  class="absolute right-0 mt-2 bg-white shadow-md rounded-lg text-left py-2 w-48 hidden z-50"
-                >
-                  <a
-                    href="/eventpage2.html"
-                    class="block px-4 py-2 hover:bg-gray-100"
-                    >Events</a
-                  >
-                  <a
-                    href="/contactus.html"
-                    class="block px-4 py-2 hover:bg-gray-100"
-                    >Contact Us</a
-                  >
-                  <a
-                    href="/user-transparency.html"
-                    class="block px-4 py-2 hover:bg-gray-100"
-                    >Budget Transparency</a
-                  >
-                  <a
-                    href="/user-inventory.html"
-                    class="block px-4 py-2 hover:bg-gray-100"
-                    >Inventory</a
-                  >
-                </div>
-              </li>
-              <li>
-                <a href="/userpage.html" class="user-icon">
-                  <img
-                    src="/assets/userpic.png"
-                    alt="User Profile"
-                    class="h-10 rounded-full"
-                  />
-                </a>
-              </li>
-            </ul>
-          </nav>
+        <div class="nav-list">
+          <a href="/index.html" class="nav-link">Home</a>
+          <div class="menu-item">
+            <button class="menu-button">Menu ▾</button>
+            <div class="dropdown-menu">
+              <a href="./Project/projects.html" class="dropdown-link">Events</a>
+              <a href="/contactus.html" class="dropdown-link">Contact Us</a>
+              <a href="/user-transparency.html" class="dropdown-link"
+                >Budget Transparency</a
+              >
+              <a href="/user-inventory.html" class="dropdown-link">Inventory</a>
+            </div>
+          </div>
+          <a href="/userpage.html" class="user-icon">
+            <img src="/assets/userpic.png" alt="User Profile" />
+          </a>
         </div>
       </div>
     </header>
 
-    <!-- Registration Section -->
     <div class="registration-section">
       <div class="container">
         <div class="slider">
-          <img src="./assets/sk-pic.jpg" id="sliderImage" alt="Slider Image" />
+          <img src="./assets/sk-pic.jpg" alt="Slider Image" />
         </div>
 
         <div class="form-container">
@@ -100,8 +60,8 @@
               <option value="𝐈𝐍𝐓𝐑𝐀 & 𝐈𝐍𝐓𝐄𝐑 𝐁𝐀𝐑𝐀𝐍𝐆𝐘 2025">
                 𝐈𝐍𝐓𝐑𝐀 & 𝐈𝐍𝐓𝐄𝐑 𝐁𝐀𝐑𝐀𝐍𝐆𝐘 2025
               </option>
-              <option value="𝘽𝙄𝙇𝙇𝘼𝙍𝘿𝙎 • 𝘿𝘼𝘿𝙏𝙎 • 𝘾𝙃𝙀𝙎𝙎">
-                𝘽𝙄𝙇𝙇𝘼𝙍𝘿𝙎 • 𝘿𝘼𝘿𝙏𝙎 • 𝘾𝙃𝙀𝙎𝙎
+              <option value="𝘽𝙄𝙇𝙇𝘼𝙍𝘿𝙎 • 𝘿𝘼𝘿𝘛𝙎 • 𝘾𝙃𝙀𝙎𝙎">
+                𝘽𝙄𝙇𝙇𝘼𝙍𝘿𝙎 • 𝘿𝘼𝘿𝘛𝙎 • 𝘾𝙃𝙀𝙎𝙎
               </option>
             </select>
             <button type="submit">Register</button>
@@ -125,7 +85,6 @@
             </div>
           </div>
         </a>
-
         <a href="#" class="event-card">
           <img
             src="/assets/recentproj-2.jpg"
@@ -141,7 +100,6 @@
             </div>
           </div>
         </a>
-
         <a href="#" class="event-card">
           <img src="/assets/project7.jpg" alt="Event 3" class="event-image" />
           <div class="event-content">
@@ -151,7 +109,6 @@
             </div>
           </div>
         </a>
-
         <a href="#" class="event-card">
           <img
             src="/assets/recentproj5.jpg"
@@ -168,14 +125,12 @@
       </div>
     </div>
 
-    <footer class="bg-white py-5 text-black text-sm relative mt-20">
-      <div class="flex justify-center items-center gap-5 flex-wrap">
-        <img src="/logo/SK-Logo.png" alt="Logo" class="h-16 w-auto" />
-        <p class="text-xl font-bold text-black m-0">
-          &copy; 2025 | CITY OF TAGUIG. All rights reserved.
-        </p>
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <img src="./logo/SK-Logo.png" alt="Logo" class="footer-logo" />
+        <p>&copy; 2025 | CITY OF TAGUIG. All rights reserved.</p>
       </div>
     </footer>
-    <script src="./js/eventpage2.js"></script>
   </body>
 </html>
