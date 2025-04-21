@@ -1,4 +1,4 @@
-/* General Reset */
+/* General styles */
 * {
   margin: 0;
   padding: 0;
@@ -8,8 +8,127 @@
 body {
   font-family: "Segoe UI", sans-serif;
   background: linear-gradient(to bottom right, #ffeaf4, #fff0fa);
-  padding: 0;
+}
+
+/* Header styles */
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+/* Header Container */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px; /* Increased padding for more space */
+  background-color: #fff;
+  position: relative;
+  max-height: 80px; /* Adjusts the height of the header */
+  width: 100%; /* Ensures full-width header */
+}
+
+/* Logo */
+.logo img {
+  height: 60px; /* Increased logo size */
+  width: auto; /* Maintains aspect ratio */
+}
+
+/* Header Title */
+.header-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Centers the title horizontally */
+  text-align: center;
+}
+
+.header-title h2 {
+  font-size: 2rem; /* Increased font size for header title */
   margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+/* Navigation List */
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Adds space between the items */
+}
+
+/* Navigation Link */
+.nav-link {
+  text-decoration: none;
+  color: #f3799f; /* Pink color */
+  font-weight: bold;
+  padding: 5px 10px; /* Adjust padding */
+  border-radius: 5px;
+  transition: color 0.3s ease;
+}
+
+/* Hover Effects */
+.nav-link:hover {
+  background-color: #f0f0f0; /* Changes background on hover */
+  color: black; /* Changes text color on hover */
+}
+
+/* Menu Button */
+.menu-button {
+  background: none; /* Transparent background */
+  color: #f3799f; /* Pink text color */
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 15px; /* Adjust padding for better size */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Hover Effects for Menu Button */
+.menu-button:hover {
+  color: black; /* Change text color to black on hover */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none; /* Hides the dropdown menu by default */
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+/* Display dropdown on hover */
+.menu-item:hover .dropdown-menu {
+  display: block;
+}
+
+/* Dropdown Link */
+.dropdown-link {
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+.dropdown-link:hover {
+  background-color: #f0f0f0;
+}
+
+.menu-item:hover .dropdown-menu {
+  display: block;
+}
+
+.user-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
 /* Registration Section */
@@ -46,6 +165,7 @@ body {
   flex: 1;
   background: #ffe9f5;
   padding: 40px;
+  font-weight: bold;
   text-align: center;
 }
 
@@ -90,7 +210,7 @@ button:hover {
 /* Events Section */
 .events-section {
   background-color: #fff;
-  padding: 60px 20px;
+  padding: 80px 20px; /* Increased top and bottom padding for more space */
 }
 
 .events-title {
@@ -102,24 +222,29 @@ button:hover {
 
 .events-subtitle {
   text-align: center;
-  color: #333;
-  font-size: 1.2rem;
-  margin-bottom: 40px;
+  color: #f3799f;
 }
 
 .events-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 40px; /* Adds space between the title and the event cards */
 }
 
 .event-card {
-  display: flex;
-  flex-direction: column;
-  background: #ffeaf4;
-  border-radius: 12px;
+  width: 300px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  transition: transform 0.3s;
+  text-decoration: none; /* Ensures no underline on the event links */
+}
+
+.event-card:hover {
+  transform: translateY(-10px);
 }
 
 .event-image {
@@ -129,28 +254,44 @@ button:hover {
 }
 
 .event-content {
-  padding: 20px;
+  padding: 15px;
 }
 
 .event-title {
-  font-size: 1.2rem;
   font-weight: bold;
   color: #f3799f;
+  font-size: 1.2rem;
 }
 
 .event-description {
-  font-size: 1rem;
+  margin-top: 10px;
   color: #333;
 }
 
-/* Footer */
+/* Footer Section */
 footer {
-  background-color: #f5f5f5;
-  color: #555;
-  padding: 20px;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 30px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #e0e0e0;
 }
 
-footer p {
-  margin: 0;
-  color: #333;
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* Adds space between the logo and text */
+}
+
+.footer-logo {
+  height: 60px; /* Increases the logo size */
+}
+
+.footer-container p {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
 }
