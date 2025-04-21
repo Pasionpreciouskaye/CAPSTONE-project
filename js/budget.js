@@ -251,7 +251,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Create data object
+        const pb = new PocketBase('http://127.0.0.1:8090');
         const data = {
+            user: pb.authStore.model?.id,
             category: category,
             allocated: allocated,
             spent: spent,
@@ -265,6 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 await pb.collection('budget').update(editId, data);
                 showNotification(`Budget item "${category}" updated successfully!`);
             } else {
+                console.log(pb.authStore.model, "Hello World")
                 // Create new record
                 const record = await pb.collection('budget').create(data);
                 showNotification(`New budget item "${category}" created successfully!`);

@@ -16,13 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         activeMembers: 189,
     };
 
-    let sampleMembers = [
-        { id: 1, name: "Jasmin Ferolino", age: 20, phone: "09380170854", email: "jasminferolino18@gmail.com", gender: "Female", status: "Active", joined: "2024-04-01" },
-        { id: 2, name: "Jerry Velasco", age: 21, phone: "09380170854", email: "jerryvelasco@gmail.com", gender: "Male", status: "Active", joined: "2024-04-05" },
-        { id: 3, name: "Jhay Dominique Velasco", age: 21, phone: "09380170854", email: "jhayvelasco@gmail.com", gender: "Male", status: "Inactive", joined: "2024-03-15" },
-        { id: 4, name: "Gigi Asetre", age: 22, phone: "09380170854", email: "asetregigi@gmail.com", gender: "Female", status: "Active", joined: "2024-04-08" },
-        { id: 5, name: "Angelica Ignacio", age: 23, phone: "09380170854", email: "anggeignco@gmail.com", gender: "Female", status: "Pending", joined: "2024-02-20" },
-    ];
 
     const userNameSpan = document.getElementById('userName');
     const profileUserNameSpan = document.getElementById('profileUserName');
