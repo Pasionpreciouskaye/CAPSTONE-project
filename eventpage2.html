@@ -1,88 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Event Registration</title>
-  <link rel="stylesheet" href="./style/eventpage2.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Registration</title>
+    <link rel="stylesheet" href="./style/eventpage2.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+      <div
+        class="flex items-center justify-between px-10 py-2 max-h-20 relative"
+      >
+        <div class="logo">
+          <img src="/logo/SK-Logo.png" alt="Logo" class="h-16" />
+        </div>
+        <div class="absolute left-1/2 transform -translate-x-1/2 text-center">
+          <h2
+            class="text-2xl sm:text-3xl font-bold text-[#f3799f] tracking-wide"
+          >
+            Projects
+          </h2>
+        </div>
+        <div class="sidebar">
+          <nav>
+            <ul class="flex items-center space-x-6">
+              <li>
+                <a href="/index.html" class="hover:text-[#f3799f]">Home</a>
+              </li>
+              <li class="relative">
+                <button
+                  id="menuButton"
+                  class="hover:text-[#f3799f] focus:outline-none flex items-center gap-1"
+                >
+                  Menu ▾
+                </button>
+                <div
+                  id="dropdownMenu"
+                  class="absolute right-0 mt-2 bg-white shadow-md rounded-lg text-left py-2 w-48 hidden z-50"
+                >
+                  <a
+                    href="/eventpage2.html"
+                    class="block px-4 py-2 hover:bg-gray-100"
+                    >Events</a
+                  >
+                  <a
+                    href="/contactus.html"
+                    class="block px-4 py-2 hover:bg-gray-100"
+                    >Contact Us</a
+                  >
+                  <a
+                    href="/user-transparency.html"
+                    class="block px-4 py-2 hover:bg-gray-100"
+                    >Budget Transparency</a
+                  >
+                  <a
+                    href="/user-inventory.html"
+                    class="block px-4 py-2 hover:bg-gray-100"
+                    >Inventory</a
+                  >
+                </div>
+              </li>
+              <li>
+                <a href="/userpage.html" class="user-icon">
+                  <img
+                    src="/assets/userpic.png"
+                    alt="User Profile"
+                    class="h-10 rounded-full"
+                  />
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
 
+    <!-- Registration Section -->
     <div class="registration-section">
-<div class="container">
-  <!-- Left Side: Image Slider -->
-  <div class="slider">
-    <img src="./assets/sk-pic.jpg" id="sliderImage" alt="Slider Image">
-  </div>
-
-  <!-- Right Side: Registration Form -->
-  <div class="form-container">
-    <h1>Events</h1>
-    <h2>Register for an Event</h2>
-
-    <form id="eventForm">
-      <input type="text" placeholder="First Name" required>
-      <input type="text" placeholder="Last Name" required>
-      <input type="text" placeholder="Phone Number" required>
-      <input type="email" placeholder="Email" required>
-
-
-      <select required>
-        <option value="">Select an event</option>
-        <option value="𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃𝐄𝐍𝐓𝐈𝐅𝐈𝐂𝐀𝐓𝐈𝐎𝐍 𝐂𝐀𝐑𝐃 𝐀𝐋𝐄𝐑𝐓">𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃</option>
-        <option value="𝗬𝗢𝗨𝗧𝗛 𝗟𝗘𝗔𝗗𝗘𝗥𝗦 𝗙𝗘𝗟𝗟𝗢𝗪𝗦𝗛𝗜𝗣 2025">𝗬𝗢𝗨𝗧𝗛 𝗟𝗘𝗔𝗗𝗘𝗥𝗦 𝗙𝗘𝗟𝗟𝗢𝗪𝗦𝗛𝗜𝗣 2025</option>
-        <option value="𝐈𝐍𝐓𝐑𝐀 𝐀𝐍𝐃 𝐈𝐍𝐓𝐄𝐑 𝐁𝐀𝐑𝐀𝐍𝐆𝐘 𝟐𝟎𝟐𝟓">𝐈𝐍𝐓𝐑𝐀 & 𝐈𝐍𝐓𝐄𝐑 𝐁𝐀𝐑𝐀𝐍𝐆𝐘 2025</option>
-        <option value="𝐓𝐀𝐆𝐔𝐈𝐆 𝐒𝐏𝐎𝐑𝐓𝐒 𝐋𝐄𝐀𝐆𝐔𝐄 𝘽𝙄𝙇𝙇𝘼𝙍𝘿𝙎 • 𝘿𝘼𝙍𝙏𝙎 • 𝘾𝙃𝙀𝙎𝙎">𝘽𝙄𝙇𝙇𝘼𝙍𝘿𝙎 • 𝘿𝘼𝙍𝙏𝙎 • 𝘾𝙃𝙀𝙎𝙎</option>
-      </select>
-
-      <button type="submit">Register</button>
-    </form>
-</div>
-  </div> <!-- .form-container -->
-</div> <!-- .container -->
-<!-- Recent Event section moved outside of the container -->
-<!-- Recent Events Section -->
-<div class="events-section">
-    <h2 class="events-title">Recent Events</h2>
-    <p class="events-subtitle">Check out our latest activities</p>
-  
-    <div class="events-container">
-      <a href="#" class="event-card">
-        <img src="/assets/youth.jpg" alt="Event 1" class="event-image" />
-        <div class="event-content">
-          <div class="event-title">𝗬𝗢𝗨𝗧𝗛 𝗟𝗘𝗔𝗗𝗘𝗥𝗦 𝗙𝗘𝗟𝗟𝗢𝗪𝗦𝗛𝗜𝗣 2025</div>
-          <div class="event-description">A gathering of youth leaders from different barangays. The SK of Lower Bicutan, together with Kap. Roel Pacayra and the Barangay Council, invites all youth leaders and focal persons to the Youth Leaders Fellowship.</div>
+      <div class="container">
+        <div class="slider">
+          <img src="./assets/sk-pic.jpg" id="sliderImage" alt="Slider Image" />
         </div>
-      </a>
-  
-      <a href="#" class="event-card">
-        <img src="/assets/recentproj-2.jpg" alt="Event 2" class="event-image" />
-        <div class="event-content">
-          <div class="event-title">TAGUIG SPORTS LEAGUE 2025 – INTRA-BARANGAY TOURNAMENT</div>
-          <div class="event-description">🏀🏐🏸 Basketball, Volleyball, Badminton
 
-            The Taguig City Sports and Development Office, in partnership with SK Lower Bicutan, invites you to join the upcoming Intra-Barangay Tournament.</div>
+        <div class="form-container">
+          <h1>Events</h1>
+          <h2>Register for an Event</h2>
+          <form id="eventForm">
+            <input type="text" placeholder="First Name" required />
+            <input type="text" placeholder="Last Name" required />
+            <input type="text" placeholder="Phone Number" required />
+            <input type="email" placeholder="Email" required />
+            <select required>
+              <option value="">Select an event</option>
+              <option value="𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃">𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃</option>
+              <option value="𝗬𝗢𝗨𝗧𝗛 𝗟𝗘𝗔𝗗𝗘𝗥𝗦 𝗙𝗘𝗟𝗟𝗢𝗪𝗦𝗛𝗜𝗣 2025">
+                𝗬𝗢𝗨𝗧𝗛 𝗟𝗘𝗔𝗗𝗘𝗥𝗦 𝗙𝗘𝗟𝗟𝗢𝗪𝗦𝗛𝗜𝗣 2025
+              </option>
+              <option value="𝐈𝐍𝐓𝐑𝐀 & 𝐈𝐍𝐓𝐄𝐑 𝐁𝐀𝐑𝐀𝐍𝐆𝐘 2025">
+                𝐈𝐍𝐓𝐑𝐀 & 𝐈𝐍𝐓𝐄𝐑 𝐁𝐀𝐑𝐀𝐍𝐆𝐘 2025
+              </option>
+              <option value="𝘽𝙄𝙇𝙇𝘼𝙍𝘿𝙎 • 𝘿𝘼𝘿𝙏𝙎 • 𝘾𝙃𝙀𝙎𝙎">
+                𝘽𝙄𝙇𝙇𝘼𝙍𝘿𝙎 • 𝘿𝘼𝘿𝙏𝙎 • 𝘾𝙃𝙀𝙎𝙎
+              </option>
+            </select>
+            <button type="submit">Register</button>
+          </form>
         </div>
-      </a>
-  
-      <a href="#" class="event-card">
-        <img src="/assets/project7.jpg" alt="Event 3" class="event-image" />
-        <div class="event-content">
-          <div class="event-title">𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃𝐄𝐍𝐓𝐈𝐅𝐈𝐂𝐀𝐓𝐈𝐎𝐍 𝐂𝐀𝐑𝐃</div>
-          <div class="event-description">Youth aged 15–30 are invited to get a free Youth Privilege Card for easy access to SK Lower Bicutan events like sports leagues, seminars, team building, and Christmas programs..</div>
-        </div>
-      </a>
-  
-      <a href="#" class="event-card">
-        <img src="/assets/recentproj5.jpg" alt="Event 4" class="event-image" />
-        <div class="event-content"></div>
-        <div class="event-title">TAGUIG SPORTS LEAGUE 2025</div>
-          <div class="event-description">Calling all youth from Barangay Lower Bicutan!
-            Show your skills and represent our barangay in your chosen game at the upcoming Taguig Sports League 2025.</div>
-        </div>
-      </a>
+      </div>
     </div>
-  </div>
-<script src="./js/eventpage2.js"></script>
-</body>
+
+    <!-- Recent Events Section -->
+    <div class="events-section">
+      <h2 class="events-title">Recent Events</h2>
+      <p class="events-subtitle">Check out our latest activities</p>
+
+      <div class="events-container">
+        <a href="#" class="event-card">
+          <img src="/assets/youth.jpg" alt="Event 1" class="event-image" />
+          <div class="event-content">
+            <div class="event-title">𝗬𝗢𝗨𝗧𝗛 𝗟𝗘𝗔𝗗𝗘𝗥𝗦 𝗙𝗘𝗟𝗟𝗢𝗪𝗦𝗛𝗜𝗣 2025</div>
+            <div class="event-description">
+              A gathering of youth leaders from different barangays...
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="event-card">
+          <img
+            src="/assets/recentproj-2.jpg"
+            alt="Event 2"
+            class="event-image"
+          />
+          <div class="event-content">
+            <div class="event-title">
+              TAGUIG SPORTS LEAGUE 2025 – INTRA-BARANGAY
+            </div>
+            <div class="event-description">
+              🏀🏐🏸 Join the upcoming Intra-Barangay Tournament...
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="event-card">
+          <img src="/assets/project7.jpg" alt="Event 3" class="event-image" />
+          <div class="event-content">
+            <div class="event-title">𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃𝐄𝐍𝐓𝐈𝐅𝐈𝐂𝐀𝐓𝐈𝐎𝐍 𝐂𝐀𝐑𝐃</div>
+            <div class="event-description">
+              Youth aged 15–30 can get a free Privilege Card...
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="event-card">
+          <img
+            src="/assets/recentproj5.jpg"
+            alt="Event 4"
+            class="event-image"
+          />
+          <div class="event-content">
+            <div class="event-title">TAGUIG SPORTS LEAGUE 2025</div>
+            <div class="event-description">
+              Represent Lower Bicutan at the Taguig Sports League!
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <footer class="bg-white py-5 text-black text-sm relative mt-20">
+      <div class="flex justify-center items-center gap-5 flex-wrap">
+        <img src="/logo/SK-Logo.png" alt="Logo" class="h-16 w-auto" />
+        <p class="text-xl font-bold text-black m-0">
+          &copy; 2025 | CITY OF TAGUIG. All rights reserved.
+        </p>
+      </div>
+    </footer>
+    <script src="./js/eventpage2.js"></script>
+  </body>
 </html>
