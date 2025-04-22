@@ -8,7 +8,8 @@ const overlay = document.getElementById("overlay");
 const closeModal = document.getElementById("closeModal");
 const addBtn = document.getElementById("addItemBtn");
 const modalTitle = document.getElementById("modalTitle");
-const itemTableBody = document.querySelector("#itemTable tbody");
+const itemTableBody = document.getElementById("inventoryTable");
+const submitBtn = document.getElementById("submitBtn");
 
 const formInputs = {
   name: document.getElementById("itemName"),
@@ -18,6 +19,7 @@ const formInputs = {
 };
 
 let editingItemId = null;
+let highlightRowId = null;
 
 // Open modal for adding item
 const openModalForAdd = () => {
@@ -25,6 +27,7 @@ const openModalForAdd = () => {
   modalTitle.textContent = 'Add Item';
   modal.classList.remove("hidden");
   overlay.classList.add("active");
+  editingItemId = null;
   formInputs.name.focus();
 };
 
@@ -36,17 +39,17 @@ const closeModalFn = () => {
   editingItemId = null;
 };
 
-// Event listener to open modal
+// Event listeners
 addBtn.addEventListener("click", openModalForAdd);
-
-// Event listener to close modal
 closeModal.addEventListener("click", closeModalFn);
 overlay.addEventListener("click", closeModalFn);
 
 // Load items and render them
 const loadItems = async () => {
   try {
-    const records = await pb.collection('inventory').getFullList();
+    const records = await pb.collection('inventory').getFullList({
+      sort: '+name'
+    });
     renderItems(records);
   } catch (error) {
     console.error("Failed to load items:", error);
@@ -58,6 +61,8 @@ const renderItems = (items) => {
   itemTableBody.innerHTML = "";
   items.forEach(item => {
     const row = document.createElement("tr");
+    row.setAttribute("data-id", item.id);
+
     row.innerHTML = `
       <td>${item.name}</td>
       <td>${item.quantity}</td>
@@ -68,17 +73,23 @@ const renderItems = (items) => {
         <button class="delete-btn" data-id="${item.id}">Delete</button>
       </td>
     `;
+
+    if (item.id === highlightRowId) {
+      row.classList.add("highlight");
+      setTimeout(() => row.classList.remove("highlight"), 2000);
+    }
+
     itemTableBody.appendChild(row);
   });
 
-  // Attach edit/delete handlers
-  document.querySelectorAll(".edit-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => openEditModal(e.target.dataset.id));
-  });
+  // Attach event listeners to buttons
+  document.querySelectorAll(".edit-btn").forEach(btn =>
+    btn.addEventListener("click", e => openEditModal(e.target.dataset.id))
+  );
 
-  document.querySelectorAll(".delete-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => deleteItem(e.target.dataset.id));
-  });
+  document.querySelectorAll(".delete-btn").forEach(btn =>
+    btn.addEventListener("click", e => deleteItem(e.target.dataset.id))
+  );
 };
 
 // Open modal for editing
@@ -112,6 +123,7 @@ const deleteItem = async (id) => {
   }
 };
 
+// Form submission (add/edit)
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const data = {
@@ -122,15 +134,20 @@ form.addEventListener("submit", async (e) => {
   };
 
   try {
+    submitBtn.disabled = true;
     if (editingItemId) {
       await pb.collection("inventory").update(editingItemId, data);
+      highlightRowId = editingItemId;
     } else {
-      await pb.collection("inventory").create(data);
+      const newItem = await pb.collection("inventory").create(data);
+      highlightRowId = newItem.id;
     }
     closeModalFn();
     loadItems();
   } catch (error) {
     console.error("Error saving item:", error);
+  } finally {
+    submitBtn.disabled = false;
   }
 });
 
