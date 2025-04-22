@@ -112,6 +112,7 @@ const deleteItem = async (id) => {
   }
 };
 
+// Form submit (add or edit)
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const data = {
