@@ -18,86 +18,74 @@
     />
   </head>
   <body>
-    <aside class="sidebar" id="sidebar" aria-hidden="true">
-      <div class="sidebar-content">
-        <div class="profile-container">
-          <div class="user-name">Navigation</div>
+    <header class="main-header">
+      <div class="header-container">
+        <div class="logo">
+          <img src="./logo/SK-Logo.png" alt="Logo" />
         </div>
-        <nav role="navigation">
+        <div class="header-title">
+          <h2>Supplies Inventory</h2>
+        </div>
+      </div>
+
+      <div class="sidebar" id="sidebar">
+        <nav class="nav-links">
           <ul>
-            <li>
-              <a href="index.html"
-                ><i class="fa-solid fa-house fa-fw"></i> Home</a
-              >
+            <li><a href="./index.html">Home</a></li>
+            <li class="dropdown">
+              <a href="#">Menu ▾</a>
+              <div class="dropdown-content">
+                <a href="/Project/projects.html">Projects</a>
+                <a href="./eventpage2.html">Events</a>
+                <a href="./contactus.html">Contact Us</a>
+                <a href="./budget.html">Budget Transparency</a>
+              </div>
             </li>
             <li>
-              <a href="Project/projects.html"
-                ><i class="fa-solid fa-briefcase fa-fw"></i> Projects</a
-              >
-            </li>
-            <li>
-              <a href="user-transparency.html"
-                ><i class="fa-solid fa-chart-pie fa-fw"></i> Budget
-                Transparency</a
-              >
-            </li>
-            <li>
-              <a href="logout.html" class="logout-btn"
-                ><i class="fa-solid fa-right-from-bracket fa-fw"></i> Log Out</a
-              >
+              <a href="./userpage.html" class="user-icon">
+                <img
+                  src="./assets/userpic.png"
+                  alt="User Profile"
+                  class="user-image"
+                />
+              </a>
             </li>
           </ul>
         </nav>
       </div>
-    </aside>
+    </header>
 
-    <div class="app-container">
-      <header class="app-header">
-        <button
-          class="hamburger-menu"
-          id="hamburger-icon"
-          aria-label="Toggle Menu"
-          aria-controls="sidebar"
-          aria-expanded="false"
-        >
-          <i class="fa-solid fa-bars"></i>
-        </button>
-        <h1 class="page-title">
-          <i class="fa-solid fa-boxes-stacked"></i> Supplies Inventory
-        </h1>
-      </header>
+    <main>
+      <section class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Category</th>
+              <th>Qty</th>
+              <th>Cost</th>
+              <th>Supplier</th>
+              <th>Reorder</th>
+              <th>Location</th>
+              <th>SKU</th>
+              <th>Packaging</th>
+              <th>Last Order</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody id="inventoryTable"></tbody>
+        </table>
+      </section>
+    </main>
 
-      <main class="main-content">
-        <header class="content-header">
-          <div class="search-add">
-            <input type="text" id="search" placeholder="Search product..." />
-          </div>
-        </header>
+    <footer>
+      <div class="footer-content">
+        <img src="./logo/SK-Logo.png" alt="Logo" />
+        <p>© 2025 | CITY OF TAGUIG. All rights reserved.</p>
+      </div>
+    </footer>
 
-        <section class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Category</th>
-                <th>Qty</th>
-                <th>Cost</th>
-                <th>Supplier</th>
-                <th>Reorder</th>
-                <th>Location</th>
-                <th>SKU</th>
-                <th>Packaging</th>
-                <th>Last Order</th>
-                <th>Usage</th>
-              </tr>
-            </thead>
-            <tbody id="inventoryTable"></tbody>
-          </table>
-        </section>
-      </main>
-    </div>
-
-    <div class="overlay"></div>
+    <!-- External Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.umd.js"></script>
     <script src="./js/user-inventory.js"></script>
   </body>
