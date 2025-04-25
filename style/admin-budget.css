@@ -617,11 +617,11 @@ input[type="date"]:focus {
 
 /* Menu Toggle for Mobile */
 .menu-toggle {
-    display: none;
+    display: none; /* Hidden by default */
     position: fixed;
     top: 20px;
     left: 20px;
-    z-index: 200;
+    z-index: 200; /* Ensure it's above the sidebar when hidden */
     background-color: var(--primary-color);
     color: white;
     border: none;
@@ -652,36 +652,89 @@ input[type="date"]:focus {
 
 @media (max-width: 768px) {
     .sidebar {
-        left: -280px;
+        left: calc(-1 * var(--sidebar-width) - 20px); /* Start hidden off-screen */
+        box-shadow: 0 0 20px rgba(0,0,0,0.2); /* Optional: add shadow when active */
     }
-    
+
     .main-content {
         margin-left: 0;
         padding: 20px;
     }
-    
+
     .menu-toggle {
-        display: flex;
+        display: flex; /* Show the toggle button */
         align-items: center;
         justify-content: center;
     }
-    
+
     .sidebar.active {
-        left: 0;
+        left: 0; /* Bring sidebar into view when active */
     }
-    
+
     .header-actions {
-        display: none;
+        /* Hide search and profile in header on small screens */
+        /* Adjust as needed - maybe just hide search? */
+         display: none;
+         /* Alternatively, keep profile but hide search: */
+         /* .search-container { display: none; } */
+         /* .user-profile { margin-right: 0; } */
     }
+
+    /* Optional: Add overlay to main content when sidebar is open */
+    /*
+    .main-content::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 99;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .sidebar.active + .main-content::before {
+        opacity: 1;
+        visibility: visible;
+    }
+    */
 }
 
 @media (max-width: 576px) {
     .summary-cards {
         grid-template-columns: 1fr;
     }
-    
+
     .form-row {
         flex-direction: column;
         gap: 0;
     }
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .page-header h1 {
+        font-size: 24px;
+    }
+     .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+}
+
+/* Additional style for negative remaining balance in table */
+.table td.negative {
+    color: var(--danger-color);
+    font-weight: 500;
+}
+
+/* Style for empty table message */
+.table td.empty-message {
+    text-align: center;
+    padding: 30px;
+    color: var(--light-text);
+    font-style: italic;
 }

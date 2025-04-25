@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Initialize PocketBase
-    const pb = new PocketBase('http://127.0.0.1:8090'); // Replace with your PocketBase URL if different
-    
-    // DOM Elements
+    const pb = new PocketBase('http://127.0.0.1:8090');
+
     const sidebar = document.querySelector('.sidebar');
     const menuToggle = document.querySelector('.menu-toggle');
     const addBudgetBtn = document.querySelector('.add-budget-btn');
@@ -11,453 +9,237 @@ document.addEventListener("DOMContentLoaded", () => {
     const budgetForm = document.getElementById("budgetForm");
     const budgetTableBody = document.getElementById("budgetBody");
     const ctx = document.getElementById("expenseChart")?.getContext("2d");
-    
-    // Global variables
-    let currentChart; // To hold the chart instance
-    let currentBudgetData = []; // Store current budget data for calculations
+    const cancelButton = document.getElementById("cancelButton");
 
-    // ========== MODAL FUNCTIONS ==========
+    let currentChart;
+    let currentBudgetData = [];
+
     function openModal() {
         modal.classList.add("show");
-        budgetForm.reset(); // Clear form when opening
-        budgetForm.dataset.editId = ''; // Clear any existing edit ID
-        
-        // Set today's date as default for date fields
+        budgetForm.reset();
+        budgetForm.dataset.editId = '';
+
         const today = new Date().toISOString().split('T')[0];
-        if (document.getElementById("dateAllocated")) {
-            document.getElementById("dateAllocated").value = today;
-        }
-        if (document.getElementById("dateSpent")) {
-            document.getElementById("dateSpent").value = today;
-        }
-        
-        // Update modal title
-        const modalTitle = document.querySelector('.modal-content h3');
-        if (modalTitle) {
-            modalTitle.textContent = 'Add Budget';
-        }
+        const dateAllocatedInput = document.getElementById("dateAllocated");
+        const dateSpentInput = document.getElementById("dateSpent");
+
+        if (dateAllocatedInput) dateAllocatedInput.value = today;
+        if (dateSpentInput) dateSpentInput.value = today;
+
+        const modalTitle = document.querySelector('#addBudgetModal .modal-content h3');
+        if (modalTitle) modalTitle.textContent = 'Add Budget';
     }
 
     function closeModal() {
         modal.classList.remove("show");
     }
 
-    // ========== DATA MANAGEMENT FUNCTIONS ==========
     async function fetchBudgetData() {
+        if (budgetTableBody) {
+            budgetTableBody.innerHTML = `<tr class="loading-row"><td colspan="7" class="loading-message">Loading budget data...</td></tr>`;
+        } else {
+            console.error("Budget table body not found!");
+            return [];
+        }
+
         try {
-            const records = await pb.collection('budget').getFullList({
-                sort: '-created',
-            });
-            currentBudgetData = records; // Store for later use
+            const records = await pb.collection('budget').getFullList({ sort: '-created' });
+            currentBudgetData = records;
             updateBudgetTable(records);
-            updateBudgetChart(records);
-            updateSummaryCards(records);
             return records;
         } catch (error) {
             console.error("Error fetching budget data:", error);
+            budgetTableBody.innerHTML = `<tr class="error-row"><td colspan="7" class="error-message">Error loading data: ${error.message}. Please try again.</td></tr>`;
             showNotification("Failed to load budget data. Please try again.", true);
             return [];
         }
     }
 
     function updateBudgetTable(data) {
-        if (!budgetTableBody) return;
-        
         budgetTableBody.innerHTML = '';
-        
         if (data.length === 0) {
             const emptyRow = budgetTableBody.insertRow();
-            emptyRow.innerHTML = `
-                <td colspan="7" class="empty-message">No budget items found. Click "Add Budget" to create one.</td>
-            `;
+            emptyRow.innerHTML = `<td colspan="7" class="empty-message">No budget items found. Click \"Add Budget\" to create one.</td>`;
+            emptyRow.querySelector('td').classList.add('empty-message');
             return;
         }
-        
+
         data.forEach(record => {
-            const remaining = parseFloat(record.allocated) - parseFloat(record.spent);
+            const allocated = parseFloat(record.allocated) || 0;
+            const spent = parseFloat(record.spent) || 0;
+            const remaining = allocated - spent;
             const remainingClass = remaining < 0 ? 'negative' : '';
-            
+
             const row = budgetTableBody.insertRow();
             row.innerHTML = `
-                <td>${record.category}</td>
-                <td>₱${parseFloat(record.allocated).toLocaleString('en-PH')}</td>
-                <td>₱${parseFloat(record.spent).toLocaleString('en-PH')}</td>
-                <td class="${remainingClass}">₱${remaining.toLocaleString('en-PH')}</td>
+                <td>${record.category || 'N/A'}</td>
+                <td>₱${allocated.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</td>
+                <td>₱${spent.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</td>
+                <td class="${remainingClass}">₱${remaining.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</td>
                 <td>${formatDate(record.dateAllocated)}</td>
                 <td>${formatDate(record.dateSpent)}</td>
                 <td>
-                    <button class="btn btn-edit" data-id="${record.id}">
-                        <i class="fas fa-edit"></i> Edit
-                    </button>
-                    <button class="btn btn-delete" data-id="${record.id}">
-                        <i class="fas fa-trash"></i> Delete
-                    </button>
+                    <button class="btn btn-edit" data-id="${record.id}"><i class="fas fa-edit"></i> Edit</button>
+                    <button class="btn btn-delete" data-id="${record.id}"><i class="fas fa-trash"></i> Delete</button>
                 </td>
             `;
         });
     }
 
-    function updateBudgetChart(data) {
-        if (!ctx) return;
-
-        // Initialize object to store category expenses
-        const categoryExpenses = {};
-        
-        // Calculate total spent per category
-        data.forEach(item => {
-            if (categoryExpenses[item.category]) {
-                categoryExpenses[item.category] += parseFloat(item.spent);
-            } else {
-                categoryExpenses[item.category] = parseFloat(item.spent);
-            }
-        });
-
-        const labels = Object.keys(categoryExpenses);
-        const amounts = Object.values(categoryExpenses);
-        
-        // Create color palette - using predefined colors for consistency
-        const colorPalette = [
-            'rgba(91, 33, 182, 0.8)',   // purple
-            'rgba(244, 114, 182, 0.8)',  // pink
-            'rgba(16, 185, 129, 0.8)',   // green
-            'rgba(245, 158, 11, 0.8)',   // orange
-            'rgba(59, 130, 246, 0.8)',   // blue
-            'rgba(239, 68, 68, 0.8)',    // red
-            'rgba(107, 114, 128, 0.8)',  // gray
-            'rgba(168, 85, 247, 0.8)',   // purple-lighter
-            'rgba(236, 72, 153, 0.8)',   // pink-lighter
-        ];
-        
-        // Generate background and border colors
-        const backgroundColors = labels.map((_, index) => 
-            colorPalette[index % colorPalette.length]
-        );
-        
-        const borderColors = backgroundColors.map(color => 
-            color.replace('0.8', '1')
-        );
-
-        // Destroy previous chart if it exists
-        if (currentChart) {
-            currentChart.destroy();
+    function markFieldInvalid(input, message) {
+        if (!input) return;
+        input.classList.add('input-error');
+        let errorElement = input.nextElementSibling;
+        if (!errorElement || !errorElement.classList.contains('input-error-message')) {
+            errorElement = document.createElement('div');
+            errorElement.className = 'input-error-message';
+            input.insertAdjacentElement('afterend', errorElement);
         }
-
-        // Create new chart
-        currentChart = new Chart(ctx, {
-            type: "doughnut",
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: "Total Expense by Category",
-                    data: amounts,
-                    backgroundColor: backgroundColors,
-                    borderColor: borderColors,
-                    borderWidth: 2,
-                    hoverOffset: 15
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '65%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            usePointStyle: true,
-                            pointStyle: 'circle'
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: 'Total Expense by Category',
-                        font: {
-                            size: 16,
-                            weight: 'bold'
-                        },
-                        padding: {
-                            top: 10,
-                            bottom: 20
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                const value = context.raw;
-                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                const percentage = Math.round((value / total) * 100);
-                                return `₱${value.toLocaleString('en-PH')} (${percentage}%)`;
-                            }
-                        }
-                    }
-                },
-                animation: {
-                    animateScale: true,
-                    animateRotate: true
-                }
-            }
-        });
+        errorElement.textContent = message;
+        input.addEventListener('input', () => {
+            input.classList.remove('input-error');
+            if (errorElement) errorElement.textContent = '';
+        }, { once: true });
     }
 
-    function updateSummaryCards(data) {
-        // Calculate totals
-        let totalAllocated = 0;
-        let totalSpent = 0;
-        
-        data.forEach(item => {
-            totalAllocated += parseFloat(item.allocated);
-            totalSpent += parseFloat(item.spent);
-        });
-        
-        const totalRemaining = totalAllocated - totalSpent;
-        
-        // Update DOM elements if they exist
-        const totalAllocatedEl = document.getElementById('totalAllocated');
-        const totalSpentEl = document.getElementById('totalSpent');
-        const totalRemainingEl = document.getElementById('totalRemaining');
-        
-        if (totalAllocatedEl) {
-            totalAllocatedEl.textContent = `₱${totalAllocated.toLocaleString('en-PH')}`;
-        }
-        
-        if (totalSpentEl) {
-            totalSpentEl.textContent = `₱${totalSpent.toLocaleString('en-PH')}`;
-        }
-        
-        if (totalRemainingEl) {
-            totalRemainingEl.textContent = `₱${totalRemaining.toLocaleString('en-PH')}`;
-            // Add class based on value
-            totalRemainingEl.className = totalRemaining < 0 ? 'negative' : 'positive';
-        }
-    }
-
-    // ========== FORM HANDLERS ==========
     async function handleFormSubmit(e) {
         e.preventDefault();
+        const categoryInput = document.getElementById("category");
+        const allocatedInput = document.getElementById("allocated");
+        const spentInput = document.getElementById("spent");
+        const dateAllocatedInput = document.getElementById("dateAllocated");
+        const dateSpentInput = document.getElementById("dateSpent");
 
-        // Get form values
-        const category = document.getElementById("category").value;
-        const allocated = parseFloat(document.getElementById("allocated").value);
-        const spent = parseFloat(document.getElementById("spent").value);
-        const dateAllocated = document.getElementById("dateAllocated").value;
-        const dateSpent = document.getElementById("dateSpent").value;
+        const category = categoryInput.value.trim();
+        const allocated = parseFloat(allocatedInput.value);
+        const spent = parseFloat(spentInput.value);
+        const dateAllocated = dateAllocatedInput.value;
+        const dateSpent = dateSpentInput.value;
         const editId = budgetForm.dataset.editId;
 
-        // Form validation
-        if (!category || isNaN(allocated) || isNaN(spent) || !dateAllocated || !dateSpent) {
-            showNotification("Please fill in all required fields correctly.", true);
-            return;
-        }
+        if (!category) return markFieldInvalid(categoryInput, "Category is required.");
+        if (isNaN(allocated) || allocated < 0) return markFieldInvalid(allocatedInput, "Allocated must be non-negative.");
+        if (isNaN(spent) || spent < 0) return markFieldInvalid(spentInput, "Spent must be non-negative.");
+        if (!dateAllocated) return markFieldInvalid(dateAllocatedInput, "Select allocation date.");
+        if (!dateSpent) return markFieldInvalid(dateSpentInput, "Select spent date.");
+        if (spent > allocated) return markFieldInvalid(spentInput, "Spent exceeds allocated amount.");
 
-        // Create data object
-        const pb = new PocketBase('http://127.0.0.1:8090');
         const data = {
-            user: pb.authStore.model?.id,
-            category: category,
-            allocated: allocated,
-            spent: spent,
-            dateAllocated: dateAllocated,
-            dateSpent: dateSpent,
+            category,
+            allocated,
+            spent,
+            dateAllocated: dateAllocated + ' 00:00:00.000Z',
+            dateSpent: dateSpent + ' 00:00:00.000Z'
         };
+
+        const saveButton = budgetForm.querySelector('.btn-save');
+        if (saveButton) saveButton.disabled = true;
 
         try {
             if (editId) {
-                // Update existing record
                 await pb.collection('budget').update(editId, data);
                 showNotification(`Budget item "${category}" updated successfully!`);
             } else {
-                console.log(pb.authStore.model, "Hello World")
-                // Create new record
-                const record = await pb.collection('budget').create(data);
+                await pb.collection('budget').create(data);
                 showNotification(`New budget item "${category}" created successfully!`);
             }
-            
-            // Reset form, refresh data, and close modal
             budgetForm.reset();
             budgetForm.dataset.editId = '';
             await fetchBudgetData();
             closeModal();
         } catch (error) {
             console.error("Error saving budget item:", error);
-            showNotification(`Failed to save budget item: ${error.message}`, true);
+            const errorMessage = error.data?.message || error.message || "Unknown error.";
+            showNotification(`Failed to save budget item: ${errorMessage}`, true);
+        } finally {
+            if (saveButton) saveButton.disabled = false;
         }
     }
 
-    async function handleDelete(id) {
-        if (!id) return;
-        
-        // Find the item to get its category for the notification
-        const itemToDelete = currentBudgetData.find(item => item.id === id);
-        const categoryName = itemToDelete ? itemToDelete.category : "Item";
-        
-        if (confirm(`Are you sure you want to delete the budget item "${categoryName}"?`)) {
-            try {
-                await pb.collection('budget').delete(id);
-                showNotification(`Budget item "${categoryName}" deleted successfully!`);
-                await fetchBudgetData(); // Refresh data
-            } catch (error) {
-                console.error("Error deleting budget item:", error);
-                showNotification(`Failed to delete budget item: ${error.message}`, true);
-            }
-        }
-    }
-
-    async function handleEdit(id) {
-        if (!id) return;
-        
-        try {
-            const record = await pb.collection('budget').getOne(id);
-            
-            // Fill form with record data
-            document.getElementById("category").value = record.category;
-            document.getElementById("allocated").value = record.allocated;
-            document.getElementById("spent").value = record.spent;
-            document.getElementById("dateAllocated").value = record.dateAllocated;
-            document.getElementById("dateSpent").value = record.dateSpent;
-            
-            // Set edit ID and update modal title
-            budgetForm.dataset.editId = id;
-            document.querySelector('.modal-content h3').textContent = `Edit Budget: ${record.category}`;
-            
-            // Open modal
-            openModal();
-        } catch (error) {
-            console.error("Error fetching budget item for edit:", error);
-            showNotification("Failed to load budget item for editing.", true);
-        }
-    }
-
-    // ========== HELPER FUNCTIONS ==========
     function formatDate(dateString) {
         if (!dateString) return 'N/A';
-        
-        // Parse the date and format it
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', {
-            year: 'numeric', 
-            month: 'short', 
-            day: 'numeric'
-        });
+        try {
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return 'Invalid Date';
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        } catch (error) {
+            console.error(`Error formatting date: ${dateString}`, error);
+            return 'Error';
+        }
     }
 
     function showNotification(message, isError = false) {
-        // Create notification element if it doesn't exist
-        let notification = document.getElementById('notification');
-        
+        const notificationId = 'notification';
+        let notification = document.getElementById(notificationId);
         if (!notification) {
             notification = document.createElement('div');
-            notification.id = 'notification';
+            notification.id = notificationId;
             notification.className = 'notification';
-            
             const messageSpan = document.createElement('span');
             messageSpan.className = 'notification-message';
-            
             const closeBtn = document.createElement('span');
             closeBtn.className = 'notification-close';
             closeBtn.innerHTML = '&times;';
-            closeBtn.addEventListener('click', () => {
-                notification.classList.remove('show');
-            });
-            
+            closeBtn.onclick = () => notification.classList.remove('show');
             notification.appendChild(messageSpan);
             notification.appendChild(closeBtn);
             document.body.appendChild(notification);
         }
-        
-        // Update notification content and display
         const messageElement = notification.querySelector('.notification-message');
-        if (messageElement) {
-            messageElement.textContent = message;
-        }
-        
-        notification.className = 'notification';
-        if (isError) {
-            notification.classList.add('error');
-        }
-        
-        notification.classList.add('show');
-        
-        // Auto-hide after 5 seconds
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 5000);
+        if (messageElement) messageElement.textContent = message;
+        notification.classList.toggle('error', isError);
+        notification.classList.toggle('success', !isError);
+        setTimeout(() => notification.classList.add('show'), 10);
+        if (notification.hideTimeout) clearTimeout(notification.hideTimeout);
+        notification.hideTimeout = setTimeout(() => notification.classList.remove('show'), 5000);
     }
 
-    // ========== EVENT LISTENERS ==========
-    // Sidebar toggle for mobile
-    if (menuToggle) {
+    if (budgetForm) budgetForm.addEventListener("submit", handleFormSubmit);
+
+    const saveButton = budgetForm.querySelector('.btn-save');
+    if (saveButton) {
+        saveButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            budgetForm.requestSubmit();
+        });
+    }
+
+    if (addBudgetBtn) addBudgetBtn.addEventListener("click", openModal);
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    if (cancelButton) cancelButton.addEventListener("click", closeModal);
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
+    if (menuToggle && sidebar) {
         menuToggle.addEventListener("click", () => {
             sidebar.classList.toggle("active");
         });
     }
-
-    // Modal open button
-    if (addBudgetBtn) {
-        addBudgetBtn.addEventListener("click", openModal);
-    }
-
-    // Modal close button
-    if (closeBtn) {
-        closeBtn.addEventListener("click", closeModal);
-    }
-
-    // Close modal on outside click
-    window.addEventListener("click", (e) => {
-        if (e.target == modal) {
-            closeModal();
-        }
-    });
-
-    // Form submission
-    if (budgetForm) {
-        budgetForm.addEventListener("submit", handleFormSubmit);
-    }
-
-    // Table actions (Edit/Delete) using event delegation
     if (budgetTableBody) {
         budgetTableBody.addEventListener("click", async (e) => {
-            const target = e.target;
-            const button = target.closest('button');
-            
+            const button = e.target.closest('button');
             if (!button) return;
-            
             const id = button.dataset.id;
-            
             if (button.classList.contains("btn-delete")) {
-                await handleDelete(id);
-            }
-            
-            if (button.classList.contains("btn-edit")) {
-                await handleEdit(id);
+                if (confirm("Are you sure you want to delete this item?")) {
+                    await pb.collection('budget').delete(id);
+                    showNotification("Budget item deleted successfully.");
+                    await fetchBudgetData();
+                }
+            } else if (button.classList.contains("btn-edit")) {
+                const record = await pb.collection('budget').getOne(id);
+                document.getElementById("category").value = record.category || '';
+                document.getElementById("allocated").value = record.allocated || 0;
+                document.getElementById("spent").value = record.spent || 0;
+                document.getElementById("dateAllocated").value = new Date(record.dateAllocated).toISOString().split('T')[0];
+                document.getElementById("dateSpent").value = new Date(record.dateSpent).toISOString().split('T')[0];
+                budgetForm.dataset.editId = id;
+                openModal();
             }
         });
     }
 
-    // ========== SEARCH FUNCTIONALITY ==========
-    const searchInput = document.getElementById('headerSearch');
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            
-            if (!searchTerm) {
-                // If search is empty, show all data
-                updateBudgetTable(currentBudgetData);
-                return;
-            }
-            
-            // Filter data based on search term
-            const filteredData = currentBudgetData.filter(item => 
-                item.category.toLowerCase().includes(searchTerm) ||
-                item.dateAllocated.includes(searchTerm) ||
-                item.dateSpent.includes(searchTerm)
-            );
-            
-            updateBudgetTable(filteredData);
-        });
-    }
-
-    // ========== INITIALIZATION ==========
-    // Fetch initial data on page load
     fetchBudgetData();
 });
