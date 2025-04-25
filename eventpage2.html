@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Event Registration</title>
     <link rel="stylesheet" href="./style/eventpage2.css" />
-    <script src="./js/eventpage2.js" defer></script>
   </head>
   <body>
     <!-- Header -->
@@ -44,14 +43,23 @@
         </div>
 
         <div class="form-container">
-          <h1>Events</h1>
           <h2>Register for an Event</h2>
           <form id="eventForm">
-            <input type="text" placeholder="First Name" required />
-            <input type="text" placeholder="Last Name" required />
-            <input type="text" placeholder="Phone Number" required />
-            <input type="email" placeholder="Email" required />
-            <select required>
+            <input
+              type="text"
+              placeholder="First Name"
+              required
+              id="firstName"
+            />
+            <input type="text" placeholder="Last Name" required id="lastName" />
+            <input
+              type="text"
+              placeholder="Phone Number"
+              required
+              id="phoneNumber"
+            />
+            <input type="email" placeholder="Email" required id="email" />
+            <select id="eventSelect" required>
               <option value="">Select an event</option>
               <option value="𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃">𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃</option>
               <option value="𝗬𝗢𝗨𝗧𝗛 𝗟𝗘𝗔𝗗𝗘𝗥𝗦 𝗙𝗘𝗟𝗟𝗢𝗪𝗦𝗛𝗜𝗣 2025">
@@ -64,6 +72,7 @@
                 𝘽𝙄𝙇𝙇𝘼𝙍𝘿𝙎 • 𝘿𝘼𝘿𝘛𝙎 • 𝘾𝙃𝙀𝙎𝙎
               </option>
             </select>
+
             <button type="submit">Register</button>
           </form>
         </div>
@@ -132,5 +141,8 @@
         <p>&copy; 2025 | CITY OF TAGUIG. All rights reserved.</p>
       </div>
     </footer>
+
+    <script src="./node_modules/pocketbase/dist/pocketbase.umd.js"></script>
+    <script src="./js/eventpage2.js"></script>
   </body>
 </html>
