@@ -1,179 +1,107 @@
+
 const pb = new PocketBase("http://127.0.0.1:8090");
-if (!pb.authStore.isValid) {
-    location.href="landing.html"
-} 
+let allMembers = [];
+let filteredMembers = [];
 
-document.addEventListener('DOMContentLoaded', () => {
-    const sampleUserData = {
-        name: "Mark Admin",
-    };
+// 2) Fetch members once authenticated
+async function fetchMembers() {
+  try {
+    const users = await pb.collection("users").getFullList({ sort: "-created" });
+    console.log("Fetched users:", users);
 
-    const sampleStats = {
-        totalMembers: 5423,
-        totalMembersChange: 8,
-        newMembers: 1893,
-        newMembersChange: -3,
-        activeMembers: 189,
-    };
+    allMembers = users
+      .filter(u => u.role === "member")
+      .map(u => {
+        const dobDate = u.dob ? new Date(u.dob) : null;
+        const age = dobDate ? Math.floor((Date.now() - dobDate.getTime())/(1000*60*60*24*365)) : "";
+        const name = [u.firstName, u.middleName, u.lastName].filter(Boolean).join(" ");
+        return {
+          id: u.id,
+          name,
+          dob: u.dob || "",
+          phone: u.phone,
+          email: u.email,
+          gender: u.gender,
+          address: u.address,
+          status: u.status || "Inactive",
+          created: new Date(u.created),
+        };
+      });
 
+    filteredMembers = [...allMembers];
+    updateStats();
+    renderMembersTable(filteredMembers);
+  } catch (err) {
+    console.error("Error fetching members:", err);
+  }
+}
 
-    const userNameSpan = document.getElementById('userName');
-    const profileUserNameSpan = document.getElementById('profileUserName');
-    const totalMembersEl = document.getElementById('totalMembers');
-    const totalMembersChangeEl = document.getElementById('totalMembersChange');
-    const newMembersEl = document.getElementById('newMembers');
-    const newMembersChangeEl = document.getElementById('newMembersChange');
-    const activeMembersEl = document.getElementById('activeMembers');
-    const membersTableBody = document.getElementById('membersTableBody');
-    const memberSearchInput = document.getElementById('memberSearch');
-    const memberSortSelect = document.getElementById('memberSort');
+function updateStats() {
+  const now = Date.now();
+  const oneMonthAgo = now - (1000*60*60*24*30);
 
-    function updateUserInfo(userData) {
-        if (userNameSpan) {
-            userNameSpan.textContent = userData.name.split(' ')[0];
-        }
-         if (profileUserNameSpan) {
-             profileUserNameSpan.textContent = userData.name;
-        }
-    }
+  const total = filteredMembers.length;
+  const newCount = filteredMembers.filter(m => m.created.getTime() >= oneMonthAgo).length;
+  const activeCount = filteredMembers.filter(m => m.status.toLowerCase()==="active").length;
 
-    function updateStats(stats) {
-        if (totalMembersEl) totalMembersEl.textContent = stats.totalMembers.toLocaleString();
-        if (newMembersEl) newMembersEl.textContent = stats.newMembers.toLocaleString();
-        if (activeMembersEl) activeMembersEl.textContent = stats.activeMembers.toLocaleString();
+  document.getElementById("totalMembers").textContent = total;
+  document.getElementById("newMembers").textContent = newCount;
+  document.getElementById("activeMembers").textContent = activeCount;
 
-        if (totalMembersChangeEl) {
-             updateChangeIndicator(totalMembersChangeEl, stats.totalMembersChange);
-        }
-        if (newMembersChangeEl) {
-            updateChangeIndicator(newMembersChangeEl, stats.newMembersChange);
-        }
-    }
+  document.getElementById("totalMembersChange").innerHTML = `<i class="fas fa-arrow-up"></i> ${ total? "100%":"0%"} this month`;
+  document.getElementById("newMembersChange").innerHTML   = `<i class="fas fa-arrow-${ newCount? "up":"down"}"></i> ${ newCount? "100%":"0%"} this month`;
+}
 
-     function updateChangeIndicator(element, changeValue) {
-        element.classList.remove('increase', 'decrease');
-        const icon = element.querySelector('i');
-        if (changeValue > 0) {
-            element.classList.add('increase');
-            if(icon) icon.className = 'fas fa-arrow-up';
-            element.childNodes[element.childNodes.length - 1].nodeValue = ` ${Math.abs(changeValue)}% this month`;
-        } else if (changeValue < 0) {
-            element.classList.add('decrease');
-             if(icon) icon.className = 'fas fa-arrow-down';
-            element.childNodes[element.childNodes.length - 1].nodeValue = ` ${Math.abs(changeValue)}% this month`;
-        } else {
-             if(icon) icon.className = 'fas fa-minus';
-            element.childNodes[element.childNodes.length - 1].nodeValue = ` No change this month`;
-        }
-    }
+function renderMembersTable(list) {
+  const tbody = document.getElementById("membersTableBody");
+  console.log(list)
+  tbody.innerHTML = "";
+  if (!list.length) {
+    tbody.innerHTML = `<tr><td colspan="9" class="table-placeholder-message">No members found.</td></tr>`;
+    return;
+  }
+  list.forEach(m => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${m.name}</td>
+      <td>${m.dob}</td>
+      <td>${m.phone}</td>
+      <td>${m.email}</td>
+      <td>${m.gender}</td>
+      <td>${m.address}</td>
+      <td><span class="status-badge ${m.status==="Active"?"active":"inactive"}">${m.status}</span></td>
+      <td>
+        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+}
 
-
-    function renderMembersTable(members) {
-        if (!membersTableBody) return;
-        membersTableBody.innerHTML = '';
-
-        if (members.length === 0) {
-            // Use the CSS class instead of inline styles
-            membersTableBody.innerHTML = '<tr><td colspan="7" class="table-placeholder-message">No members found.</td></tr>';
-            return;
-        }
-
-        members.forEach(member => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${member.name}</td>
-                <td>${member.age}</td>
-                <td>${member.phone}</td>
-                <td>${member.email}</td>
-                <td>${member.gender}</td>
-                <td><span class="status-badge ${member.status.toLowerCase()}">${member.status}</span></td>
-                <td class="action-buttons">
-                    <button class="edit-btn" title="Edit Member" data-id="${member.id}"><i class="fas fa-edit"></i></button>
-                    <button class="delete-btn" title="Delete Member" data-id="${member.id}"><i class="fas fa-trash-alt"></i></button>
-                </td>
-            `;
-            membersTableBody.appendChild(row);
-        });
-
-        addActionButtonListeners();
-    }
-
-     function addActionButtonListeners() {
-        document.querySelectorAll('.edit-btn').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const id = e.currentTarget.dataset.id;
-                console.log(`Edit member with ID: ${id}`);
-                 alert(`Edit member ID: ${id}`);
-            });
-        });
-
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const id = e.currentTarget.dataset.id;
-                console.log(`Delete member with ID: ${id}`);
-                 if(confirm(`Are you sure you want to delete member ID: ${id}?`)) {
-                     alert(`Deleting member ID: ${id}`);
-                     const index = sampleMembers.findIndex(m => m.id == id);
-                     if (index > -1) {
-                          sampleMembers.splice(index, 1);
-                          filterAndSortMembers();
-                     }
-                 }
-            });
-        });
-    }
-
-    function filterAndSortMembers() {
-        const searchTerm = memberSearchInput ? memberSearchInput.value.toLowerCase() : '';
-        const sortBy = memberSortSelect ? memberSortSelect.value : 'recent';
-
-        let filteredMembers = sampleMembers.filter(member => {
-            return (
-                member.name.toLowerCase().includes(searchTerm) ||
-                member.email.toLowerCase().includes(searchTerm) ||
-                member.phone.includes(searchTerm)
-            );
-        });
-
-        switch (sortBy) {
-             case 'nameAsc':
-                 filteredMembers.sort((a, b) => a.name.localeCompare(b.name));
-                 break;
-             case 'nameDesc':
-                 filteredMembers.sort((a, b) => b.name.localeCompare(a.name));
-                 break;
-             case 'active':
-                 filteredMembers.sort((a, b) => {
-                     if (a.status === 'Active' && b.status !== 'Active') return -1;
-                     if (a.status !== 'Active' && b.status === 'Active') return 1;
-                      return a.name.localeCompare(b.name);
-                 });
-                 break;
-               case 'recent':
-             default:
-                 filteredMembers.sort((a, b) => (b.id || 0) - (a.id || 0));
-                 break;
-        }
-
-        renderMembersTable(filteredMembers);
-    }
-
-    updateUserInfo(sampleUserData);
-    updateStats(sampleStats);
-    filterAndSortMembers();
-
-    if (memberSearchInput) {
-        memberSearchInput.addEventListener('input', filterAndSortMembers);
-    }
-    if (memberSortSelect) {
-        memberSortSelect.addEventListener('change', filterAndSortMembers);
-    }
-
-    const addMemberBtn = document.querySelector('.add-member-btn');
-    if (addMemberBtn) {
-        addMemberBtn.addEventListener('click', () => {
-            alert("Add Member button clicked! Implement form/modal here.");
-        });
-    }
-
+// Debounced search
+let searchTimer;
+document.getElementById("memberSearch").addEventListener("input", e => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    const kw = e.target.value.toLowerCase();
+    filteredMembers = allMembers.filter(m =>
+      m.name.toLowerCase().includes(kw) ||
+      m.email.toLowerCase().includes(kw) ||
+      m.phone.toLowerCase().includes(kw)
+    );
+    renderMembersTable(filteredMembers);
+  }, 300);
 });
+
+// Sort control
+document.getElementById("memberSort").addEventListener("change", e => {
+  const opt = e.target.value;
+  let sorted = [...filteredMembers];
+  if (opt==="nameAsc")   sorted.sort((a,b)=>a.name.localeCompare(b.name));
+  if (opt==="nameDesc")  sorted.sort((a,b)=>b.name.localeCompare(a.name));
+  if (opt==="active")    sorted.sort((a,b)=>b.status.localeCompare(a.status));
+  if (opt==="recent")    sorted.sort((a,b)=>b.created - a.created);
+  renderMembersTable(sorted);
+});
+
+fetchMembers();
