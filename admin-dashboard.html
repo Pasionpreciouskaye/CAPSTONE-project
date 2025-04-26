@@ -13,9 +13,7 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="./style/admin-dashboard.css" />
   </head>
@@ -29,50 +27,43 @@
       <nav class="sidebar-nav">
         <ul>
           <li>
-            <a href="./index.html"
-              ><i class="fas fa-home"></i><span>Home</span></a
-            >
-          </li>
-          <li>
-            <a href="./admin-budget.html"
-              ><i class="fas fa-chart-pie"></i
-              ><span>Budget Transparency</span></a
-            >
+            <a href="./admin-budget.html">
+              <i class="fas fa-chart-pie"></i>
+              <span>Budget Transparency</span>
+            </a>
           </li>
           <li class="active">
-            <a href="#"><i class="fas fa-users"></i><span>Members</span></a>
+            <a href="#">
+              <i class="fas fa-users"></i>
+              <span>Members</span>
+            </a>
           </li>
           <li>
-            <a href="inventory.html"
-              ><i class="fas fa-boxes"></i><span>Inventory</span></a
-            >
+            <a href="inventory.html">
+              <i class="fas fa-boxes"></i>
+              <span>Inventory</span>
+            </a>
           </li>
           <li>
-            <a href="user-transparency.html"
-              ><i class="fas fa-history"></i><span>Transaction History</span></a
-            >
+            <a href="user-transparency.html">
+              <i class="fas fa-history"></i>
+              <span>Transaction History</span>
+            </a>
           </li>
           <li>
-            <a href="./contactus.html"
-              ><i class="fas fa-comment-alt"></i><span>Feedback</span></a
-            >
+            <a href="./contactus.html">
+              <i class="fas fa-comment-alt"></i>
+              <span>Feedback</span>
+            </a>
           </li>
         </ul>
       </nav>
 
       <div class="sidebar-footer">
-        <script>
-          function logout() {
-            // Log out the current user
-            pb.authStore.clear();
-
-            console.log("User logged out.");
-            location.href = "landing.html";
-          }
-        </script>
-        <a href="#" class="logout-link"
-          ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
-        >
+        <a href="#" class="logout-link" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
       </div>
     </aside>
 
@@ -84,17 +75,14 @@
         </div>
         <div class="header-actions">
           <div class="search-container">
+            <label for="headerSearch" class="visually-hidden">Search</label>
             <i class="fas fa-search"></i>
             <input
               type="search"
               id="headerSearch"
               placeholder="Search anything..."
+              aria-label="Search anything"
             />
-          </div>
-          <div class="user-profile">
-            <i class="fas fa-user-circle user-icon"></i>
-            <span id="profileUserName">Admin User</span>
-            <i class="fas fa-chevron-down dropdown-icon"></i>
           </div>
         </div>
       </header>
@@ -105,9 +93,9 @@
           <div class="stat-info">
             <p>Total Members</p>
             <h3 id="totalMembers">0</h3>
-            <span class="increase" id="totalMembersChange"
-              ><i class="fas fa-arrow-up"></i> 0% this month</span
-            >
+            <span class="increase" id="totalMembersChange">
+              <i class="fas fa-arrow-up"></i> 0% this month
+            </span>
           </div>
         </div>
         <div class="stat-card">
@@ -115,9 +103,9 @@
           <div class="stat-info">
             <p>New Members</p>
             <h3 id="newMembers">0</h3>
-            <span class="decrease" id="newMembersChange"
-              ><i class="fas fa-arrow-down"></i> 0% this month</span
-            >
+            <span class="decrease" id="newMembersChange">
+              <i class="fas fa-arrow-down"></i> 0% this month
+            </span>
           </div>
         </div>
         <div class="stat-card">
@@ -134,20 +122,26 @@
         <div class="members-header">
           <h2>All Members</h2>
           <div class="members-controls">
-            <input
-              type="search"
-              id="memberSearch"
-              placeholder="Search members..."
-            />
-            <select id="memberSort">
+            <label for="memberSearch" class="visually-hidden"
+              >Search members</label
+            >
+            <div class="search-container">
+              <input
+                type="search"
+                id="memberSearch"
+                placeholder="Search members..."
+                aria-label="Search members"
+              />
+              <i class="search-icon">🔍</i>
+            </div>
+
+            <label for="memberSort" class="visually-hidden">Sort members</label>
+            <select id="memberSort" aria-label="Sort members">
               <option value="recent">Sort by: Recent</option>
               <option value="nameAsc">Sort by: Name (A-Z)</option>
               <option value="nameDesc">Sort by: Name (Z-A)</option>
               <option value="active">Sort by: Active First</option>
             </select>
-            <button class="add-member-btn">
-              <i class="fas fa-plus"></i> Add Member
-            </button>
           </div>
         </div>
 
@@ -156,31 +150,41 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Age</th>
+                <th>DOB</th>
                 <th>Phone Number</th>
                 <th>Email</th>
                 <th>Gender</th>
+                <th>Address</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody id="membersTableBody">
               <tr>
-                <td colspan="7" class="table-placeholder-message">
+                <td colspan="9" class="table-placeholder-message">
                   Loading members...
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="pagination">
-          <button>&laquo; Prev</button>
-          <span>Page 1 of 5</span>
-          <button>Next &raquo;</button>
+
+        <div class="pagination" role="navigation" aria-label="Pagination">
+          <button disabled aria-label="Previous page">&laquo; Prev</button>
+          <span>Page 1 of 1</span>
+          <button disabled aria-label="Next page">Next &raquo;</button>
         </div>
       </section>
     </main>
 
+    <script src="./node_modules/pocketbase/dist/pocketbase.umd.js"></script>
+    <script>
+      function logout() {
+        pb.authStore.clear();
+        console.log("User logged out.");
+        location.href = "landing.html";
+      }
+    </script>
     <script src="./js/admin-dashboard.js"></script>
   </body>
 </html>
