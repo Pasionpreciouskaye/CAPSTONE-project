@@ -1,6 +1,5 @@
-/* --- General Styles (Applied to both inventory and admin dashboard) --- */
+/* --- General Styles --- */
 :root {
-  /* Color Palette - Adjust to match admin dashboard */
   --primary-color: #4a90e2;
   --secondary-color: #f875aa;
   --text-color: #333;
@@ -17,27 +16,34 @@
   --border-radius-sm: 4px;
   --border-radius-md: 8px;
   --border-radius-lg: 12px;
-
-  /* Font Family - Match admin dashboard */
-  --font-family: 'Poppins', sans-serif;
-
-  /* Sidebar Width - Match admin dashboard */
-  --sidebar-width: 260px;
-  --transition-speed: 0.3s;
 }
 
+/* --- Body and Layout --- */
 body {
-  font-family: var(--font-family);
+  font-family: 'Poppins', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: 0;
   overflow-x: hidden;
   min-height: 100vh;
-  display: flex; /* Use flex to position sidebar and content */
+  display: flex;
 }
 
+.app-container {
+  flex-grow: 1;
+  margin-left: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  padding: 25px;
+  flex-grow: 1;
+}
+
+/* --- Sidebar Styling --- */
 .sidebar {
-  width: var(--sidebar-width);
+  width: 260px;
   background: var(--sidebar-bg);
   height: 100vh;
   display: flex;
@@ -46,8 +52,6 @@ body {
   position: fixed;
   left: 0;
   top: 0;
-  transition: width 0.3s ease;
-  z-index: 1050; /* Ensure above overlay */
 }
 
 .sidebar-header {
@@ -91,6 +95,7 @@ body {
   margin: 5px 10px;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
+
 .sidebar-nav ul li a i {
   width: 20px;
   text-align: center;
@@ -112,6 +117,7 @@ body {
   padding: 15px 10px;
   border-top: 1px solid var(--border-color);
 }
+
 .logout-link {
   display: flex;
   align-items: center;
@@ -123,83 +129,24 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
   font-weight: 500;
 }
+
 .logout-link:hover {
   background-color: #fceded;
 }
+
 .logout-link i {
   width: 20px;
   text-align: center;
   font-size: 1.1em;
 }
 
-.app-container {
-  flex-grow: 1;
-  margin-left: var(--sidebar-width);
-  transition: margin-left var(--transition-speed) ease-in-out;
-  display: flex;
-  flex-direction: column;
-}
-
-.main-content {
-  padding: 25px;
-  flex-grow: 1;
-}
-
-.main-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.header-greeting h1 {
-  font-size: 1.8em;
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-.content-header {
-  display: flex;
-  justify-content: flex-end; /* Align to the right */
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.search-add {
-  display: flex;
-  gap: 15px;
-}
-
-.action-btn {
-  background-color: var(--primary-color); /* Use admin dashboard's primary color */
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: var(--border-radius-sm);
-  cursor: pointer;
-  font-size: 0.9em;
-  transition: background-color 0.2s ease;
-}
-
-.action-btn:hover {
-  background-color: #3a7bc8;
-}
-
-.add-item-btn {
-  background-color: var(--success-color); /* Green for add */
-}
-
-.add-item-btn:hover {
-  background-color: #45a049;
-}
-
+/* --- Table Styling --- */
 .table-container {
-  background-color: var(--card-bg); /* Use card background for table container */
+  background-color: var(--card-bg);
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-light);
   overflow-x: auto;
+  margin-top: 20px;
 }
 
 table {
@@ -207,8 +154,7 @@ table {
   border-collapse: collapse;
 }
 
-th,
-td {
+th, td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
@@ -231,7 +177,7 @@ tbody tr:hover {
   background-color: #eee;
 }
 
-/* Modal Styles - Keep these, they are fairly standard */
+/* --- Modal Styling --- */
 .modal {
   position: fixed;
   top: 0;
@@ -239,7 +185,7 @@ tbody tr:hover {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
+  display: none;  /* Initially hidden */
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -249,6 +195,7 @@ tbody tr:hover {
 }
 
 .modal.active {
+  display: flex;  /* Ensure the modal is flex when active */
   opacity: 1;
   visibility: visible;
   transition: opacity 0.3s ease-in-out, visibility 0s 0s;
@@ -260,59 +207,85 @@ tbody tr:hover {
   border-radius: var(--border-radius-md);
   width: 90%;
   max-width: 500px;
+  z-index: 1100;
+  box-shadow: var(--shadow-medium);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 10px;
+  overflow: auto; /* Allow for scrolling if the content overflows */
 }
 
 .modal-content h3 {
   color: var(--text-color);
   margin-top: 0;
   margin-bottom: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-.form-grid input[type='text'],
-.form-grid input[type='number'] {
-  padding: 10px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-sm);
-  font-size: 0.9em;
-}
-
-.modal-content .close {
+/* --- Close Button for Modal inside the content --- */
+.close {
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 1.2em;
+  font-size: 1.5em;
   cursor: pointer;
   background: none;
   border: none;
   color: var(--text-muted);
+  z-index: 1200;
 }
 
-.modal-content .close:hover {
+.close:hover {
   color: var(--text-color);
 }
 
-.modal-content button[type='submit'] {
+/* --- Form Grid Styling for Modern Layout (One input per row) --- */
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.form-grid input[type="text"],
+.form-grid input[type="number"] {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9em;
+  width: 100%;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+/* --- Button Styling --- */
+.action-btn {
   background-color: var(--primary-color);
-  color: #fff;
+  color: white;
   border: none;
   padding: 10px 15px;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
   font-size: 0.9em;
+  transition: background-color 0.2s ease;
   width: 100%;
 }
 
-.modal-content button[type='submit']:hover {
+.action-btn:hover {
   background-color: #3a7bc8;
 }
 
+/* --- Save Button Styling --- */
+.save-btn {
+  background-color: var(--success-color);
+}
+
+.save-btn:hover {
+  background-color: #45a049;
+}
+
+/* --- Overlay Styles --- */
 .overlay {
   position: fixed;
   top: 0;
@@ -320,7 +293,7 @@ tbody tr:hover {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 999; /* Below modal */
+  z-index: 999;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
@@ -343,8 +316,8 @@ tbody tr:hover {
     left: -100%;
     width: 100%;
     height: auto;
-    min-height: 100vh; /* Ensure full viewport height */
-    padding-bottom: 60px; /* Space for potential fixed footer */
+    min-height: 100vh;
+    padding-bottom: 60px;
   }
 
   .sidebar.active {
