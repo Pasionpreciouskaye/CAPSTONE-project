@@ -27,25 +27,16 @@
         <nav class="sidebar-nav">
           <ul>
             <li>
-              <a href="projects.html"
-                ><i class="fas fa-tasks"></i><span>Projects</span></a
-              >
+              <a href="projects.html"><i class="fas fa-tasks"></i><span>Projects</span></a>
             </li>
             <li>
-              <a href="budgetdashboard.html"
-                ><i class="fas fa-chart-pie"></i
-                ><span>Budget Transparency</span></a
-              >
+              <a href="budgetdashboard.html"><i class="fas fa-chart-pie"></i><span>Budget Transparency</span></a>
             </li>
             <li class="active">
-              <a href="inventory.html"
-                ><i class="fas fa-boxes"></i><span>Inventory</span></a
-              >
+              <a href="inventory.html"><i class="fas fa-boxes"></i><span>Inventory</span></a>
             </li>
             <li>
-              <a href="logout.html" class="logout-link"
-                ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
-              >
+              <a href="logout.html" class="logout-link"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
             </li>
           </ul>
         </nav>
@@ -60,9 +51,7 @@
 
         <section class="content-header">
           <div class="search-add">
-            <button id="addItemBtn" class="action-btn add-item-btn">
-              ➕ Add Item
-            </button>
+            <button id="addItemBtn" class="action-btn add-item-btn">➕ Add Item</button>
           </div>
         </section>
 
@@ -80,9 +69,7 @@
             </thead>
             <tbody id="inventoryTable">
               <tr>
-                <td colspan="6" style="text-align: center; padding: 20px">
-                  Please load the serve.
-                </td>
+                <td colspan="6" style="text-align: center; padding: 20px">Please load the serve.</td>
               </tr>
             </tbody>
           </table>
@@ -90,41 +77,34 @@
       </main>
     </div>
 
-    <div
-      id="itemModal"
-      class="modal hidden"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modalTitle"
-    >
+    <!-- Modal for Add Item -->
+    <div id="itemModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-content">
-        <button id="closeModal" class="close" aria-label="Close modal">
-          &times;
-        </button>
+        <!-- Close Button (X) inside the modal -->
+        <button id="closeModal" class="close" aria-label="Close modal">✖</button>
         <h3 id="modalTitle">Add Item</h3>
         <form id="itemForm">
           <div class="form-grid">
-            <input type="text" placeholder="Item Name" id="itemName" required />
-            <input type="text" placeholder="Category" id="itemCategory" />
-            <input type="number" placeholder="Quantity" id="itemQty" required />
+            <input type="text" placeholder="Item Name: " id="itemName" required />
+            <input type="text" placeholder="Category: " id="itemCategory" />
+            <input type="number" placeholder="Quantity: " id="itemQty" required />
             <input
               type="text"
-              placeholder="Unit Cost (e.g., 150.75)"
+              placeholder="Unit Cost: "
               id="itemCost"
               required
               pattern="^\d+(\.\d{1,2})?$"
-              title="Enter cost like 150.00 or 150.75"
+              title="Enter cost: "
             />
             <input type="text" placeholder="SKU (Unique Code)" id="itemSKU" />
           </div>
-          <button type="submit" class="action-btn save-btn">
-            💾 Save Item
-          </button>
+          <button type="submit" class="action-btn save-btn">💾 Save Item</button>
         </form>
       </div>
     </div>
 
-    <div id="overlay"></div>
+    <!-- Overlay to block interaction -->
+    <div id="overlay" class="overlay"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.umd.js"></script>
     <script src="./js/inventory.js"></script>

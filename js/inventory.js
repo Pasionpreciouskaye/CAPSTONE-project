@@ -1,4 +1,4 @@
-const POCKETBASE_URL = 'http://127.0.0.1:8090';
+const POCKETBASE_URL = 'http://127.0.0.1:8090'; // PocketBase URL
 const pb = new PocketBase(POCKETBASE_URL);
 
 // DOM elements
@@ -20,22 +20,30 @@ const formInputs = {
 
 let editingItemId = null;
 
-// Open modal for adding
+// Open modal for adding item
 const openModalForAdd = () => {
   form.reset();
   editingItemId = null;
   modalTitle.textContent = "Add Item";
-  modal.classList.remove("hidden");
+  
+  // Make modal visible
+  modal.classList.add("active");
   overlay.classList.add("active");
+
+  // Focus on the first input
   formInputs.name.focus();
+
+  console.log("Modal Opened: Add Item"); // Debug statement
 };
 
 // Close modal
 const closeModalFn = () => {
-  modal.classList.add("hidden");
+  modal.classList.remove("active");
   overlay.classList.remove("active");
   form.reset();
   editingItemId = null;
+
+  console.log("Modal Closed"); // Debug statement
 };
 
 // Event listeners
@@ -64,7 +72,7 @@ const renderItems = (items) => {
     row.innerHTML = `
       <td>${item.name}</td>
       <td>${item.category || ""}</td>
-      <td>${item.quantity}</td>
+      <td>${item.current_quantity}</td>
       <td>${item.cost}</td>
       <td>${item.sku || ""}</td>
       <td>
@@ -84,19 +92,19 @@ const renderItems = (items) => {
   });
 };
 
-// Open modal to edit
+// Open modal to edit item
 const openEditModal = async (id) => {
   try {
     const item = await pb.collection("inventory").getOne(id);
     formInputs.name.value = item.name;
     formInputs.category.value = item.category || "";
-    formInputs.quantity.value = item.quantity;
+    formInputs.quantity.value = item.current_quantity;
     formInputs.cost.value = item.cost;
     formInputs.sku.value = item.sku || "";
 
     editingItemId = id;
     modalTitle.textContent = "Edit Item";
-    modal.classList.remove("hidden");
+    modal.classList.add("active");
     overlay.classList.add("active");
     formInputs.name.focus();
   } catch (err) {
@@ -116,22 +124,35 @@ const deleteItem = async (id) => {
   }
 };
 
-// Form submission
+// Form submission for adding or editing item
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const data = {
     name: formInputs.name.value.trim(),
     category: formInputs.category.value.trim(),
-    quantity: parseInt(formInputs.quantity.value),
+    current_quantity: parseInt(formInputs.quantity.value),  // Corrected field name
     cost: parseFloat(formInputs.cost.value),
     sku: formInputs.sku.value.trim()
   };
 
+  console.log("Form Data:", data); // Debug statement
+
+  // Validate data before sending to PocketBase
+  if (!data.name || !data.current_quantity || !data.cost) {
+    console.error("Missing required fields!");
+    alert("Please fill in all required fields.");
+    return;
+  }
+
   try {
     if (editingItemId) {
+      // Edit item
+      console.log("Editing Item: ", editingItemId);
       await pb.collection("inventory").update(editingItemId, data);
     } else {
+      // Create new item
+      console.log("Creating New Item");
       await pb.collection("inventory").create(data);
     }
     closeModalFn();
