@@ -8,12 +8,12 @@
   </head>
 
   <body>
+    <!-- HEADER -->
     <header class="main-header">
       <div class="header-container">
         <div class="logo">
           <img src="./logo/SK-Logo.png" alt="Logo" />
         </div>
-
         <div class="header-title">
           <h2>Contact Us</h2>
         </div>
@@ -23,7 +23,6 @@
         <nav class="nav-links">
           <ul>
             <li><a href="./index.html">Home</a></li>
-
             <li class="dropdown">
               <a href="#">Menu ▾</a>
               <div class="dropdown-content">
@@ -33,7 +32,6 @@
                 <a href="./inventory.html">Inventory</a>
               </div>
             </li>
-
             <li>
               <a href="./userpage.html" class="user-icon">
                 <img
@@ -48,10 +46,12 @@
       </div>
     </header>
 
+    <!-- BANNER -->
     <section class="banner">
       <img src="./assets/banner2.jpg" alt="SK Banner" />
     </section>
 
+    <!-- INTRO -->
     <section class="contact-intro">
       <div class="intro-box">
         <p>
@@ -61,6 +61,7 @@
       </div>
     </section>
 
+    <!-- CONTACT CARDS -->
     <section class="contact-cards">
       <div class="card">
         <h3>📞 CALL US</h3>
@@ -76,11 +77,31 @@
       </div>
     </section>
 
+    <!-- MAP (Replaced with Image) -->
     <section class="map">
       <h3>Our Location</h3>
-      <div id="map" style="width: 100%; height: 400px"></div>
+      <img
+        src="./assets/skmap.png"
+        alt="SK Taguig Location Map"
+        style="
+          width: 100%;
+          height: auto;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        "
+      />
     </section>
 
+    <!-- CONFIRMATION MESSAGE (Initially Hidden) -->
+    <div
+      id="confirmation-message"
+      class="confirmation-message"
+      style="display: none"
+    >
+      <p>Submitted successfully!</p>
+    </div>
+
+    <!-- CONTACT FORM -->
     <section class="contact-form">
       <h2>GET IN <span>TOUCH</span></h2>
       <form id="contact_form">
@@ -90,32 +111,19 @@
       </form>
     </section>
 
+    <!-- EMERGENCY HOTLINES -->
     <section class="hotlines">
       <h2>EMERGENCY HOTLINES</h2>
       <div class="hotline-grid">
-        <div>
-          <strong>TAGUIG COMMAND CENTER</strong><br />
-          (02) 8789 3200
-        </div>
-        <div>
-          <strong>TAGUIG RESCUE</strong><br />
-          0916 079 3112
-        </div>
-        <div>
-          <strong>TAGUIG PNP</strong><br />
-          0968 850 7912
-        </div>
-        <div>
-          <strong>DOCTOR-ON-CALL</strong><br />
-          0919 079 3112
-        </div>
-        <div>
-          <strong>R.E.A.C.T.</strong><br />
-          0916 851 7712
-        </div>
+        <div><strong>TAGUIG COMMAND CENTER</strong><br />(02) 8789 3200</div>
+        <div><strong>TAGUIG RESCUE</strong><br />0916 079 3112</div>
+        <div><strong>TAGUIG PNP</strong><br />0968 850 7912</div>
+        <div><strong>DOCTOR-ON-CALL</strong><br />0919 079 3112</div>
+        <div><strong>R.E.A.C.T.</strong><br />0916 851 7712</div>
       </div>
     </section>
 
+    <!-- FOOTER -->
     <footer>
       <div class="footer-content">
         <img src="./logo/SK-Logo.png" alt="Logo" />
@@ -123,14 +131,8 @@
       </div>
     </footer>
 
-    <!-- Add Google Maps API key in the script URL -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"
-      async
-      defer
-    ></script>
-
+    <!-- Scripts -->
     <script src="./node_modules/pocketbase/dist/pocketbase.umd.js"></script>
-    <script src="/js/contactus.js"></script>
+    <script src="./js/contactus.js"></script>
   </body>
 </html>

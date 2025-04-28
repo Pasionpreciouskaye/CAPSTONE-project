@@ -73,14 +73,14 @@ body {
 
 .nav-links ul li a {
   text-decoration: none;
-  color: rgb(243, 121, 159);
+  color: black;
   font-weight: 500;
   font-size: 16px;
   transition: color 0.3s ease;
 }
 
 .nav-links ul li a:hover {
-  color: #000000;
+  color: rgb(243, 121, 159);
 }
 
 .nav-links ul li {
@@ -387,4 +387,19 @@ footer {
   color: #333333;
   line-height: 1.6;
   font-weight: 500;
+}
+
+/* Confirmation Message Style */
+.confirmation-message {
+  background-color: rgb(222, 106, 126);
+  color: black;
+  padding: 15px;
+  text-align: center;
+  font-size: 18px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  z-index: 1000;
 }

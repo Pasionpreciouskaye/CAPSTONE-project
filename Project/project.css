@@ -1,4 +1,4 @@
-/* Global reset (this part is optional as Tailwind already includes a reset) */
+/* Global Reset */
 *,
 *::before,
 *::after {
@@ -9,47 +9,26 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-/* If you're using custom fonts, you can include it here */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
-
-/* Ensuring the project page content is centered */
-.min-h-screen {
-  min-height: 100vh;
-}
-
-.text-center {
-  text-align: center;
-}
-
+/* Page background */
 .bg-gradient-to-b {
   background: linear-gradient(to bottom, #fdfdff, #f190d4);
 }
 
-.project-page-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 2rem;
-}
-
-.project-content {
-  max-width: 1200px;
-  width: 100%;
-}
-
+/* Header title */
 .project-header h1 {
   font-size: 3rem;
   color: #f3799f;
 }
 
-/* Dropdown menu styles */
+/* Dropdown hover */
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
 .dropdown-content {
   display: none;
 }
 
-/* You can add more specific styles below if needed */
+/* Optional: Extra smooth spacing */
+.pt-36 {
+  padding-top: 9rem; /* Already handled by Tailwind class */
+}

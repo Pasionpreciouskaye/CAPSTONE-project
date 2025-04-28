@@ -87,7 +87,7 @@
       <p class="events-subtitle">Check out our latest activities</p>
 
       <div class="events-container">
-        <a href="#" class="event-card">
+        <a href="registration.html?event=𝐒𝐊𝐋𝐁%20𝐊𝐊%20𝐈𝐃" class="event-card">
           <img src="/assets/youth.jpg" alt="Event 1" class="event-image" />
           <div class="event-content">
             <div class="event-title">𝗬𝗢𝗨𝗧𝗛 𝗟𝗘𝗔𝗗𝗘𝗥𝗦 𝗙𝗘𝗟𝗟𝗢𝗪𝗦𝗛𝗜𝗣 2025</div>
@@ -96,7 +96,11 @@
             </div>
           </div>
         </a>
-        <a href="#" class="event-card">
+
+        <a
+          href="registration.html?event=TAGUIG%20SPORTS%20LEAGUE%202025%20INTRA-BARANGAY"
+          class="event-card"
+        >
           <img
             src="/assets/recentproj-2.jpg"
             alt="Event 2"
@@ -111,7 +115,11 @@
             </div>
           </div>
         </a>
-        <a href="#" class="event-card">
+
+        <a
+          href="registration.html?event=𝐒𝐊𝐋𝐁%20𝐊𝐊%20𝐈𝐃𝐄𝐍𝐓𝐈𝐅𝐈𝐂𝐀𝐓𝐈𝐎𝐍%20𝐂𝐀𝐑𝐃"
+          class="event-card"
+        >
           <img src="/assets/project7.jpg" alt="Event 3" class="event-image" />
           <div class="event-content">
             <div class="event-title">𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃𝐄𝐍𝐓𝐈𝐅𝐈𝐂𝐀𝐓𝐈𝐎𝐍 𝐂𝐀𝐑𝐃</div>
@@ -120,12 +128,12 @@
             </div>
           </div>
         </a>
-        <a href="#" class="event-card">
-          <img
-            src="assets/recentproj3.jpg"
-            alt="Event 4"
-            class="event-image"
-          />
+
+        <a
+          href="registration.html?event=TAGUIG%20SPORTS%20LEAGUE%202025"
+          class="event-card"
+        >
+          <img src="assets/recentproj3.jpg" alt="Event 4" class="event-image" />
           <div class="event-content">
             <div class="event-title">TAGUIG SPORTS LEAGUE 2025</div>
             <div class="event-description">
@@ -133,6 +141,16 @@
             </div>
           </div>
         </a>
+      </div>
+    </div>
+
+    <div id="confirmationModal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <h1 id="modalTitle"></h1>
+        <p id="modalMessage"></p>
+        <div class="button-group">
+          <button class="btn ok" onclick="closeModal()">OK</button>
+        </div>
       </div>
     </div>
 

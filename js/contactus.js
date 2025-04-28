@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const contact_form = document.getElementById("contact_form");
+  const confirmationMessage = document.getElementById('confirmation-message');  // Confirmation message element
 
   contact_form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -21,7 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Optional: clear the form or show a success message
       contact_form.reset();
-      alert("Feedback submitted successfully!");
+
+      // Show the success confirmation message
+      confirmationMessage.style.display = 'block';
+
+      // Hide the confirmation message after 3 seconds
+      setTimeout(() => {
+        confirmationMessage.style.display = 'none';
+      }, 3000);
     } catch (error) {
       console.error("Error submitting feedback:", error);
       alert("Failed to submit feedback. Please try again.");
