@@ -11,29 +11,34 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
+
   <body
     class="font-poppins bg-gradient-to-b from-[#fdfdff] to-[#f190d4] text-gray-800 text-center overflow-x-hidden"
   >
+    <!-- Header -->
     <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
       <div
-        class="flex items-center justify-between px-10 py-2 max-h-20 relative"
+        class="flex items-center justify-between px-10 py-4 max-h-20 relative"
       >
         <div class="logo">
           <img src="/logo/SK-Logo.png" alt="Logo" class="h-16" />
         </div>
+
         <div class="absolute left-1/2 transform -translate-x-1/2 text-center">
           <h2
             class="text-2xl sm:text-3xl font-bold text-[#f3799f] tracking-wide"
           >
-             Projects
+            Projects
           </h2>
         </div>
+
         <div class="sidebar">
           <nav>
             <ul class="flex items-center space-x-6">
               <li>
                 <a href="/index.html" class="hover:text-[#f3799f]">Home</a>
               </li>
+
               <li class="relative">
                 <button
                   id="menuButton"
@@ -48,28 +53,24 @@
                   <a
                     href="/eventpage.html"
                     class="block px-4 py-2 hover:bg-gray-100"
+                    >Events</a
                   >
-                    Events
-                  </a>
                   <a
                     href="/contactus.html"
                     class="block px-4 py-2 hover:bg-gray-100"
+                    >Contact Us</a
                   >
-                    Contact Us
-                  </a>
                   <a
                     href="/user-transparency.html"
                     class="block px-4 py-2 hover:bg-gray-100"
+                    >Budget Transparency</a
                   >
-                    Budget Transparency
-                  </a>
                   <a
                     href="/user-inventory.html"
                     class="block px-4 py-2 hover:bg-gray-100"
+                    >Inventory</a
                   >
-                    Inventory
-                  </a>
-                  
+                </div>
               </li>
 
               <li>
@@ -88,41 +89,32 @@
     </header>
 
     <!-- Project Cards -->
-    <div class="flex flex-wrap justify-center gap-5 max-w-6xl mx-auto px-5">
-      <div
-        class="bg-white rounded-lg shadow-md overflow-hidden w-72 cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg"
-        data-title="SEED TO LEAD – FROM TEAM PLAYER TO VISIONARY LEADER"
-        data-image="/assets/project1.png"
-        data-description="This is a sample description for Seed to Lead project."
-        onclick="openProjectModal(event, this, '/Project/proj1.html')"
+    <div
+      class="flex flex-wrap justify-center gap-5 max-w-6xl mx-auto px-5 pt-36"
+    >
+      <a
+        href="/Project/proj1.html"
+        class="bg-white rounded-lg shadow-md overflow-hidden w-72 transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg"
       >
         <img
           src="/assets/project1.png"
           alt="Project 1"
           class="w-full h-52 object-cover"
         />
-        <h3 class="font-bold text-lg text-gray-800 p-4">
-          SEED TO LEAD – FROM TEAM PLAYER TO VISIONARY LEADER
-        </h3>
-      </div>
+        <h3 class="font-bold text-lg text-gray-800 p-4">SIKCUP GAMES 2024</h3>
+      </a>
 
-      <!-- Project 2 Card -->
-      <div
-        class="bg-white rounded-lg shadow-md overflow-hidden w-72 cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg"
-        data-title="KATIPUNAN NG KABATAAN ASSEMBLY"
-        data-image="/assets/project2.png"
-        data-description="A description of the Katipunan ng Kabataan Assembly."
-        onclick="openProjectModal(event, this, '/Project/proj2.html')"
+      <a
+        href="/Project/proj2.html"
+        class="bg-white rounded-lg shadow-md overflow-hidden w-72 transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg"
       >
         <img
           src="/assets/project2.png"
           alt="Project 2"
           class="w-full h-52 object-cover"
         />
-        <h3 class="font-bold text-lg text-gray-800 p-4">
-          KATIPUNAN NG KABATAAN ASSEMBLY
-        </h3>
-      </div>
+        <h3 class="font-bold text-lg text-gray-800 p-4">SIKCUP GAMES 2024</h3>
+      </a>
 
       <a
         href="/Project/proj3.html"
@@ -201,55 +193,20 @@
         />
         <h3 class="font-bold text-lg text-gray-800 p-4">SEEN IT, CLEAN IT</h3>
       </a>
-    </div>
 
-    <a
-    href="/Project/proj9.html"
-    class="bg-white rounded-lg shadow-md overflow-hidden w-72 transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg"
-  >
-    <img
-      src="/assets/proj9 (10).jpg"
-      alt="Project 9"
-      class="w-full h-52 object-cover"
-    />
-    <h3 class="font-bold text-lg text-gray-800 p-4">🎊 HAPPY FIESTA SAN FRANCISCO JAVIER CHAPEL!
-      PALARONG PINOY 2024</h3>
-  </a>
-   </div>
-
-    <div
-      id="projectModal"
-      class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 items-center justify-center p-5"
-    >
-      <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full relative">
-        <button
-          id="closeModal"
-          class="absolute top-2 right-3 text-2xl font-bold text-gray-700 hover:text-pink-500"
-          onclick="closeProjectModal()"
-        >
-          &times;
-        </button>
+      <a
+        href="/Project/proj9.html"
+        class="bg-white rounded-lg shadow-md overflow-hidden w-72 transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg"
+      >
         <img
-          id="modalImage"
-          src=""
-          alt="Project Image"
-          class="w-full h-64 object-cover rounded-t-lg"
+          src="/assets/proj9 (10).jpg"
+          alt="Project 9"
+          class="w-full h-52 object-cover"
         />
-        <div class="p-5">
-          <h2
-            id="modalTitle"
-            class="text-2xl font-bold text-[#f3799f] mb-3"
-          ></h2>
-          <p id="modalDescription" class="text-gray-700"></p>
-          <button
-            id="modalLinkButton"
-            class="bg-[#f3799f] text-white py-2 px-4 rounded mt-5"
-            onclick="navigateToProject()"
-          >
-            Go to Project
-          </button>
-        </div>
-      </div>
+        <h3 class="font-bold text-lg text-gray-800 p-4">
+          🎊 HAPPY FIESTA SAN FRANCISCO JAVIER CHAPEL! PALARONG PINOY 2024
+        </h3>
+      </a>
     </div>
 
     <!-- Footer -->
@@ -261,6 +218,7 @@
         </p>
       </div>
     </footer>
+
     <script src="/Project/projectpage.js"></script>
   </body>
 </html>

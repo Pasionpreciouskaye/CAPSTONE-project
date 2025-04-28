@@ -5,9 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SKLB KK IDENTIFICATION CARD ALERT!</title>
   <link rel="stylesheet" href="./style/event3.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div class="container">
+<body class="font-poppins bg-gradient-to-b from-[#fdfdff] to-[#f190d4] text-gray-800 text-center overflow-x-hidden">
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+    <div class="flex items-center justify-between px-10 py-2 max-h-20 relative">
+      <div class="logo">
+        <img src="/logo/SK-Logo.png" alt="Logo" class="h-16" />
+      </div>
+      <div class="absolute left-1/2 transform -translate-x-1/2 text-center">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#f3799f] tracking-wide">SKLB KK IDENTIFICATION CARD ALERT!</h2>
+      </div>
+      <div class="sidebar">
+        <nav>
+          <ul class="flex items-center space-x-6">
+            <li><a href="/eventpage.html" class="hover:text-[#f3799f]">Events</a></li>
+    
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container mt-20">
     <div class="left-section">
       <h1>🚨 SKLB KK IDENTIFICATION CARD ALERT! 🚨</h1>
       <p>Are you ready for your Kabataan Card Experience?
@@ -34,5 +57,17 @@
       <img src="/assets/id1.jpg" alt="Youth Person"/>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="bg-white py-5 text-black text-sm relative mt-20">
+    <div class="flex justify-center items-center gap-5 flex-wrap">
+      <img src="/logo/SK-Logo.png" alt="Logo" class="h-16 w-auto" />
+      <p class="text-xl font-bold text-black m-0">
+        &copy; 2025 | CITY OF TAGUIG. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="/Project/projectpage.js"></script>
 </body>
 </html>

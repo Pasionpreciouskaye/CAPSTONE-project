@@ -89,14 +89,14 @@ main {
 
 .nav-links ul li a {
   text-decoration: none;
-  color: #f3799f; /* Soft pink from the Contact Us page */
+  color: black; /* Soft pink from the Contact Us page */
   font-weight: 500;
   font-size: 16px;
   transition: color 0.3s ease;
 }
 
 .nav-links ul li a:hover {
-  color: #000000;
+  color: rgb(243, 121, 159);
 }
 
 .nav-links ul li .dropdown-content {

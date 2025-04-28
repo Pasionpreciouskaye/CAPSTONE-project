@@ -1,55 +1,116 @@
 document.addEventListener("DOMContentLoaded", () => {
   const pb = new PocketBase("http://127.0.0.1:8090");
   const eventForm = document.getElementById("eventForm");
+  const confirmationModal = document.getElementById("confirmationModal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalMessage = document.getElementById("modalMessage");
 
+  // Handle event registration form submission
   eventForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    // Log the form elements to ensure they're being selected correctly
-    const firstName = document.getElementById("firstName").value;
-    const lastName = document.getElementById("lastName").value;
-    const phone = document.getElementById("phoneNumber").value;
-    const email = document.getElementById("email").value;
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const phone = document.getElementById("phoneNumber").value.trim();
+    const email = document.getElementById("email").value.trim();
     const selectedEvent = document.getElementById("eventSelect").value;
 
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-    console.log("Phone:", phone);
-    console.log("Email:", email);
-    console.log("Selected Event:", selectedEvent);
-
-    // Check if user is authenticated
-    const user = pb.authStore.model;  // Get the authenticated user
+    const user = pb.authStore.model;
     if (!user) {
       alert("You need to log in first.");
       return;
     }
 
-    // Create the data object
+    if (email.toLowerCase() !== user.email.toLowerCase()) {
+      showModal(
+        "❌ There was an issue with your registration.",
+        "Please use the email registered with your account."
+      );
+      return;
+    }
+
     const data = {
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phone,
       email: email,
       selectedEvent: selectedEvent,
-      user_id: user.id  // Associating the event registration with the logged-in user
+      user_id: user.id
     };
 
-    // Try to create the event registration in PocketBase
     try {
       await pb.collection("event_registrations").create(data);
-      eventForm.reset();  // Reset the form after submission
-      alert("✅ You have successfully registered for the event!");
+      eventForm.reset();
+      showModal(
+        "✅ You have successfully registered for the event!",
+        `Thank you for signing up for the ${selectedEvent} event.`
+      );
+
+      // Redirect to the event page after modal close
+      setTimeout(() => {
+        redirectToEventPage(selectedEvent);
+      }, 2000); // 2 seconds delay before redirection
     } catch (error) {
       console.error("❌ Error registering:", error);
-      alert("There was an issue with your registration. Please try again.");
+      showModal(
+        "❌ There was an issue with your registration.",
+        "Please try again."
+      );
     }
   });
-});
 
+  // Show modal with message
+  function showModal(title, message) {
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+    confirmationModal.classList.add("visible");
+  }
 
+  // Close modal when OK button is clicked
+  window.closeModal = function () {
+    confirmationModal.classList.remove("visible");
+  };
 
+  // Redirect user to the respective event page based on selected event
+  function redirectToEventPage(event) {
+    let redirectUrl = "";
 
+    switch (event) {
+      case "𝐒𝐊𝐋𝐁 𝐊𝐊 𝐈𝐃":
+        redirectUrl = "event3.html";
+        break;
+      case "𝗬𝗢𝗨𝗧𝗛 𝗟𝗘𝗔𝗗𝗘𝗥𝗦 𝗙𝗘𝗟𝗟𝗢𝗪𝗦𝗛𝗜𝗣 2025":
+        redirectUrl = "event1.html";
+        break;
+      case "𝐈𝐍𝐓𝐑𝐀 & 𝐈𝐍𝐓𝐄𝐑 𝐁𝐀𝐑𝐀𝐍𝐆𝐘 2025":
+        redirectUrl = "event2.html";
+        break;
+      case "𝘽𝙄𝙇𝙇𝘼𝙍𝘿𝙎 • 𝘿𝘼𝘿𝘛𝙎 • 𝘾𝙃𝙀𝙎𝙎":
+        redirectUrl = "event4.html";
+        break;
+      default:
+        redirectUrl = "eventpage2.html"; // fallback if no match
+    }
+
+    window.location.href = redirectUrl;
+  }
+
+  // Handle event card clicks to open registration form
+  const eventCards = document.querySelectorAll(".event-card");
+  eventCards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      e.preventDefault();
+      const eventTitle = card.querySelector(".event-title").textContent;
+
+      // Set the selected event in the dropdown
+      document.getElementById("eventSelect").value = eventTitle;
+
+      // Optionally, scroll to the form if needed
+      document.querySelector(".form-container").scrollIntoView({
+        behavior: "smooth"
+      });
+    });
+  });
 
   // Menu Toggle
   const menuButton = document.querySelector(".menu-button");
@@ -98,3 +159,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   setInterval(autoScroll, 50);
+});
