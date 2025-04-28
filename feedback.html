@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Feedback Management</title>
+    <link rel="stylesheet" href="./style/feedback.css" />
+
+    <!-- FontAwesome -->
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="./logo/SK-Logo.png" alt="SK Logo" class="logo" />
+        <h2>Admin Panel</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="./admin-budget.html">
+              <i class="fas fa-chart-pie"></i><span>Budget Transparency</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-dashboard.html">
+              <i class="fas fa-users"></i><span>Members</span>
+            </a>
+          </li>
+          <li>
+            <a href="inventory.html">
+              <i class="fas fa-boxes"></i><span>Inventory</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-transactionhistory.html">
+              <i class="fas fa-history"></i><span>Transaction History</span>
+            </a>
+          </li>
+          <li class="active">
+            <a href="./feedback.html">
+              <i class="fas fa-comment-alt"></i><span>Feedback</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" class="logout-link" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header>
+        <div class="header-left"></div>
+        <div class="header-right">
+          <input
+            type="text"
+            id="feedbackSearch"
+            placeholder="Search feedbacks..."
+          />
+        </div>
+      </header>
+
+      <section class="social-messages">
+        <h1>Feedback Management</h1>
+
+        <div id="messagesGrid" class="messages-grid">
+          <!-- Feedback cards will be dynamically loaded here -->
+        </div>
+
+        <button id="viewMoreBtn">View More</button>
+      </section>
+
+      <footer>
+        Having problems with the web app? <a href="#">Contact Us</a>
+      </footer>
+    </div>
+
+    <script
+      defer
+      src="./node_modules/pocketbase/dist/pocketbase.umd.js"
+    ></script>
+    <script defer src="./js/feedback.js"></script>
+  </body>
+</html>

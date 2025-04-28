@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const contact_form = document.getElementById("contact_form");
-  const confirmationMessage = document.getElementById('confirmation-message');  // Confirmation message element
+  const confirmationMessage = document.getElementById('confirmation-message');
 
   contact_form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -12,21 +12,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const data = {
-        user: pb.authStore.model.id,
         subject: subject,
         message: message,
       };
 
-      // Create a new record in the "feedbacks" collection
-      const record = await pb.collection("feedbacks").create(data);
+      // Only set the 'user' if logged in
+      if (pb.authStore.model) {
+        data.user = pb.authStore.model.id;
+      }
 
-      // Optional: clear the form or show a success message
+      // Create a new record in the "feedbacks" collection
+      await pb.collection("feedbacks").create(data);
+
+      // Clear the form
       contact_form.reset();
 
       // Show the success confirmation message
       confirmationMessage.style.display = 'block';
-
-      // Hide the confirmation message after 3 seconds
       setTimeout(() => {
         confirmationMessage.style.display = 'none';
       }, 3000);
