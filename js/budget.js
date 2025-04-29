@@ -1,20 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const pb = new PocketBase('http://127.0.0.1:8090');
+    const pb = new PocketBase('http://127.0.0.1:8090');  // Ensure PocketBase instance is running
 
-    const sidebar = document.querySelector('.sidebar');
-    const menuToggle = document.querySelector('.menu-toggle');
     const addBudgetBtn = document.querySelector('.add-budget-btn');
     const modal = document.getElementById("addBudgetModal");
     const closeBtn = document.querySelector(".close-btn");
     const budgetForm = document.getElementById("budgetForm");
     const budgetTableBody = document.getElementById("budgetBody");
-    const ctx = document.getElementById("expenseChart")?.getContext("2d");
     const cancelButton = document.getElementById("cancelButton");
 
-    let currentChart;
     let currentBudgetData = [];
 
+    // Open Modal Function
     function openModal() {
+        console.log("Opening modal for adding budget");
         modal.classList.add("show");
         budgetForm.reset();
         budgetForm.dataset.editId = '';
@@ -30,78 +28,127 @@ document.addEventListener("DOMContentLoaded", () => {
         if (modalTitle) modalTitle.textContent = 'Add Budget';
     }
 
+    // Close Modal Function
     function closeModal() {
+        console.log("Closing modal");
         modal.classList.remove("show");
     }
 
+    // Event Listener to Open Modal
+    if (addBudgetBtn) {
+        addBudgetBtn.addEventListener("click", openModal);
+    } else {
+        console.error("Add Budget button not found!");
+    }
+
+    // Event Listener to Close Modal
+    if (closeBtn) {
+        closeBtn.addEventListener("click", closeModal);
+    }
+
+    // Cancel Button
+    if (cancelButton) {
+        cancelButton.addEventListener("click", closeModal);
+    }
+
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
+
+    // Fetch Budget Data from PocketBase
     async function fetchBudgetData() {
+        console.log("Fetching budget data...");
         if (budgetTableBody) {
             budgetTableBody.innerHTML = `<tr class="loading-row"><td colspan="7" class="loading-message">Loading budget data...</td></tr>`;
-        } else {
-            console.error("Budget table body not found!");
-            return [];
         }
 
         try {
             const records = await pb.collection('budget').getFullList({ sort: '-created' });
             currentBudgetData = records;
             updateBudgetTable(records);
-            return records;
         } catch (error) {
             console.error("Error fetching budget data:", error);
-            budgetTableBody.innerHTML = `<tr class="error-row"><td colspan="7" class="error-message">Error loading data: ${error.message}. Please try again.</td></tr>`;
             showNotification("Failed to load budget data. Please try again.", true);
-            return [];
         }
     }
 
+    // Update Budget Table
     function updateBudgetTable(data) {
+        console.log("Updating budget table with data:", data);
         budgetTableBody.innerHTML = '';
         if (data.length === 0) {
             const emptyRow = budgetTableBody.insertRow();
-            emptyRow.innerHTML = `<td colspan="7" class="empty-message">No budget items found. Click \"Add Budget\" to create one.</td>`;
+            emptyRow.innerHTML = `<td colspan="7" class="empty-message">No budget items found. Click "Add Budget" to create one.</td>`;
             emptyRow.querySelector('td').classList.add('empty-message');
-            return;
+        } else {
+            data.forEach(record => {
+                const allocated = parseFloat(record.allocated) || 0;
+                const spent = parseFloat(record.spent) || 0;
+                const remaining = allocated - spent;
+                const remainingClass = remaining < 0 ? 'negative' : '';
+
+                const row = budgetTableBody.insertRow();
+                row.innerHTML = `
+                    <td>${record.category || 'N/A'}</td>
+                    <td>₱${allocated.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</td>
+                    <td>₱${spent.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</td>
+                    <td class="${remainingClass}">₱${remaining.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</td>
+                    <td>${formatDate(record.dateAllocated)}</td>
+                    <td>${formatDate(record.dateSpent)}</td>
+                    <td>
+                        <button class="btn btn-edit" data-id="${record.id}"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn btn-delete" data-id="${record.id}"><i class="fas fa-trash"></i> Delete</button>
+                    </td>
+                `;
+            });
         }
 
-        data.forEach(record => {
-            const allocated = parseFloat(record.allocated) || 0;
-            const spent = parseFloat(record.spent) || 0;
-            const remaining = allocated - spent;
-            const remainingClass = remaining < 0 ? 'negative' : '';
+        // Add Event Listeners for Edit and Delete buttons using Event Delegation
+        budgetTableBody.addEventListener("click", async (e) => {
+            const button = e.target.closest('button');
+            if (!button) return;
 
-            const row = budgetTableBody.insertRow();
-            row.innerHTML = `
-                <td>${record.category || 'N/A'}</td>
-                <td>₱${allocated.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</td>
-                <td>₱${spent.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</td>
-                <td class="${remainingClass}">₱${remaining.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</td>
-                <td>${formatDate(record.dateAllocated)}</td>
-                <td>${formatDate(record.dateSpent)}</td>
-                <td>
-                    <button class="btn btn-edit" data-id="${record.id}"><i class="fas fa-edit"></i> Edit</button>
-                    <button class="btn btn-delete" data-id="${record.id}"><i class="fas fa-trash"></i> Delete</button>
-                </td>
-            `;
+            const id = button.getAttribute('data-id');
+
+            if (button.classList.contains('btn-edit')) {
+                console.log("Edit button clicked for ID:", id);
+                const record = await pb.collection('budget').getOne(id);
+                document.getElementById("category").value = record.category || '';
+                document.getElementById("allocated").value = record.allocated || 0;
+                document.getElementById("spent").value = record.spent || 0;
+                document.getElementById("dateAllocated").value = new Date(record.dateAllocated).toISOString().split('T')[0];
+                document.getElementById("dateSpent").value = new Date(record.dateSpent).toISOString().split('T')[0];
+                budgetForm.dataset.editId = id;
+                openModal();
+            }
+
+            if (button.classList.contains('btn-delete')) {
+                console.log("Delete button clicked for ID:", id);
+                if (confirm("Are you sure you want to delete this item?")) {
+                    try {
+                        await pb.collection('budget').delete(id);
+                        console.log("Item deleted successfully");
+                        showNotification("Budget item deleted successfully.");
+                        await fetchBudgetData();  // Refresh the data
+                    } catch (error) {
+                        console.error("Error deleting item:", error);
+                        showNotification("Failed to delete budget item.", true);
+                    }
+                }
+            }
         });
     }
 
-    function markFieldInvalid(input, message) {
-        if (!input) return;
-        input.classList.add('input-error');
-        let errorElement = input.nextElementSibling;
-        if (!errorElement || !errorElement.classList.contains('input-error-message')) {
-            errorElement = document.createElement('div');
-            errorElement.className = 'input-error-message';
-            input.insertAdjacentElement('afterend', errorElement);
-        }
-        errorElement.textContent = message;
-        input.addEventListener('input', () => {
-            input.classList.remove('input-error');
-            if (errorElement) errorElement.textContent = '';
-        }, { once: true });
+    // Format Date Function
+    function formatDate(dateString) {
+        if (!dateString) return 'N/A';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
     }
 
+    // Handle Form Submission (Create/Update)
     async function handleFormSubmit(e) {
         e.preventDefault();
         const categoryInput = document.getElementById("category");
@@ -117,6 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const dateSpent = dateSpentInput.value;
         const editId = budgetForm.dataset.editId;
 
+        // Validate inputs
         if (!category) return markFieldInvalid(categoryInput, "Category is required.");
         if (isNaN(allocated) || allocated < 0) return markFieldInvalid(allocatedInput, "Allocated must be non-negative.");
         if (isNaN(spent) || spent < 0) return markFieldInvalid(spentInput, "Spent must be non-negative.");
@@ -124,28 +172,34 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!dateSpent) return markFieldInvalid(dateSpentInput, "Select spent date.");
         if (spent > allocated) return markFieldInvalid(spentInput, "Spent exceeds allocated amount.");
 
+        // Format data for PocketBase
         const data = {
             category,
             allocated,
             spent,
-            dateAllocated: dateAllocated + ' 00:00:00.000Z',
-            dateSpent: dateSpent + ' 00:00:00.000Z'
+            dateAllocated: new Date(dateAllocated).toISOString(),  // Ensure proper format
+            dateSpent: new Date(dateSpent).toISOString()  // Ensure proper format
         };
+
+        console.log("Submitting data:", data);
 
         const saveButton = budgetForm.querySelector('.btn-save');
         if (saveButton) saveButton.disabled = true;
 
         try {
             if (editId) {
-                await pb.collection('budget').update(editId, data);
+                const response = await pb.collection('budget').update(editId, data);
+                console.log("Budget item updated:", response);  // Log the response for debugging
                 showNotification(`Budget item "${category}" updated successfully!`);
             } else {
-                await pb.collection('budget').create(data);
+                const response = await pb.collection('budget').create(data);  // Create new record
+                console.log("New budget item created:", response);  // Log the response for debugging
                 showNotification(`New budget item "${category}" created successfully!`);
             }
+
             budgetForm.reset();
             budgetForm.dataset.editId = '';
-            await fetchBudgetData();
+            await fetchBudgetData();  // Fetch the updated list of records
             closeModal();
         } catch (error) {
             console.error("Error saving budget item:", error);
@@ -156,90 +210,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function formatDate(dateString) {
-        if (!dateString) return 'N/A';
-        try {
-            const date = new Date(dateString);
-            if (isNaN(date.getTime())) return 'Invalid Date';
-            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-        } catch (error) {
-            console.error(`Error formatting date: ${dateString}`, error);
-            return 'Error';
-        }
-    }
+    if (budgetForm) budgetForm.addEventListener("submit", handleFormSubmit);
 
+    // Show Notification Function
     function showNotification(message, isError = false) {
-        const notificationId = 'notification';
-        let notification = document.getElementById(notificationId);
-        if (!notification) {
-            notification = document.createElement('div');
-            notification.id = notificationId;
-            notification.className = 'notification';
-            const messageSpan = document.createElement('span');
-            messageSpan.className = 'notification-message';
-            const closeBtn = document.createElement('span');
-            closeBtn.className = 'notification-close';
-            closeBtn.innerHTML = '&times;';
-            closeBtn.onclick = () => notification.classList.remove('show');
-            notification.appendChild(messageSpan);
-            notification.appendChild(closeBtn);
-            document.body.appendChild(notification);
-        }
+        const notification = document.getElementById('notification');
         const messageElement = notification.querySelector('.notification-message');
+
         if (messageElement) messageElement.textContent = message;
         notification.classList.toggle('error', isError);
         notification.classList.toggle('success', !isError);
-        setTimeout(() => notification.classList.add('show'), 10);
-        if (notification.hideTimeout) clearTimeout(notification.hideTimeout);
-        notification.hideTimeout = setTimeout(() => notification.classList.remove('show'), 5000);
+
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 5000);
     }
 
-    if (budgetForm) budgetForm.addEventListener("submit", handleFormSubmit);
-
-    const saveButton = budgetForm.querySelector('.btn-save');
-    if (saveButton) {
-        saveButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            budgetForm.requestSubmit();
-        });
-    }
-
-    if (addBudgetBtn) addBudgetBtn.addEventListener("click", openModal);
-    if (closeBtn) closeBtn.addEventListener("click", closeModal);
-    if (cancelButton) cancelButton.addEventListener("click", closeModal);
-    if (modal) {
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal) closeModal();
-        });
-    }
-    if (menuToggle && sidebar) {
-        menuToggle.addEventListener("click", () => {
-            sidebar.classList.toggle("active");
-        });
-    }
-    if (budgetTableBody) {
-        budgetTableBody.addEventListener("click", async (e) => {
-            const button = e.target.closest('button');
-            if (!button) return;
-            const id = button.dataset.id;
-            if (button.classList.contains("btn-delete")) {
-                if (confirm("Are you sure you want to delete this item?")) {
-                    await pb.collection('budget').delete(id);
-                    showNotification("Budget item deleted successfully.");
-                    await fetchBudgetData();
-                }
-            } else if (button.classList.contains("btn-edit")) {
-                const record = await pb.collection('budget').getOne(id);
-                document.getElementById("category").value = record.category || '';
-                document.getElementById("allocated").value = record.allocated || 0;
-                document.getElementById("spent").value = record.spent || 0;
-                document.getElementById("dateAllocated").value = new Date(record.dateAllocated).toISOString().split('T')[0];
-                document.getElementById("dateSpent").value = new Date(record.dateSpent).toISOString().split('T')[0];
-                budgetForm.dataset.editId = id;
-                openModal();
-            }
-        });
-    }
-
-    fetchBudgetData();
+    fetchBudgetData();  // Fetch data on initial load
 });
