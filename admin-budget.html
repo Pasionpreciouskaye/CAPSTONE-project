@@ -20,6 +20,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.1/dist/pocketbase.umd.js"></script>
@@ -76,21 +77,6 @@
         <div class="header-greeting">
           <h1>Hello, <span id="userName">Admin</span>! 👋🏼</h1>
           <p>Welcome back to the dashboard.</p>
-        </div>
-        <div class="header-actions">
-          <div class="search-container">
-            <i class="fas fa-search"></i>
-            <input
-              type="search"
-              id="headerSearch"
-              placeholder="Search anything..."
-            />
-          </div>
-          <div class="user-profile">
-            <i class="fas fa-user-circle user-icon"></i>
-            <span id="profileUserName">Admin User</span>
-            <i class="fas fa-chevron-down dropdown-icon"></i>
-          </div>
         </div>
       </header>
 
@@ -161,6 +147,12 @@
             </div>
           </div>
         </section>
+        
+        <!-- Pie Chart Section -->
+        <section class="pie-chart-container">
+          <h3>Budget Category Breakdown</h3>
+          <canvas id="categoryPieChart" width="400" height="400"></canvas>
+        </section>
       </div>
     </main>
 
@@ -174,7 +166,18 @@
         <form id="budgetForm">
           <div class="form-group">
             <label for="category">Category:</label>
-            <input type="text" id="category" required />
+            <select id="category" required>
+              <option value="Active Citizenship">Active Citizenship</option>
+              <option value="Governance">Governance</option>
+              <option value="Global Mobility">Global Mobility</option>
+              <option value="Economic Empowerment">Economic Empowerment</option>
+              <option value="Peace Building and Security">Peace Building and Security</option>
+              <option value="Health">Health</option>
+              <option value="Social Inclusion and Equity">Social Inclusion and Equity</option>
+              <option value="Education">Education</option>
+              <option value="Environment">Environment</option>
+              <option value="Agriculture">Agriculture</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="allocated">Allocated Amount (₱):</label>

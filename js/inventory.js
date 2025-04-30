@@ -15,7 +15,7 @@ const formInputs = {
   category: document.getElementById("itemCategory"),
   quantity: document.getElementById("itemQty"),
   cost: document.getElementById("itemCost"),
-  sku: document.getElementById("itemSKU")
+  sku: document.getElementById("itemSKU")  // SKU input field (we'll auto-generate this)
 };
 
 let editingItemId = null;
@@ -124,6 +124,27 @@ const deleteItem = async (id) => {
   }
 };
 
+// Generate new SKU with auto-increment
+const generateNewSKU = async () => {
+  try {
+    const lastItem = await pb.collection("inventory").getFirstListItem(); // Get first item (latest)
+    const lastSKU = lastItem ? lastItem.sku : "2025-0000"; // Default if no items
+
+    // Extract number part from the last SKU
+    const lastNumber = parseInt(lastSKU.split('-')[1]);
+
+    // Increment and format the new SKU
+    const newNumber = String(lastNumber + 1).padStart(4, '0');
+    const newSKU = `2025-${newNumber}`;
+
+    console.log("Generated SKU:", newSKU); // Debug log
+    return newSKU;
+  } catch (err) {
+    console.error("Error generating SKU:", err);
+    return "2025-0001"; // Fallback if something goes wrong
+  }
+};
+
 // Form submission for adding or editing item
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -133,7 +154,7 @@ form.addEventListener("submit", async (e) => {
     category: formInputs.category.value.trim(),
     current_quantity: parseInt(formInputs.quantity.value),  // Corrected field name
     cost: parseFloat(formInputs.cost.value),
-    sku: formInputs.sku.value.trim()
+    sku: await generateNewSKU()  // Generate new SKU if creating a new item
   };
 
   console.log("Form Data:", data); // Debug statement
@@ -151,7 +172,7 @@ form.addEventListener("submit", async (e) => {
       console.log("Editing Item: ", editingItemId);
       await pb.collection("inventory").update(editingItemId, data);
     } else {
-      // Create new item
+      // Create new item with auto-generated SKU
       console.log("Creating New Item");
       await pb.collection("inventory").create(data);
     }
