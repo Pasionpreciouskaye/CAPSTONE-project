@@ -20,7 +20,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.1/dist/pocketbase.umd.js"></script>
@@ -147,12 +146,6 @@
             </div>
           </div>
         </section>
-        
-        <!-- Pie Chart Section -->
-        <section class="pie-chart-container">
-          <h3>Budget Category Breakdown</h3>
-          <canvas id="categoryPieChart" width="400" height="400"></canvas>
-        </section>
       </div>
     </main>
 
@@ -167,6 +160,7 @@
           <div class="form-group">
             <label for="category">Category:</label>
             <select id="category" required>
+              <option value="">Select Category</option>
               <option value="Active Citizenship">Active Citizenship</option>
               <option value="Governance">Governance</option>
               <option value="Global Mobility">Global Mobility</option>
