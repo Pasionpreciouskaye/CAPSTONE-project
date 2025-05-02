@@ -27,23 +27,19 @@ const openModalForAdd = () => {
   modalTitle.textContent = "Add Item";
   
   // Make modal visible
-  modal.classList.add("active");
-  overlay.classList.add("active");
+  modal.classList.add("show");
+  overlay.classList.add("show");
 
   // Focus on the first input
   formInputs.name.focus();
-
-  console.log("Modal Opened: Add Item"); // Debug statement
 };
 
 // Close modal
 const closeModalFn = () => {
-  modal.classList.remove("active");
-  overlay.classList.remove("active");
+  modal.classList.remove("show");
+  overlay.classList.remove("show");
   form.reset();
   editingItemId = null;
-
-  console.log("Modal Closed"); // Debug statement
 };
 
 // Event listeners
@@ -104,8 +100,8 @@ const openEditModal = async (id) => {
 
     editingItemId = id;
     modalTitle.textContent = "Edit Item";
-    modal.classList.add("active");
-    overlay.classList.add("active");
+    modal.classList.add("show");
+    overlay.classList.add("show");
     formInputs.name.focus();
   } catch (err) {
     console.error("Error loading item:", err);
@@ -137,10 +133,8 @@ const generateNewSKU = async () => {
     const newNumber = String(lastNumber + 1).padStart(4, '0');
     const newSKU = `2025-${newNumber}`;
 
-    console.log("Generated SKU:", newSKU); // Debug log
     return newSKU;
   } catch (err) {
-    console.error("Error generating SKU:", err);
     return "2025-0001"; // Fallback if something goes wrong
   }
 };
@@ -152,28 +146,20 @@ form.addEventListener("submit", async (e) => {
   const data = {
     name: formInputs.name.value.trim(),
     category: formInputs.category.value.trim(),
-    current_quantity: parseInt(formInputs.quantity.value),  // Corrected field name
+    current_quantity: parseInt(formInputs.quantity.value),
     cost: parseFloat(formInputs.cost.value),
-    sku: await generateNewSKU()  // Generate new SKU if creating a new item
+    sku: await generateNewSKU()
   };
 
-  console.log("Form Data:", data); // Debug statement
-
-  // Validate data before sending to PocketBase
   if (!data.name || !data.current_quantity || !data.cost) {
-    console.error("Missing required fields!");
     alert("Please fill in all required fields.");
     return;
   }
 
   try {
     if (editingItemId) {
-      // Edit item
-      console.log("Editing Item: ", editingItemId);
       await pb.collection("inventory").update(editingItemId, data);
     } else {
-      // Create new item with auto-generated SKU
-      console.log("Creating New Item");
       await pb.collection("inventory").create(data);
     }
     closeModalFn();

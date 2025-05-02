@@ -17,44 +17,100 @@ body {
   margin: 0;
   background-color: var(--bg-color);
   color: var(--text-color);
-  min-height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 .app-container {
   display: flex;
-  min-height: 100vh;
+  width: 100%;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: var(--secondary-color);
+  color: var(--white);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar Title */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sidebar-title {
+  margin-left: 10px; /* Space between logo and title */
+  font-size: 1.5rem; /* Font size for the "Admin Panel" title */
+  font-weight: 600;
+  color: var(--accent-color); /* Change the color to make it more visible */
+  font-family: 'Poppins', sans-serif;
+}
+
+.sidebar-nav ul {
+  padding: 0;
+  list-style: none;
+  margin-top: 30px;
+}
+
+.sidebar-nav ul li {
+  margin: 15px 0;
+}
+
+.sidebar-nav ul li a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.9rem; /* Smaller font size for navbar */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-nav ul li a:hover,
+.sidebar-nav ul li.active a {
+  color: var(--accent-color);
+}
+
+.sidebar-nav ul li a i {
+  font-size: 1.2rem; /* Adjust icon size */
 }
 
 .main-content {
   flex-grow: 1;
   padding: 2rem;
-  overflow-x: auto;
-  background-color: var(--bg-color);
-}
-
-.main-header h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  color: var(--secondary-color);
-}
-
-.content-header {
+  background-color: var(--white);
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: auto;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--secondary-color);
 }
 
 .action-btn {
   background-color: var(--primary-color);
   color: var(--white);
   border: none;
-  padding: 0.5rem 1.25rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1rem;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
 .action-btn:hover {
@@ -62,45 +118,68 @@ body {
 }
 
 .table-container {
-  overflow-x: auto;
-  margin-top: 1rem;
+  width: 100%;
+  max-width: 1200px;
+  padding: 1rem;
+  margin-top: 2rem;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 0 15px var(--shadow-light);
   display: flex;
-  justify-content: flex-start;
-}
-
-.table-container table {
-  max-width: 1000px;
-  min-width: 800px;
-  margin-right: auto;
+  justify-content: center;
+  align-items: center;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: var(--white);
-  box-shadow: 0 0 10px var(--shadow-light);
+  font-size: 1rem;
   border-radius: 12px;
-  overflow: hidden;
-  font-size: 0.95rem;
 }
 
 th, td {
-  padding: 0.85rem 1rem;
+  padding: 1rem;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
 }
 
 th {
   background-color: var(--secondary-color);
   color: var(--white);
   font-weight: 600;
-  letter-spacing: 0.5px;
 }
 
 td:last-child {
   display: flex;
-  gap: 0.5rem;
-  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.edit-btn, .delete-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.edit-btn {
+  background-color: var(--accent-color);
+}
+
+.edit-btn:hover {
+  background-color: #e67e22;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
 }
 
 /* Modal */
@@ -108,7 +187,7 @@ td:last-child {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%);
   z-index: 1000;
   background-color: var(--white);
   padding: 2rem;
@@ -117,48 +196,23 @@ td:last-child {
   max-width: 500px;
   box-shadow: 0 10px 25px var(--shadow-heavy);
   display: none;
-  transition: transform 0.3s ease-in-out;
-}
-
-.modal h3 {
-  margin-top: 0;
-  font-size: 1.5rem;
-  margin-bottom: 1.25rem;
-  color: var(--secondary-color);
-  font-weight: 600;
 }
 
 .modal.show {
   display: block;
 }
 
-.hidden {
-  display: none !important;
+.modal-content {
+  display: flex;
+  flex-direction: column;
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 900;
-  display: none;
-}
-
-.overlay.show {
-  display: block;
-}
-
-.close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
+.close-btn {
+  background-color: transparent;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   cursor: pointer;
+  align-self: flex-end;
 }
 
 .form-grid {
@@ -170,13 +224,12 @@ td:last-child {
 
 input[type="text"],
 input[type="number"] {
-  padding: 0.5rem 0.75rem;
+  padding: 0.6rem;
   border: 1px solid var(--border-color);
   border-radius: 6px;
   width: 100%;
   font-size: 1rem;
   background-color: var(--white);
-  color: var(--text-color);
 }
 
 .save-btn {
@@ -194,6 +247,21 @@ input[type="number"] {
 
 .save-btn:hover {
   background-color: #e67e22;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 900;
+  display: none;
+}
+
+.overlay.show {
+  display: block;
 }
 
 /* Responsive */
@@ -217,10 +285,5 @@ input[type="number"] {
   .action-btn {
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
-  }
-
-  .table-container table {
-    min-width: unset;
-    max-width: 100%;
   }
 }
