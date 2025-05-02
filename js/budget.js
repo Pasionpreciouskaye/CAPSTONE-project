@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const pb = new PocketBase('http://127.0.0.1:8090');  // Ensure PocketBase instance is running
+    const pb = new PocketBase('http://127.0.0.1:8090');  // Ensure your PocketBase instance is running
 
     const addBudgetBtn = document.querySelector('.add-budget-btn');
     const modal = document.getElementById("addBudgetModal");
@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Open Modal Function
     function openModal() {
-        console.log("Opening modal for adding budget");
         modal.classList.add("show");
         budgetForm.reset();
         budgetForm.dataset.editId = '';
@@ -30,18 +29,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Close Modal Function
     function closeModal() {
-        console.log("Closing modal");
         modal.classList.remove("show");
     }
 
-    // Event Listener to Open Modal
+    // Add Event Listener to Open Modal
     if (addBudgetBtn) {
         addBudgetBtn.addEventListener("click", openModal);
     } else {
         console.error("Add Budget button not found!");
     }
 
-    // Event Listener to Close Modal
+    // Add Event Listener to Close Modal
     if (closeBtn) {
         closeBtn.addEventListener("click", closeModal);
     }
@@ -57,9 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Fetch Budget Data from PocketBase
+    // Fetch Budget Data
     async function fetchBudgetData() {
-        console.log("Fetching budget data...");
         if (budgetTableBody) {
             budgetTableBody.innerHTML = `<tr class="loading-row"><td colspan="7" class="loading-message">Loading budget data...</td></tr>`;
         }
@@ -76,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Update Budget Table
     function updateBudgetTable(data) {
-        console.log("Updating budget table with data:", data);
         budgetTableBody.innerHTML = '';
         if (data.length === 0) {
             const emptyRow = budgetTableBody.insertRow();
@@ -104,41 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
             });
         }
-
-        // Add Event Listeners for Edit and Delete buttons using Event Delegation
-        budgetTableBody.addEventListener("click", async (e) => {
-            const button = e.target.closest('button');
-            if (!button) return;
-
-            const id = button.getAttribute('data-id');
-
-            if (button.classList.contains('btn-edit')) {
-                console.log("Edit button clicked for ID:", id);
-                const record = await pb.collection('budget').getOne(id);
-                document.getElementById("category").value = record.category || '';
-                document.getElementById("allocated").value = record.allocated || 0;
-                document.getElementById("spent").value = record.spent || 0;
-                document.getElementById("dateAllocated").value = new Date(record.dateAllocated).toISOString().split('T')[0];
-                document.getElementById("dateSpent").value = new Date(record.dateSpent).toISOString().split('T')[0];
-                budgetForm.dataset.editId = id;
-                openModal();
-            }
-
-            if (button.classList.contains('btn-delete')) {
-                console.log("Delete button clicked for ID:", id);
-                if (confirm("Are you sure you want to delete this item?")) {
-                    try {
-                        await pb.collection('budget').delete(id);
-                        console.log("Item deleted successfully");
-                        showNotification("Budget item deleted successfully.");
-                        await fetchBudgetData();  // Refresh the data
-                    } catch (error) {
-                        console.error("Error deleting item:", error);
-                        showNotification("Failed to delete budget item.", true);
-                    }
-                }
-            }
-        });
     }
 
     // Format Date Function
@@ -148,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
     }
 
-    // Handle Form Submission (Create/Update)
+    // Handle Form Submission
     async function handleFormSubmit(e) {
         e.preventDefault();
         const categoryInput = document.getElementById("category");
@@ -225,6 +186,33 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             notification.classList.remove('show');
         }, 5000);
+    }
+
+    // Edit and Delete Event Delegation
+    if (budgetTableBody) {
+        budgetTableBody.addEventListener("click", async (e) => {
+            const button = e.target.closest('button');
+            if (!button) return;
+
+            const id = button.dataset.id;
+
+            if (button.classList.contains("btn-delete")) {
+                if (confirm("Are you sure you want to delete this item?")) {
+                    await pb.collection('budget').delete(id);
+                    showNotification("Budget item deleted successfully.");
+                    await fetchBudgetData();
+                }
+            } else if (button.classList.contains("btn-edit")) {
+                const record = await pb.collection('budget').getOne(id);
+                document.getElementById("category").value = record.category || '';
+                document.getElementById("allocated").value = record.allocated || 0;
+                document.getElementById("spent").value = record.spent || 0;
+                document.getElementById("dateAllocated").value = new Date(record.dateAllocated).toISOString().split('T')[0];
+                document.getElementById("dateSpent").value = new Date(record.dateSpent).toISOString().split('T')[0];
+                budgetForm.dataset.editId = id;
+                openModal();
+            }
+        });
     }
 
     fetchBudgetData();  // Fetch data on initial load
