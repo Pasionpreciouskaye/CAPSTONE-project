@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Supplies Inventory</title>
     <link rel="stylesheet" href="./style/inventory.css" />
+    <link rel="stylesheet" href="./style/admin-dashboard.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -12,36 +13,60 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     />
   </head>
   <body>
     <div class="app-container">
+      <!-- Sidebar -->
       <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
           <img src="./logo/SK-Logo.png" alt="SK Logo" class="logo" />
-          <h2>Inventory</h2>
+          <h2>Admin Panel</h2>
         </div>
         <nav class="sidebar-nav">
           <ul>
             <li>
-              <a href="projects.html"><i class="fas fa-tasks"></i><span>Projects</span></a>
+              <a href="./admin-budget.html">
+                <i class="fas fa-chart-pie"></i>
+                <span>Budget Transparency</span>
+              </a>
             </li>
             <li>
-              <a href="budgetdashboard.html"><i class="fas fa-chart-pie"></i><span>Budget Transparency</span></a>
+              <a href="members.html">
+                <i class="fas fa-users"></i>
+                <span>Members</span>
+              </a>
             </li>
-            <li class="active">
-              <a href="inventory.html"><i class="fas fa-boxes"></i><span>Inventory</span></a>
+            <li class="inventory-button">
+              <a href="inventory.html">
+                <i class="fas fa-boxes"></i>
+                <span>Inventory</span>
+              </a>
             </li>
             <li>
-              <a href="logout.html" class="logout-link"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+              <a href="admin-transactionhistory.html">
+                <i class="fas fa-history"></i>
+                <span>Transaction History</span>
+              </a>
+            </li>
+            <li>
+              <a href="./feedback.html">
+                <i class="fas fa-comment-alt"></i>
+                <span>Feedback</span>
+              </a>
+            </li>
+            <li>
+              <a href="logout.html" class="logout-link">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+              </a>
             </li>
           </ul>
         </nav>
       </aside>
 
+      <!-- Main Content -->
       <main class="main-content">
         <header class="main-header">
           <div class="header-greeting">
@@ -69,7 +94,7 @@
             </thead>
             <tbody id="inventoryTable">
               <tr>
-                <td colspan="6" style="text-align: center; padding: 20px">Please load the serve.</td>
+                <td colspan="6" style="text-align: center; padding: 20px">Please load the server.</td>
               </tr>
             </tbody>
           </table>
@@ -80,7 +105,6 @@
     <!-- Modal for Add Item -->
     <div id="itemModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-content">
-        <!-- Close Button (X) inside the modal -->
         <button id="closeModal" class="close" aria-label="Close modal">✖</button>
         <h3 id="modalTitle">Add Item</h3>
         <form id="itemForm">
@@ -93,7 +117,7 @@
               placeholder="Unit Cost: "
               id="itemCost"
               required
-              pattern="^\d+(\.\d{1,2})?$"
+              pattern="^\\d+(\\.\\d{1,2})?$"
               title="Enter cost: "
             />
           </div>
@@ -102,7 +126,7 @@
       </div>
     </div>
 
-    <!-- Overlay to block interaction -->
+    <!-- Overlay -->
     <div id="overlay" class="overlay"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.umd.js"></script>
