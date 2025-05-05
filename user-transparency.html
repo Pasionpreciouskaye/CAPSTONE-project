@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Budget Transparency - Sangguniang Kabataan</title>
 
+    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -13,60 +14,39 @@
       referrerpolicy="no-referrer"
     />
 
+    <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="./style/index.css" />
     <link rel="stylesheet" href="./style/user-transparency.css" />
 
-    <style>
-      /* Example: Ensure body padding accounts for fixed header */
-      body {
-        padding-top: 5rem; /* Adjust based on actual header height (max-h-20 = 5rem) */
-        font-family: "Poppins", sans-serif; /* Ensure font is applied if Tailwind overrides */
-        padding-bottom: 5rem; /* Add padding to prevent content from hiding behind the initially hidden fixed footer space */
-      }
-      .main-content {
-      }
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
-      /* Styles for the reveal-on-scroll footer */
-      #pageFooter {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        z-index: 40; /* Below header (z-50) */
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(100%); /* Start below the viewport */
-        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out,
-          transform 0.3s ease-in-out;
-      }
+    <!-- PocketBase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/pocketbase@0.10.0/dist/pocketbase.min.js"></script>
 
-      #pageFooter.visible {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0); /* Slide into view */
-      }
-    </style>
+    <!-- Custom JavaScript -->
+    <script src="./js/user-transparency.js"></script>
   </head>
 
   <body class="font-poppins text-gray-800 overflow-x-hidden">
+    <!-- Header Section -->
     <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-      <div
-        class="flex items-center justify-between px-10 py-2 max-h-20 relative"
-      >
+      <div class="flex items-center justify-between px-10 py-2 max-h-20 relative">
         <div class="logo">
           <img src="./logo/SK-Logo.png" alt="Logo" class="h-16" />
         </div>
         <div class="absolute left-1/2 transform -translate-x-1/2 text-center">
-          <h2
-            class="text-2xl sm:text-3xl font-bold text-[#f3799f] tracking-wide"
-          >
+          <h2 class="text-2xl sm:text-3xl font-bold text-[#f3799f] tracking-wide">
             Budget Transparency
           </h2>
         </div>
@@ -87,39 +67,15 @@
                   id="dropdownMenu"
                   class="absolute right-0 mt-2 bg-white shadow-md rounded-lg text-left py-2 w-48 hidden z-50"
                 >
-                  <a
-                    href="./eventpage.html"
-                    class="block px-4 py-2 hover:text-[#f3799f]"
-                  >
-                    Events
-                  </a>
-                  <a
-                    href="./Project/projects.html"
-                    class="block px-4 py-2 hover:text-[#f3799f]"
-                  >
-                    Projects
-                  </a>
-                  <a
-                    href="./contactus.html"
-                    class="block px-4 py-2 hover:text-[#f3799f]"
-                  >
-                    Contact Us
-                  </a>
-                  <a
-                    href="./user-inventory.html"
-                    class="block px-4 py-2 hover:text-[#f3799f]"
-                  >
-                    Inventory
-                  </a>
+                  <a href="./eventpage.html" class="block px-4 py-2 hover:text-[#f3799f]">Events</a>
+                  <a href="./Project/projects.html" class="block px-4 py-2 hover:text-[#f3799f]">Projects</a>
+                  <a href="./contactus.html" class="block px-4 py-2 hover:text-[#f3799f]">Contact Us</a>
+                  <a href="./user-inventory.html" class="block px-4 py-2 hover:text-[#f3799f]">Inventory</a>
                 </div>
               </li>
               <li>
                 <a href="./userpage.html" class="user-icon">
-                  <img
-                    src="./assets/userpic.png"
-                    alt="User Profile"
-                    class="h-10 rounded-full"
-                  />
+                  <img src="./assets/userpic.png" alt="User Profile" class="h-10 rounded-full" />
                 </a>
               </li>
             </ul>
@@ -127,6 +83,8 @@
         </div>
       </div>
     </header>
+
+    <!-- Main Content Section -->
     <div class="main-content">
       <section class="table-container">
         <h2>Budget Overview</h2>
@@ -142,86 +100,7 @@
             </tr>
           </thead>
           <tbody id="budgetBody">
-            <tr>
-              <td>Community Projects</td>
-              <td>₱100,000</td>
-              <td>₱50,000</td>
-              <td>₱50,000</td>
-              <td>2024-04-01</td>
-              <td>2024-04-15</td>
-            </tr>
-            <tr>
-              <td>Infrastructure Maintenance</td>
-              <td>₱75,000</td>
-              <td>₱60,000</td>
-              <td>₱15,000</td>
-              <td>2024-03-10</td>
-              <td>2024-04-05</td>
-            </tr>
-            <tr>
-              <td>Health Services</td>
-              <td>₱50,000</td>
-              <td>₱25,500</td>
-              <td>₱24,500</td>
-              <td>2024-02-20</td>
-              <td>2024-03-30</td>
-            </tr>
-            <tr>
-              <td>Office Supplies</td>
-              <td>₱10,000</td>
-              <td>₱8,200</td>
-              <td>₱1,800</td>
-              <td>2024-04-02</td>
-              <td>2024-04-10</td>
-            </tr>
-            <tr>
-              <td>Training Programs</td>
-              <td>₱30,000</td>
-              <td>₱15,000</td>
-              <td>₱15,000</td>
-              <td>2024-05-01</td>
-              <td>2024-05-15</td>
-            </tr>
-            <tr>
-              <td>Sports Equipment</td>
-              <td>₱20,000</td>
-              <td>₱18,000</td>
-              <td>₱2,000</td>
-              <td>2024-05-05</td>
-              <td>2024-05-20</td>
-            </tr>
-            <tr>
-              <td>Event Catering</td>
-              <td>₱40,000</td>
-              <td>₱35,000</td>
-              <td>₱5,000</td>
-              <td>2024-06-01</td>
-              <td>2024-06-10</td>
-            </tr>
-            <tr>
-              <td>Technology Upgrades</td>
-              <td>₱60,000</td>
-              <td>₱50,000</td>
-              <td>₱10,000</td>
-              <td>2024-06-15</td>
-              <td>2024-06-25</td>
-            </tr>
-            <tr>
-              <td>Youth Seminars</td>
-              <td>₱25,000</td>
-              <td>₱20,000</td>
-              <td>₱5,000</td>
-              <td>2024-07-01</td>
-              <td>2024-07-10</td>
-            </tr>
-            <tr>
-              <td>Travel Expenses</td>
-              <td>₱15,000</td>
-              <td>₱12,000</td>
-              <td>₱3,000</td>
-              <td>2024-07-15</td>
-              <td>2024-07-20</td>
-            </tr>
+            <!-- Data will be inserted here dynamically -->
           </tbody>
         </table>
       </section>
@@ -231,6 +110,8 @@
         <canvas id="expenseChart"></canvas>
       </section>
     </div>
+
+    <!-- Footer Section -->
     <footer id="pageFooter" class="bg-white py-5 text-black text-sm">
       <div class="flex justify-center items-center gap-5 flex-wrap">
         <img src="./logo/SK-Logo.png" alt="Logo" class="h-16 w-auto" />
@@ -239,12 +120,5 @@
         </p>
       </div>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-
-    <script src="./js/user-transparency.js"></script>
-    <script src="/Project/projectpage.js"></script>
-    <script src="user-transparency.js"></script>
   </body>
 </html>
