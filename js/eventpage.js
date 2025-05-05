@@ -1,3 +1,25 @@
+// Image slider logic
+const images = [
+  './assets/sk-pic2.jpg',
+  './assets/skpic3.jpg',
+
+];
+
+const slider = document.getElementById("slider");
+let currentIndex = 0;
+
+function changeImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    slider.style.opacity = 0;
+
+    setTimeout(() => {
+        slider.src = images[currentIndex];
+        slider.style.opacity = 1;
+    }, 500);
+}
+
+setInterval(changeImage, 2000);
+
 document.addEventListener("DOMContentLoaded", () => {
   const pb = new PocketBase("http://127.0.0.1:8090");
   const eventForm = document.getElementById("eventForm");
