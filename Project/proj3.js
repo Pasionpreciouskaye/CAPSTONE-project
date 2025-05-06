@@ -1,6 +1,6 @@
 // Array of image paths
 const images = [
-    '/assets/pic3(1).jpg',
+  
     '/assets/pic3 (2).jpg',
     '/assets/pic3 (3).jpg',
     '/assets/pic3 (1).jpg',

@@ -1,8 +1,7 @@
 // Image slider logic
 const images = [
-    './assets/skbanner.jpg',
     './assets/sk-pic2.jpg',
-    './assets/sk-pic.jpg',
+    './assets/skpic3.jpg',
 ];
 
 const slider = document.getElementById("slider");
