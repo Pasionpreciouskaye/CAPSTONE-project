@@ -9,42 +9,34 @@
 
 body {
     background-color: #f8f9fa;
-    /* display: flex; <-- Removed */
     min-height: 100vh;
     overflow-x: hidden;
+    font-family: "Poppins", sans-serif;
 }
-
-/* All rules for the old .sidebar class have been deleted */
 
 .main-content {
-    /* flex-grow: 1; <-- Removed */
     padding: 25px;
-    overflow-y: auto; /* Allows content scrolling */
-    /* height: 100vh; <-- Removed */
-    background-color: #f8f9fa;
-    /* Added margin-top: Adjust '80px' based on your actual header height */
-    margin-top: 80px;
-    /* Added width: 100%; */
+    margin-top: 80px; /* Prevent content from being hidden behind the fixed header */
     width: 100%;
+    background-color: #f8f9fa;
+    overflow-y: auto;
 }
 
-/* Rule for simple header h1 removed as that element is gone */
-
-
-/* Styles for Table and Chart Container (Unchanged from original relevant parts) */
+/* Table Container Styles */
 .table-container {
     background-color: #fff;
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
     margin-bottom: 25px;
-    overflow-x: auto; /* Allows table scrolling on small screens */
+    overflow-x: auto; /* Makes the table horizontally scrollable on small screens */
 }
+
 .table-container h2 {
     margin-bottom: 20px;
     font-size: 1.2rem;
     font-weight: 600;
-    color: #333; /* Added color for consistency */
+    color: #333;
 }
 
 .table {
@@ -60,7 +52,7 @@ body {
     text-align: left;
     border-bottom: 1px solid #eee;
     font-size: 0.9rem;
-    color: #444; /* Added color */
+    color: #444;
 }
 
 .table th {
@@ -69,24 +61,12 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.8rem;
-    position: sticky; /* Keeps header visible when table scrolls vertically */
-    top: 0; /* Adjust if main-content padding affects sticky position */
-    z-index: 1; /* Keeps header above rows */
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
-/* Optional button style (kept from original) */
-.btn {
-    padding: 9px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    border: none;
-    transition: all 0.2s ease;
-    font-weight: 500;
-    margin: 2px;
-    white-space: nowrap;
-}
-
+/* Chart Container Styles */
 .chart-container {
     background-color: #fff;
     padding: 25px;
@@ -94,28 +74,121 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
     margin-top: 25px;
     position: relative;
-    /* Adjusted height properties for better chart display */
-    min-height: 400px; /* Ensure minimum space */
-    max-height: 500px; /* Limit maximum space */
-    display: flex; /* Use flex to help center canvas */
+    min-height: 400px;
+    max-height: 500px;
+    display: flex;
     flex-direction: column;
-    align-items: center; /* Center canvas horizontally */
-    overflow: hidden; /* Prevent potential overflow issues */
+    align-items: center;
+    overflow: hidden; /* Prevent overflow */
 }
+
 .chart-container h2 {
     margin-bottom: 20px;
     font-size: 1.2rem;
     font-weight: 600;
-    color: #333; /* Added color */
-    width: 100%; /* Ensure title spans width */
-    text-align: left; /* Align title */
+    color: #333;
+    width: 100%;
+    text-align: left;
 }
 
 canvas#expenseChart {
-    /* Let Chart.js handle sizing based on container */
     max-width: 100%;
-    /* max-height adjusted in options, but this can provide a fallback */
-    max-height: calc(100% - 50px); /* Attempt to fit within container minus title */
+    max-height: calc(100% - 50px); /* Ensures chart fits in its container */
     margin-top: 10px;
-    display: block; /* Good practice for canvas */
+    display: block;
+}
+
+/* Header Styles */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header .logo img {
+    height: 60px;
+}
+
+header h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #f3799f;
+    font-weight: bold;
+}
+
+header nav ul {
+    display: flex;
+    justify-content: flex-end;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+header nav ul li a:hover {
+    color: #f3799f;
+}
+
+/* Sidebar Styles for Dropdown Menu */
+#dropdownMenu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+#dropdownMenu a {
+    padding: 10px 20px;
+    display: block;
+    color: #333;
+}
+
+#dropdownMenu a:hover {
+    background-color: #f1f3f5;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #ffffff;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    color: #333;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .table-container {
+        padding: 15px;
+    }
+
+    .table th, .table td {
+        padding: 12px 8px;
+        font-size: 0.8rem;
+    }
+
+    .chart-container {
+        padding: 15px;
+        max-height: 400px;
+    }
 }

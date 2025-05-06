@@ -19,66 +19,29 @@
   <body>
     <div class="app-container">
       <!-- Sidebar -->
-      <aside class="sidebar" id="sidebar">
+      <aside class="sidebar">
         <div class="sidebar-header">
           <img src="./logo/SK-Logo.png" alt="SK Logo" class="logo" />
-          <h2>Admin Panel</h2>
+          <h2 class="sidebar-title">Admin Panel</h2> <!-- "Admin Panel" Text Added -->
         </div>
         <nav class="sidebar-nav">
           <ul>
-            <li>
-              <a href="./admin-budget.html">
-                <i class="fas fa-chart-pie"></i>
-                <span>Budget Transparency</span>
-              </a>
-            </li>
-            <li>
-              <a href="members.html">
-                <i class="fas fa-users"></i>
-                <span>Members</span>
-              </a>
-            </li>
-            <li class="inventory-button">
-              <a href="inventory.html">
-                <i class="fas fa-boxes"></i>
-                <span>Inventory</span>
-              </a>
-            </li>
-            <li>
-              <a href="admin-transactionhistory.html">
-                <i class="fas fa-history"></i>
-                <span>Transaction History</span>
-              </a>
-            </li>
-            <li>
-              <a href="./feedback.html">
-                <i class="fas fa-comment-alt"></i>
-                <span>Feedback</span>
-              </a>
-            </li>
-            <li>
-              <a href="logout.html" class="logout-link">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Logout</span>
-              </a>
-            </li>
+            <li><a href="./admin-budget.html"><i class="fas fa-chart-pie"></i> Budget Transparency</a></li>
+            <li><a href="./admin-dashboard.html"><i class="fas fa-users"></i> Members</a></li>
+            <li class="active"><a href="./inventory.html"><i class="fas fa-boxes"></i> Inventory</a></li>
+            <li><a href="./admin-transactionhistory.html"><i class="fas fa-history"></i> Transaction History</a></li>
+            <li><a href="./feedback.html"><i class="fas fa-comment-alt"></i> Feedback</a></li>
+            <li><a href="./logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
           </ul>
         </nav>
       </aside>
 
       <!-- Main Content -->
       <main class="main-content">
-        <header class="main-header">
-          <div class="header-greeting">
-            <h1>📦 Supplies Inventory</h1>
-          </div>
+        <header>
+          <h1>📦 Supplies Inventory</h1>
+          <button id="addItemBtn" class="action-btn">➕ Add Item</button>
         </header>
-
-        <section class="content-header">
-          <div class="search-add">
-            <button id="addItemBtn" class="action-btn add-item-btn">➕ Add Item</button>
-          </div>
-        </section>
 
         <section class="table-container">
           <table>
@@ -94,7 +57,9 @@
             </thead>
             <tbody id="inventoryTable">
               <tr>
-                <td colspan="6" style="text-align: center; padding: 20px">Please load the server.</td>
+                <td colspan="6" style="text-align: center; padding: 20px">
+                  Please load the server.
+                </td>
               </tr>
             </tbody>
           </table>
@@ -102,24 +67,18 @@
       </main>
     </div>
 
-    <!-- Modal for Add Item -->
-    <div id="itemModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <!-- Modal for Add/Edit Item -->
+    <div id="itemModal" class="modal">
       <div class="modal-content">
-        <button id="closeModal" class="close" aria-label="Close modal">✖</button>
+        <button id="closeModal" class="close-btn">✖</button>
         <h3 id="modalTitle">Add Item</h3>
         <form id="itemForm">
           <div class="form-grid">
-            <input type="text" placeholder="Item Name: " id="itemName" required />
-            <input type="text" placeholder="Category: " id="itemCategory" />
-            <input type="number" placeholder="Quantity: " id="itemQty" required />
-            <input
-              type="text"
-              placeholder="Unit Cost: "
-              id="itemCost"
-              required
-              pattern="^\\d+(\\.\\d{1,2})?$"
-              title="Enter cost: "
-            />
+            <input type="text" placeholder="Item Name" id="itemName" required />
+            <input type="text" placeholder="Category" id="itemCategory" />
+            <input type="number" placeholder="Quantity" id="itemQty" required />
+            <input type="number" step="0.01" placeholder="Unit Cost" id="itemCost" required />
+            <input type="text" placeholder="SKU" id="itemSKU" readonly />
           </div>
           <button type="submit" class="action-btn save-btn">💾 Save Item</button>
         </form>
