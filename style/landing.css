@@ -22,7 +22,7 @@ body {
 
 .left-side {
   flex: 1;
-  background: url('../assets/banner.jpg') no-repeat center center/cover;
+  background: url('../assets/landing.jpg') no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
