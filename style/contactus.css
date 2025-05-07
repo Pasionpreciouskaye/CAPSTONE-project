@@ -238,16 +238,6 @@ body {
   font-size: 16px;
 }
 
-.map {
-  text-align: center;
-  margin: 40px 0;
-}
-
-.map img {
-  width: 80%;
-  height: auto;
-}
-
 .contact-form {
   text-align: center;
   margin: 40px 0;

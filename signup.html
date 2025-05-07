@@ -34,12 +34,17 @@
             placeholder="Password"
             required
           />
+          <!-- Minimum length error message below the password field -->
+          <div id="passwordLengthError" class="error-message"></div>
+
           <input
             type="password"
             id="confirmPassword"
             placeholder="Confirm Password"
             required
           />
+          <!-- Password mismatch error message below confirm password -->
+          <div id="passwordError" class="error-message"></div>
         </div>
 
         <div class="form-group">

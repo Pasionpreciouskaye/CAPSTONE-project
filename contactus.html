@@ -78,19 +78,30 @@
     </section>
 
     <!-- MAP (Replaced with Image) -->
-    <section class="map">
-      <h3>Our Location</h3>
-      <img
-        src="./assets/skmap.png"
-        alt="SK Taguig Location Map"
-        style="
-          width: 100%;
-          height: auto;
-          border-radius: 12px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        "
-      />
-    </section>
+    <div style="overflow: hidden; max-width: 100%; width: 500px; height: 500px">
+      <div
+        id="embedded-map-display"
+        style="height: 100%; width: 100%; max-width: 100%"
+      >
+        <iframe
+          style="height: 100%; width: 100%; border: 0"
+          frameborder="0"
+          src="https://www.google.com/maps/embed/v1/place?q=Lower+Bicutan,+Taguig+city&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+        ></iframe>
+      </div>
+      <a
+        class="code-for-google-map"
+        href="https://www.bootstrapskins.com/themes"
+        id="enable-map-data"
+        >premium bootstrap themes</a
+      ><style>
+        #embedded-map-display img {
+          max-height: none;
+          max-width: 100% !important;
+          background: none !important;
+        }
+      </style>
+    </div>
 
     <!-- CONFIRMATION MESSAGE (Initially Hidden) -->
     <div
