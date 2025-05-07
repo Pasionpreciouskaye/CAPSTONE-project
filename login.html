@@ -27,17 +27,29 @@
           <form id="loginForm">
             <!-- Email Input -->
             <div class="form-group">
-              <input type="email" id="email" placeholder="Email" required />
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+                required
+              />
             </div>
 
             <!-- Password Input -->
             <div class="form-group">
               <input
                 type="password"
+                name="password"
                 id="password"
                 placeholder="Password"
                 required
               />
+            </div>
+
+            <!-- Forgot Password Link -->
+            <div class="forgot-password">
+              <a href="#" id="openForgot">Forgot Password?</a>
             </div>
 
             <!-- Submit Button -->
@@ -53,7 +65,25 @@
       </div>
     </div>
 
-    <!-- PocketBase and Login Script -->
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal hidden">
+      <div class="modal-content">
+        <!-- Password Reset Sent Message -->
+        <div id="resetSentMessage" class="reset-sent-message">
+          Password reset link sent to your email.
+        </div>
+
+        <h3>Forgot Password</h3>
+        <p>Enter your email to reset your password.</p>
+        <input type="email" id="resetEmail" placeholder="Enter your email" />
+        <button id="resetBtn">Reset Password</button>
+        <a href="./login.html" id="backToLogin" class="back-button"
+          >Back to Login</a
+        >
+      </div>
+    </div>
+
+    <!-- PocketBase and Script -->
     <script src="./node_modules/pocketbase/dist/pocketbase.umd.js"></script>
     <script src="./js/login.js"></script>
   </body>

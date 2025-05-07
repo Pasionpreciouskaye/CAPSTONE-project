@@ -3,7 +3,7 @@
 body {
   font-family: "Poppins", sans-serif;
   background: url("../logo/SK-Logo.png") no-repeat center center;
-  background-size: cover;
+  background-size: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,6 +41,7 @@ body {
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 15px;
+  position: relative;
 }
 
 .form-group input,
@@ -51,6 +52,19 @@ body {
   border-radius: 5px;
   font-size: 14px;
   min-width: 0;
+}
+
+.error-message {
+  display: block;
+  color: black; /* Error text color */
+  font-size: 12px; /* Smaller font size for error messages */
+  position: absolute; /* Position error message below the password */
+  bottom: -20px; /* Move it slightly below the password input */
+  left: 0;
+  font-weight: bold;
+  width: 100%; /* Make sure the error message stretches across the width of the input */
+  text-align: left; /* Align text to the left */
+  padding: 5px;
 }
 
 .full-width {
