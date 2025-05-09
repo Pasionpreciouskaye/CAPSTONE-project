@@ -1,37 +1,47 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const menuButton = document.getElementById("menuButton");
+  const dropdownMenu = document.getElementById("dropdownMenu");
+  const searchBar = document.getElementById("searchBar");
   const tableBody = document.querySelector("#inventoryTable tbody");
-  const searchInput = document.getElementById("search");
+  const pb = new PocketBase('http://127.0.0.1:8090'); // PocketBase URL
 
-  // Connect to PocketBase
-  const pb = new PocketBase('http://127.0.0.1:8090'); // Update with your actual PocketBase URL if different
+  // Dropdown logic
+  if (menuButton && dropdownMenu) {
+    let dropdownTimeout;
 
+    menuButton.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent click event from bubbling up
+      dropdownMenu.classList.toggle("hidden");
+      console.log("Dropdown toggled");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!menuButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.classList.add("hidden");
+      }
+    });
+  }
+
+  // Load inventory data from PocketBase
   async function loadInventory() {
     try {
       const records = await pb.collection('inventory').getFullList({
         sort: '-created' // latest items first
       });
 
-      // Clear existing table rows
-      tableBody.innerHTML = '';
+      tableBody.innerHTML = ''; // Clear existing rows
 
       records.forEach(item => {
         const row = document.createElement("tr");
-
-        // Optional: format cost as currency
-        const formattedCost = item.cost ? parseFloat(item.cost).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : '';
+        const formattedCost = item.cost ? parseFloat(item.cost).toLocaleString('en-PH', { style: 'currency', currency: 'PHP' }) : 'N/A';
+        const quantity = item['# current_quantity'] || 'N/A';
 
         row.innerHTML = `
-          <td>${item.name || ''}</td>
-          <td>${item.category || ''}</td>
-          <td>${item.qty || ''}</td>
+          <td>${item.name || 'N/A'}</td>
+          <td>${item.category || 'N/A'}</td>
           <td>${formattedCost}</td>
-          <td>${item.supplier || ''}</td>
-          <td>${item.reorder || ''}</td>
-          <td>${item.location || ''}</td>
-          <td>${item.sku || ''}</td>
-          <td>${item.packaging || ''}</td>
-          <td>${item.date || ''}</td>
-          <td>${item.usage || ''}</td>
+          <td>${item.sku || 'N/A'}</td>
+          <td>${quantity}</td>
         `;
 
         tableBody.appendChild(row);
@@ -41,17 +51,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // --- Live Search ---
-  searchInput.addEventListener("keyup", () => {
-    const query = searchInput.value.toLowerCase().trim();
-    document.querySelectorAll("#inventoryTable tbody tr").forEach(row => {
-      const match = Array.from(row.cells).some(cell =>
-        cell.textContent.toLowerCase().includes(query)
+  // Load inventory data on page load
+  loadInventory();
+
+  // Search functionality
+  searchBar.addEventListener("input", function () {
+    const searchQuery = searchBar.value.toLowerCase().trim();
+    const rows = tableBody.querySelectorAll("tr");
+
+    rows.forEach(row => {
+      const cells = row.querySelectorAll("td");
+      const isVisible = Array.from(cells).some(cell => 
+        cell.textContent.toLowerCase().includes(searchQuery)
       );
-      row.style.display = match ? "" : "none";
+      row.style.display = isVisible ? "" : "none";
     });
   });
-
-  // Load inventory data
-  loadInventory();
 });

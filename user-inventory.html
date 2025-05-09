@@ -1,30 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Inventory</title>
-  <link rel="stylesheet" href="./style/user-inventory.css">
+  <link rel="stylesheet" href="./style/user-inventory.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="font-poppins bg-gradient-to-b from-[#fdfdff] to-[#f190d4] text-gray-800 text-center overflow-x-hidden">
 
-  <header>
-    <h1>My Inventory</h1>
-    <div class="search-container">
-      <input type="text" id="search" placeholder="Search inventory...">
+  <!-- Header -->
+  <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+    <div class="flex items-center justify-between px-10 py-4 max-h-20 relative">
+      <div class="logo">
+        <img src="/logo/SK-Logo.png" alt="Logo" class="h-16" />
+      </div>
+
+      <div class="absolute left-1/2 transform -translate-x-1/2 text-center">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#f3799f] tracking-wide">
+          Inventory
+        </h2>
+      </div>
+
+      <div class="sidebar">
+        <nav>
+          <ul class="flex items-center space-x-6">
+            <li>
+              <a href="/index.html" class="hover:text-[#f3799f]">Home</a>
+            </li>
+
+            <li class="relative">
+              <button
+                id="menuButton"
+                class="hover:text-[#f3799f] focus:outline-none flex items-center gap-1"
+              >
+                Menu ▾
+              </button>
+              <div
+                id="dropdownMenu"
+                class="absolute right-0 mt-2 bg-white shadow-md rounded-lg text-left py-2 w-48 hidden z-50"
+              >
+                <a href="/eventpage.html" class="block px-4 py-2 hover:bg-gray-100">Events</a>
+                <a href="/contactus.html" class="block px-4 py-2 hover:bg-gray-100">Contact Us</a>
+                <a href="/user-transparency.html" class="block px-4 py-2 hover:bg-gray-100">Budget Transparency</a>
+                <a href="/user-inventory.html" class="block px-4 py-2 hover:bg-gray-100">Inventory</a>
+              </div>
+            </li>
+
+            <li>
+              <a href="/userpage.html" class="user-icon">
+                <img src="/assets/userpic.png" alt="User Profile" class="h-10 rounded-full" />
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </header>
 
-  <main>
-    <div class="table-container">
-      <table id="inventoryTable">
+  <!-- Main Content -->
+  <main class="pt-36 pb-20"> <!-- Adjusted for footer space -->
+    <!-- Search Bar -->
+    <div class="max-w-6xl mx-auto px-5 pt-10">
+      <input
+        type="text"
+        id="searchBar"
+        placeholder="Search Inventory..."
+        class="w-full sm:w-1/2 px-4 py-2 border rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#f3799f]"
+      />
+    </div>
+
+    <!-- Inventory Table -->
+    <div class="table-container max-w-6xl mx-auto px-5 mt-10">
+      <table id="inventoryTable" class="w-full bg-white shadow-md rounded-lg overflow-hidden">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Cost</th>
-            <th>SKU</th>
-            <th>Quantity</th>
+            <th class="px-4 py-2">Name</th>
+            <th class="px-4 py-2">Category</th>
+            <th class="px-4 py-2">Cost</th>
+            <th class="px-4 py-2">SKU</th>
+            <th class="px-4 py-2">Quantity</th>
           </tr>
         </thead>
         <tbody>
@@ -33,6 +88,16 @@
       </table>
     </div>
   </main>
+
+  <!-- Footer -->
+  <footer class="bg-white py-5 text-black text-sm relative mt-10">
+    <div class="flex justify-center items-center gap-5 flex-wrap">
+      <img src="/logo/SK-Logo.png" alt="Logo" class="h-16 w-auto" />
+      <p class="text-xl font-bold text-black m-0">
+        &copy; 2025 | CITY OF TAGUIG. All rights reserved.
+      </p>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.umd.js"></script>
   <script src="./js/user-inventory.js"></script>
