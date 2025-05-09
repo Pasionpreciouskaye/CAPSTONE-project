@@ -4,57 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Budget Transparency</title>
-
-    <!-- External Styles -->
-    <link rel="stylesheet" href="./style/user-transparency.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-
-    <!-- Scripts -->
+    <link rel="stylesheet" href="/Project/project.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.1/dist/pocketbase.umd.js"></script>
     <script src="./js/user-transparency.js" defer></script>
   </head>
 
-  <body class="font-poppins text-gray-800 overflow-x-hidden">
-    <!-- Header Section -->
+  <body class="font-poppins bg-gradient-to-b from-[#fdfdff] to-[#f190d4] text-gray-800 text-center overflow-x-hidden">
+    <!-- Header -->
     <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-      <div class="flex items-center justify-between px-10 py-2 max-h-20 relative">
+      <div class="flex items-center justify-between px-10 py-4 max-h-20 relative">
         <div class="logo">
-          <img src="./logo/SK-Logo.png" alt="Logo" class="h-16" />
+          <img src="/logo/SK-Logo.png" alt="Logo" class="h-16" />
         </div>
+
         <div class="absolute left-1/2 transform -translate-x-1/2 text-center">
-          <h2 class="text-2xl sm:text-3xl font-bold text-[#f3799f] tracking-wide">
-            Budget Transparency
-          </h2>
+          <h2 class="text-2xl sm:text-3xl font-bold text-[#f3799f] tracking-wide">Budget Transparency</h2>
         </div>
+
         <div class="sidebar">
           <nav>
             <ul class="flex items-center space-x-6">
               <li>
-                <a href="./index.html" class="hover:text-[#f3799f]">Home</a>
+                <a href="/index.html" class="hover:text-[#f3799f]">Home</a>
               </li>
               <li class="relative">
-                <button
-                  id="menuButton"
-                  class="hover:text-[#f3799f] focus:outline-none flex items-center gap-1"
-                >
-                  Menu ▾
-                </button>
-                <div
-                  id="dropdownMenu"
-                  class="absolute right-0 mt-2 bg-white shadow-md rounded-lg text-left py-2 w-48 hidden z-50"
-                >
-                  <a href="./eventpage.html" class="block px-4 py-2 hover:text-[#f3799f]">Events</a>
-                  <a href="./Project/projects.html" class="block px-4 py-2 hover:text-[#f3799f]">Projects</a>
-                  <a href="./contactus.html" class="block px-4 py-2 hover:text-[#f3799f]">Contact Us</a>
-                  <a href="./user-inventory.html" class="block px-4 py-2 hover:text-[#f3799f]">Inventory</a>
+                <button id="menuButton" class="hover:text-[#f3799f] focus:outline-none flex items-center gap-1">Menu ▾</button>
+                <div id="dropdownMenu" class="absolute right-0 mt-2 bg-white shadow-md rounded-lg text-left py-2 w-48 hidden z-50">
+                  <a href="/eventpage.html" class="block px-4 py-2 hover:bg-gray-100">Events</a>
+                  <a href="/contactus.html" class="block px-4 py-2 hover:bg-gray-100">Contact Us</a>
+                  <a href="/user-transparency.html" class="block px-4 py-2 hover:bg-gray-100">Budget Transparency</a>
+                  <a href="/user-inventory.html" class="block px-4 py-2 hover:bg-gray-100">Inventory</a>
                 </div>
               </li>
               <li>
-                <a href="./userpage.html" class="user-icon">
-                  <img src="./assets/userpic.png" alt="User Profile" class="h-10 rounded-full" />
+                <a href="/userpage.html" class="user-icon">
+                  <img src="/assets/userpic.png" alt="User Profile" class="h-10 rounded-full" />
                 </a>
               </li>
             </ul>
@@ -63,41 +49,38 @@
       </div>
     </header>
 
-    <!-- Main Content Section -->
-    <div class="main-content">
-      <section class="table-container">
-        <h2>Budget Overview</h2>
-        <table class="table">
+    <!-- Budget Table -->
+    <main class="main-content pt-36">
+      <section class="budget-table">
+        <h2 class="text-xl sm:text-2xl font-semibold mb-6 text-gray-800">Budget Overview</h2>
+        <table id="budgetTable" class="mx-auto w-full bg-white rounded-lg shadow-md">
           <thead>
-            <tr>
-              <th>Category</th>
-              <th>Allocated</th>
-              <th>Spent</th>
-              <th>Remaining</th>
-              <th>Date Allocated</th>
-              <th>Date Spent</th>
+            <tr class="bg-[#f1f3f5]">
+              <th class="px-4 py-2">Category</th>
+              <th class="px-4 py-2">Allocated</th>
+              <th class="px-4 py-2">Spent</th>
+              <th class="px-4 py-2">Remaining</th>
+              <th class="px-4 py-2">Date Allocated</th>
+              <th class="px-4 py-2">Date Spent</th>
             </tr>
           </thead>
           <tbody id="budgetBody">
-            <!-- Data will be inserted here dynamically -->
+            <tr>
+              <td colspan="6">Loading data...</td>
+            </tr>
           </tbody>
         </table>
       </section>
+    </main>
 
-      <section class="chart-container">
-        <h2>Spent Budget Distribution (%)</h2>
-        <canvas id="expenseChart"></canvas>
-      </section>
-    </div>
-
-    <!-- Footer Section -->
-    <footer id="pageFooter" class="bg-white py-5 text-black text-sm">
+    <!-- Footer -->
+    <footer class="bg-white py-5 text-black text-sm relative mt-20">
       <div class="flex justify-center items-center gap-5 flex-wrap">
-        <img src="./logo/SK-Logo.png" alt="Logo" class="h-16 w-auto" />
-        <p class="text-xl font-bold text-black m-0">
-          &copy; 2025 | CITY OF TAGUIG. All rights reserved.
-        </p>
+        <img src="/logo/SK-Logo.png" alt="Logo" class="h-16 w-auto" />
+        <p class="text-xl font-bold text-black m-0">&copy; 2025 | CITY OF TAGUIG. All rights reserved.</p>
       </div>
     </footer>
+
+    <script src="/Project/projectpage.js"></script>
   </body>
 </html>
