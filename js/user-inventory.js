@@ -1,9 +1,68 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  const tableBody = document.querySelector("#inventoryTable tbody");
-  const searchInput = document.getElementById("search");
+document.addEventListener("DOMContentLoaded", () => {
+  // Dropdown logic
+  const menuButton = document.getElementById("menuButton");
+  const dropdownMenu = document.getElementById("dropdownMenu");
+  let dropdownTimeout;
 
-  // Connect to PocketBase
-  const pb = new PocketBase('http://127.0.0.1:8090'); // Update with your actual PocketBase URL if different
+  // Check if the elements exist
+  if (menuButton && dropdownMenu) {
+    console.log("Dropdown elements found");
+
+    // Toggle dropdown visibility when the menu button is clicked
+    menuButton.addEventListener("click", (e) => {
+      e.preventDefault();  // Prevent default action
+      e.stopPropagation(); // Stop the click event from bubbling
+      if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+        dropdownMenu.style.display = "block"; // Show the dropdown
+      } else {
+        dropdownMenu.style.display = "none"; // Hide the dropdown
+      }
+      console.log("Dropdown toggled");
+    });
+
+    // Show the dropdown when the mouse enters the menu button
+    menuButton.addEventListener("mouseenter", () => {
+      clearTimeout(dropdownTimeout);
+      dropdownMenu.style.display = "block"; // Show the dropdown
+      console.log("Dropdown shown on hover");
+    });
+
+    // Keep the dropdown open when the mouse enters the dropdown itself
+    dropdownMenu.addEventListener("mouseenter", () => {
+      clearTimeout(dropdownTimeout);
+      console.log("Mouse entered dropdown");
+    });
+
+    // Hide dropdown when the mouse leaves the menu button
+    menuButton.addEventListener("mouseleave", () => {
+      dropdownTimeout = setTimeout(() => {
+        dropdownMenu.style.display = "none"; // Hide the dropdown
+        console.log("Dropdown hidden after mouse leaves button");
+      }, 300); // Add delay for smoother hiding
+    });
+
+    // Hide dropdown when the mouse leaves the dropdown menu
+    dropdownMenu.addEventListener("mouseleave", () => {
+      dropdownTimeout = setTimeout(() => {
+        dropdownMenu.style.display = "none"; // Hide the dropdown
+        console.log("Dropdown hidden after mouse leaves menu");
+      }, 300); // Add delay for smoother hiding
+    });
+
+    // Close the dropdown if the user clicks outside of the menu
+    document.addEventListener("click", (e) => {
+      if (!menuButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.style.display = "none"; // Hide the dropdown
+        console.log("Dropdown hidden after clicking outside");
+      }
+    });
+  } else {
+    console.error("Dropdown elements not found");
+  }
+
+  // Load inventory data from PocketBase
+  const tableBody = document.querySelector("#inventoryTable tbody");
+  const pb = new PocketBase('http://127.0.0.1:8090'); // PocketBase URL
 
   async function loadInventory() {
     try {
@@ -11,27 +70,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         sort: '-created' // latest items first
       });
 
-      // Clear existing table rows
-      tableBody.innerHTML = '';
+      tableBody.innerHTML = ''; // Clear existing rows
 
       records.forEach(item => {
         const row = document.createElement("tr");
-
-        // Optional: format cost as currency
-        const formattedCost = item.cost ? parseFloat(item.cost).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : '';
+        const formattedCost = item.cost ? parseFloat(item.cost).toLocaleString('en-PH', { style: 'currency', currency: 'PHP' }) : 'N/A';
+        const quantity = item['# current_quantity'] || 'N/A';
 
         row.innerHTML = `
-          <td>${item.name || ''}</td>
-          <td>${item.category || ''}</td>
-          <td>${item.qty || ''}</td>
+          <td>${item.name || 'N/A'}</td>
+          <td>${item.category || 'N/A'}</td>
           <td>${formattedCost}</td>
-          <td>${item.supplier || ''}</td>
-          <td>${item.reorder || ''}</td>
-          <td>${item.location || ''}</td>
-          <td>${item.sku || ''}</td>
-          <td>${item.packaging || ''}</td>
-          <td>${item.date || ''}</td>
-          <td>${item.usage || ''}</td>
+          <td>${item.sku || 'N/A'}</td>
+          <td>${quantity}</td>
         `;
 
         tableBody.appendChild(row);
@@ -41,17 +92,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // --- Live Search ---
-  searchInput.addEventListener("keyup", () => {
-    const query = searchInput.value.toLowerCase().trim();
-    document.querySelectorAll("#inventoryTable tbody tr").forEach(row => {
-      const match = Array.from(row.cells).some(cell =>
-        cell.textContent.toLowerCase().includes(query)
+  // Load inventory data on page load
+  loadInventory();
+
+  // Search functionality
+  const searchBar = document.getElementById("searchBar");
+
+  searchBar.addEventListener("input", function () {
+    const searchQuery = searchBar.value.toLowerCase().trim();
+    const rows = tableBody.querySelectorAll("tr");
+
+    rows.forEach(row => {
+      const cells = row.querySelectorAll("td");
+      const isVisible = Array.from(cells).some(cell => 
+        cell.textContent.toLowerCase().includes(searchQuery)
       );
-      row.style.display = match ? "" : "none";
+      row.style.display = isVisible ? "" : "none";
     });
   });
-
-  // Load inventory data
-  loadInventory();
 });
