@@ -64,6 +64,21 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const records = await pb.collection('budget').getFullList({ sort: '-created' });
             currentBudgetData = records;
+
+            // Calculate totals
+            let totalAllocated = 0;
+            let totalSpent = 0;
+            records.forEach(record => {
+                totalAllocated += parseFloat(record.allocated) || 0;
+                totalSpent += parseFloat(record.spent) || 0;
+            });
+            const totalRemaining = totalAllocated - totalSpent;
+
+            // Update summary cards
+            document.getElementById("totalAllocated").textContent = `₱${totalAllocated.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
+            document.getElementById("totalSpent").textContent = `₱${totalSpent.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
+            document.getElementById("totalRemaining").textContent = `₱${totalRemaining.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`;
+
             updateBudgetTable(records);
         } catch (error) {
             console.error("Error fetching budget data:", error);
