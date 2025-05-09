@@ -74,8 +74,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       records.forEach(item => {
         const row = document.createElement("tr");
+
+        // Correct the field for quantity to 'current_quantity'
         const formattedCost = item.cost ? parseFloat(item.cost).toLocaleString('en-PH', { style: 'currency', currency: 'PHP' }) : 'N/A';
-        const quantity = item['# current_quantity'] || 'N/A';
+        const quantity = item.current_quantity || 'N/A'; // Correct field name for quantity
 
         row.innerHTML = `
           <td>${item.name || 'N/A'}</td>
