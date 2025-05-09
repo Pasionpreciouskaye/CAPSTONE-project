@@ -1,28 +1,69 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Dropdown logic
   const menuButton = document.getElementById("menuButton");
   const dropdownMenu = document.getElementById("dropdownMenu");
-  const searchBar = document.getElementById("searchBar");
-  const tableBody = document.querySelector("#inventoryTable tbody");
-  const pb = new PocketBase('http://127.0.0.1:8090'); // PocketBase URL
+  let dropdownTimeout;
 
-  // Dropdown logic
+  // Check if the elements exist
   if (menuButton && dropdownMenu) {
-    let dropdownTimeout;
+    console.log("Dropdown elements found");
 
+    // Toggle dropdown visibility when the menu button is clicked
     menuButton.addEventListener("click", (e) => {
-      e.stopPropagation(); // Prevent click event from bubbling up
-      dropdownMenu.classList.toggle("hidden");
+      e.preventDefault();  // Prevent default action
+      e.stopPropagation(); // Stop the click event from bubbling
+      if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+        dropdownMenu.style.display = "block"; // Show the dropdown
+      } else {
+        dropdownMenu.style.display = "none"; // Hide the dropdown
+      }
       console.log("Dropdown toggled");
     });
 
+    // Show the dropdown when the mouse enters the menu button
+    menuButton.addEventListener("mouseenter", () => {
+      clearTimeout(dropdownTimeout);
+      dropdownMenu.style.display = "block"; // Show the dropdown
+      console.log("Dropdown shown on hover");
+    });
+
+    // Keep the dropdown open when the mouse enters the dropdown itself
+    dropdownMenu.addEventListener("mouseenter", () => {
+      clearTimeout(dropdownTimeout);
+      console.log("Mouse entered dropdown");
+    });
+
+    // Hide dropdown when the mouse leaves the menu button
+    menuButton.addEventListener("mouseleave", () => {
+      dropdownTimeout = setTimeout(() => {
+        dropdownMenu.style.display = "none"; // Hide the dropdown
+        console.log("Dropdown hidden after mouse leaves button");
+      }, 300); // Add delay for smoother hiding
+    });
+
+    // Hide dropdown when the mouse leaves the dropdown menu
+    dropdownMenu.addEventListener("mouseleave", () => {
+      dropdownTimeout = setTimeout(() => {
+        dropdownMenu.style.display = "none"; // Hide the dropdown
+        console.log("Dropdown hidden after mouse leaves menu");
+      }, 300); // Add delay for smoother hiding
+    });
+
+    // Close the dropdown if the user clicks outside of the menu
     document.addEventListener("click", (e) => {
       if (!menuButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
-        dropdownMenu.classList.add("hidden");
+        dropdownMenu.style.display = "none"; // Hide the dropdown
+        console.log("Dropdown hidden after clicking outside");
       }
     });
+  } else {
+    console.error("Dropdown elements not found");
   }
 
   // Load inventory data from PocketBase
+  const tableBody = document.querySelector("#inventoryTable tbody");
+  const pb = new PocketBase('http://127.0.0.1:8090'); // PocketBase URL
+
   async function loadInventory() {
     try {
       const records = await pb.collection('inventory').getFullList({
@@ -55,6 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
   loadInventory();
 
   // Search functionality
+  const searchBar = document.getElementById("searchBar");
+
   searchBar.addEventListener("input", function () {
     const searchQuery = searchBar.value.toLowerCase().trim();
     const rows = tableBody.querySelectorAll("tr");
